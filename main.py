@@ -1,6 +1,6 @@
 from folder import Folder
 from palette import Palette
+from texture import Texture
 
 if __name__ == "__main__":
-    Folder("Korob").process()
-    Palette("PAL.PAL").save("palette.png")
+    Folder("parkan").process(palette_path="P.COL")

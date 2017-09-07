@@ -10,15 +10,15 @@ class Texture(Binary_file):
     def save(self, id, out_file, palette):
         _, texture = self.get_header_and_texture()
 
-        pixs = [palette.get_color_by_id(col_id) for col_id in texture]
+        pixels = [palette.get_color_by_id(col_id) for col_id in texture]
 
         wd, ht = self.get_width_and_height()
 
         cur = 0
         cur_id = 0
-        while cur < len(pixs):
+        while cur < len(pixels):
             if cur_id == id:
-                arr = np.array(pixs[cur: cur + ht * wd]).reshape(ht, wd, 3)
+                arr = np.array(pixels[cur: cur + ht * wd]).reshape(ht, wd, palette.get_used_channels_cnt())
                 cv2.imwrite(out_file, arr)
                 break
             cur_id += 1
