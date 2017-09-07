@@ -8,8 +8,9 @@ class Binary_file:
         self.seq = np.fromfile(f, dtype=np.uint8)
 
 class Palette(Binary_file):
-    def __init__(self, path):
+    def __init__(self, path, shift = 0):
         super().__init__(path)
+        self.shift = shift
         self.palette_colors_cnt = 256
 
         bytes_per_color = 4
@@ -18,8 +19,14 @@ class Palette(Binary_file):
                       range(0, bytes_per_color * self.palette_colors_cnt, bytes_per_color)]
         self.data = np.array(colors_seq).reshape(1, self.palette_colors_cnt, 3)
 
-    def get_color_by_id(self, col_id, shift = 0):
-        return list(self.data[0][(col_id + self.palette_colors_cnt - shift) % self.palette_colors_cnt])
+    def get_shifted_id(self, col_id):
+        return (col_id + self.palette_colors_cnt - self.shift) % self.palette_colors_cnt
+
+    def get_color_by_id(self, col_id):
+        return list(self.data[0][self.get_shifted_id(col_id)])
+
+    def save(self, out_file):
+        cv2.imwrite(out_file, self.data)
 
 class Texture(Binary_file):
     def __init__(self, path):
@@ -29,8 +36,7 @@ class Texture(Binary_file):
     def save(self, id, out_file, palette):
         _, texture = self.get_header_and_texture()
 
-        shift = 0
-        pixs = [palette.get_color_by_id(col_id, shift=shift) for col_id in texture]
+        pixs = [palette.get_color_by_id(col_id) for col_id in texture]
 
         wd, ht = self.get_width_and_height()
 
@@ -63,7 +69,8 @@ class Folder:
     def __init__(self, name):
         self.name = name
 
-    def get_texture_extensions(self):
+    @staticmethod
+    def get_texture_extensions():
         return ['A', 'A4']
 
     def get_texture_files(self):
@@ -92,6 +99,6 @@ class Folder:
             palette = Palette("PAL.PAL")
             cur_tex.save(0, self.get_output_filename(texture_path), palette=palette)
 
-folder = Folder("Korob")
-folder.process()
+Folder("parkan").process()
+Palette("PAL.PAL").save("palette.png")
 
