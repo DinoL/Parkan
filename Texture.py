@@ -56,28 +56,39 @@ class Texture:
         header, _ = self.get_header_and_texture()
         return map(self.bytes_seq_to_int, (header[4:8], header[8:12]))
 
-def get_texture_files(dir, ext_list):
-    return [file for files_with_ext in map(lambda ext: glob.glob(os.path.join(dir, "*." + ext)), ext_list) for file in files_with_ext]
+class Folder:
+    def __init__(self, name):
+        self.name = name
 
-def get_file_stats(file):
-    texture = Texture(file)
-    header, _ = texture.get_header_and_texture()
-    wd, ht = texture.get_width_and_height()
-    print(file, wd, ht, header[12], header[24], header[28], sep='\t')
+    def get_texture_extensions(self):
+        return ['A', 'A4']
 
-def get_output_filename(texture_path):
-    texture_folder, tex_name = os.path.split(texture_path)
-    file_name = os.path.splitext(tex_name)[0]
-    out_folder = os.path.join(texture_folder, "png")
-    if not os.path.exists(out_folder):
-        os.makedirs(out_folder)
-    return os.path.join(out_folder, file_name + ".png")
+    def get_texture_files(self):
+        ext_list = self.get_texture_extensions()
+        return [file for files_with_ext in map(lambda ext: glob.glob(os.path.join(self.name, "*." + ext)), ext_list) for file in files_with_ext]
 
-def process_folder(folder_name):
-    for texture_path in get_texture_files(folder_name, ['A', 'A4']):
-        cur_tex = Texture(texture_path)
-        palette = Palette("PAL.PAL")
-        cur_tex.save(0, get_output_filename(texture_path), palette=palette)
+    @staticmethod
+    def get_file_stats(texture_path):
+        texture = Texture(texture_path)
+        header, _ = texture.get_header_and_texture()
+        wd, ht = texture.get_width_and_height()
+        print(texture_path, wd, ht, header[12], header[24], header[28], sep='\t')
 
-process_folder("Korob")
+    @staticmethod
+    def get_output_filename(texture_path):
+        texture_folder, tex_name = os.path.split(texture_path)
+        file_name = os.path.splitext(tex_name)[0]
+        out_folder = os.path.join(texture_folder, "png")
+        if not os.path.exists(out_folder):
+            os.makedirs(out_folder)
+        return os.path.join(out_folder, file_name + ".png")
+
+    def process(self):
+        for texture_path in self.get_texture_files():
+            cur_tex = Texture(texture_path)
+            palette = Palette("PAL.PAL")
+            cur_tex.save(0, self.get_output_filename(texture_path), palette=palette)
+
+folder = Folder("Korob")
+folder.process()
 
