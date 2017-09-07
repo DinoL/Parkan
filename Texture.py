@@ -71,7 +71,9 @@ class Folder:
 
     @staticmethod
     def get_texture_extensions():
-        return ['A', 'A4']
+        bases = ['A', 'V', 'F', 'W']
+        animated_files = [base + str(x) for base in bases for x in range(1, 10)]
+        return bases + animated_files
 
     def get_texture_files(self):
         ext_list = self.get_texture_extensions()
@@ -87,18 +89,23 @@ class Folder:
     @staticmethod
     def get_output_filename(texture_path):
         texture_folder, tex_name = os.path.split(texture_path)
-        file_name = os.path.splitext(tex_name)[0]
         out_folder = os.path.join(texture_folder, "png")
         if not os.path.exists(out_folder):
             os.makedirs(out_folder)
-        return os.path.join(out_folder, file_name + ".png")
+        return os.path.join(out_folder, tex_name + ".png")
 
     def process(self):
-        for texture_path in self.get_texture_files():
-            cur_tex = Texture(texture_path)
-            palette = Palette("PAL.PAL")
-            cur_tex.save(0, self.get_output_filename(texture_path), palette=palette)
+        all_textures = self.get_texture_files()
+        processed = 0
+        if all_textures:
+            for texture_path in all_textures:
+                cur_tex = Texture(texture_path)
+                palette = Palette("PAL.PAL")
+                cur_tex.save(0, self.get_output_filename(texture_path), palette=palette)
+                processed += 1
+                print("{} out of {} processed, {}".format(processed, len(all_textures),
+                                                          str(int(100 * processed / len(all_textures))) + "%"))
 
-Folder("parkan").process()
+Folder("TEXTURES.LIB.dir").process()
 Palette("PAL.PAL").save("palette.png")
 
