@@ -2,11 +2,15 @@ import numpy as np
 import cv2
 import glob, os
 
-class Palette:
+class Binary_file:
     def __init__(self, path):
         f = open(path, "r")
-        self.palette_colors_cnt = 256
         self.seq = np.fromfile(f, dtype=np.uint8)
+
+class Palette(Binary_file):
+    def __init__(self, path):
+        super().__init__(path)
+        self.palette_colors_cnt = 256
 
         bytes_per_color = 4
         bytes_per_channels = 3
@@ -17,11 +21,10 @@ class Palette:
     def get_color_by_id(self, col_id, shift = 0):
         return list(self.data[0][(col_id + self.palette_colors_cnt - shift) % self.palette_colors_cnt])
 
-class Texture:
+class Texture(Binary_file):
     def __init__(self, path):
+        super().__init__(path)
         self.header_size = 32
-        f = open(path, "r")
-        self.seq = np.fromfile(f, dtype=np.uint8)
 
     def save(self, id, out_file, palette):
         _, texture = self.get_header_and_texture()
