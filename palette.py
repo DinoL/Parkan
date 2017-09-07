@@ -1,10 +1,12 @@
 from binary_file import Binary_file
+import utils
 import numpy as np
 import cv2
 import os.path
 
 class Palette(Binary_file):
-    def __init__(self, path, shift = 0):
+    def __init__(self, name, shift = 0):
+        path = os.path.join(utils.get_palettes_folder(), name)
         super().__init__(path)
         self.shift = shift
         self.palette_colors_cnt = 256
@@ -33,3 +35,7 @@ class Palette(Binary_file):
 
     def save(self, out_file):
         cv2.imwrite(out_file, self.data)
+
+    @staticmethod
+    def get_palette_extensions():
+        return ['PAL', 'COL']

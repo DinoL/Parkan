@@ -1,6 +1,7 @@
 from texture import Texture
 from palette import Palette
-import glob, os
+import utils
+import glob, os.path
 
 class Folder:
     def __init__(self, name):
@@ -11,11 +12,11 @@ class Folder:
         bases = ['A', 'V']
         singles = ['DIB', 'NGB', 'F', 'W']
         animated_files = [base + str(x) for base in bases for x in range(1, 10)]
-        return bases + animated_files
+        return bases + animated_files + singles
 
     def get_texture_files(self):
         ext_list = self.get_texture_extensions()
-        return [file for files_with_ext in map(lambda ext: glob.glob(os.path.join(self.name, "*." + ext)), ext_list) for file in files_with_ext]
+        return [file for files_with_ext in map(lambda ext: glob.glob(os.path.join(utils.get_textures_folder(), self.name, "*." + ext)), ext_list) for file in files_with_ext]
 
     @staticmethod
     def get_file_stats(texture_path):
