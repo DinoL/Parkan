@@ -1,5 +1,4 @@
 from binary_file import Binary_file
-import utils
 import numpy as np
 import cv2
 
@@ -36,6 +35,17 @@ class Texture(Binary_file):
             sum += bytes_seq[i] * (256 ** i)
         return sum
 
+    @staticmethod
+    def get_texture_extensions():
+        bases = ['A', 'V']
+        singles = ['NGB', 'F', 'W']
+        animated_files = [base + str(x) for base in bases for x in range(1, 10)]
+        return bases + animated_files + singles
+
     def get_width_and_height(self):
         header, _ = self.get_header_and_texture()
         return map(self.bytes_seq_to_int, (header[4:8], header[8:12]))
+
+    @staticmethod
+    def get_textures_folder():
+        return 'textures'
