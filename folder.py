@@ -1,3 +1,4 @@
+from texture_builder import TextureBuilder
 from texture import Texture
 from palette import Palette
 import glob, os.path
@@ -7,14 +8,14 @@ class Folder:
         self.name = name
 
     def get_texture_files(self):
-        ext_list = Texture.get_texture_extensions()
+        ext_list = TextureBuilder.get_texture_extensions()
         return [file for files_with_ext in
-                map(lambda ext: glob.glob(os.path.join(Texture.get_textures_folder(), self.name, "*." + ext)), ext_list)
+                map(lambda ext: glob.glob(os.path.join(Texture.get_textures_folder(), self.name, "*" + ext)), ext_list)
                 for file in files_with_ext]
 
     @staticmethod
     def get_file_stats(texture_path):
-        texture = Texture(texture_path)
+        texture = TextureBuilder.get_texture(texture_path)
         header, _ = texture.get_header_and_texture()
         wd, ht = texture.get_width_and_height()
         print(texture_path, wd, ht, header[12], header[24], header[28], sep='\t')
@@ -32,7 +33,10 @@ class Folder:
         processed = 0
         if all_textures:
             for texture_path in all_textures:
-                cur_tex = Texture(texture_path)
+                cur_tex = TextureBuilder.get_texture(texture_path)
+                if cur_tex is None:
+                    print("Could not create texture for path", texture_path)
+                    continue
                 palette = Palette(palette_path, shift=0)
                 cur_tex.save(0, self.get_output_filename(texture_path, palette.get_name()), palette=palette)
                 processed += 1
