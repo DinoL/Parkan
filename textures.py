@@ -13,6 +13,10 @@ class Texture(Binary_file):
         pixels = [palette.get_color_by_id(col_id) for col_id in texture]
 
         wd, ht = self.get_width_and_height()
+        if wd == 0 or ht == 0:
+            wd, ht = 256, 256
+            if wd*ht > len(self.seq) - self.header_size:
+                ht = ht//2
 
         cur = 0
         cur_id = 0
@@ -38,7 +42,7 @@ class Texture(Binary_file):
     @staticmethod
     def get_texture_extensions():
         bases = ['A', 'V']
-        singles = ['NGB', 'F', 'W']
+        singles = ['DIB', 'NGB', 'F', 'W']
         animated_files = [base + str(x) for base in bases for x in range(1, 10)]
         return bases + animated_files + singles
 
