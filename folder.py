@@ -3,6 +3,7 @@ from texture import Texture
 from palette import Palette
 import glob, os.path
 
+
 class Folder:
     def __init__(self, name):
         self.name = name

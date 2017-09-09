@@ -2,11 +2,12 @@ from binary_file import Binary_file
 import numpy as np
 import cv2
 
+
 class Texture(Binary_file):
     def __init__(self, path):
         super().__init__(path)
 
-    def save(self, id, out_file, palette):
+    def save(self, order, out_file, palette):
         """To be implemented in derived classes"""
         print("Abstract save method call!")
 

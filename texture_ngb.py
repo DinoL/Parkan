@@ -1,5 +1,6 @@
 from texture import Texture
 
+
 class TextureNgb(Texture):
     def __init__(self, path):
         super().__init__(path)

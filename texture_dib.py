@@ -3,12 +3,13 @@ from binary_file import Binary_file
 import numpy as np
 import cv2
 
+
 class TextureDib(Texture):
     def __init__(self, path):
         super().__init__(path)
         self.header_size = 32
 
-    def save(self, id, out_file, palette):
+    def save(self, order, out_file, palette):
         _, texture = self.get_header_and_texture()
 
         pixels = [palette.get_color_by_id(col_id) for col_id in texture]

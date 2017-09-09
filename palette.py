@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 import os.path, glob
 
+
 class Palette(Binary_file):
     def __init__(self, path, shift = 0):
         super().__init__(path)
