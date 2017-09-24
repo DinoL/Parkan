@@ -1,7 +1,7 @@
-from binary_file import Binary_file
+from binary_file import BinaryFile
 
 
-class Texture(Binary_file):
+class Texture(BinaryFile):
     def __init__(self, path):
         super().__init__(path)
 

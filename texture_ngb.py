@@ -1,5 +1,5 @@
 from texture import Texture
-from binary_file import Binary_file
+from binary_file import BinaryFile
 import numpy as np
 import cv2
 
@@ -17,7 +17,7 @@ class TextureNgb(Texture):
 
     def get_width_and_height(self):
         header, _ = self.get_header_and_texture()
-        header_words = {i : Binary_file.bytes_seq_to_int(header[i:i+2]) for i in range(0, 8, 2)}
+        header_words = {i : BinaryFile.bytes_seq_to_int(header[i:i + 2]) for i in range(0, 8, 2)}
         wd = header_words[4] - header_words[0] + 1
         ht = header_words[6] - header_words[2] + 1
         return wd, ht
@@ -54,8 +54,8 @@ class TextureNgbComplex(TextureNgb):
 
     def get_pixel_color(self, x, y):
         row_info_pos_pos = 4*y + self.header_size
-        row_info_pos = Binary_file.bytes_seq_to_int(self.seq[row_info_pos_pos : row_info_pos_pos + 4])
-        row_info = Binary_file.bytes_seq_to_int(self.seq[row_info_pos: row_info_pos + 4])
+        row_info_pos = BinaryFile.bytes_seq_to_int(self.seq[row_info_pos_pos : row_info_pos_pos + 4])
+        row_info = BinaryFile.bytes_seq_to_int(self.seq[row_info_pos: row_info_pos + 4])
         mod = 2**16
         cur_wd, x_shift = divmod(row_info, mod)
         while True:
@@ -67,7 +67,7 @@ class TextureNgbComplex(TextureNgb):
                 return self.seq[row_info_pos + cur_x + 4]
             else:
                 row_info_pos += (cur_wd + 4)
-                row_info = Binary_file.bytes_seq_to_int(self.seq[row_info_pos : row_info_pos + 4])
+                row_info = BinaryFile.bytes_seq_to_int(self.seq[row_info_pos : row_info_pos + 4])
                 x = cur_x - cur_wd
                 cur_wd, x_shift = divmod(row_info, mod)
 

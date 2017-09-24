@@ -1,5 +1,5 @@
 from texture import Texture
-from binary_file import Binary_file
+from binary_file import BinaryFile
 import numpy as np
 import cv2
 
@@ -24,7 +24,7 @@ class TextureDib(Texture):
 
     def get_width_and_height(self):
         header, _ = self.get_header_and_texture()
-        return map(Binary_file.bytes_seq_to_int, (header[8:12], header[12:16]))
+        return map(BinaryFile.bytes_seq_to_int, (header[8:12], header[12:16]))
 
     @staticmethod
     def has_signature(binary):

@@ -1,13 +1,13 @@
 from texture_common import TextureCommon
 from texture_dib import TextureDib
 from texture_ngb import TextureNgbComplex, TextureNgbPlain
-from binary_file import Binary_file
+from binary_file import BinaryFile
 
 
 class TextureBuilder:
     @staticmethod
     def get_texture(path):
-        binary = Binary_file(path)
+        binary = BinaryFile(path)
         compliant_textures = (texture_class for texture_class in TextureBuilder.get_texture_types()
                               if texture_class.has_signature(binary))
         for texture_class in compliant_textures:
