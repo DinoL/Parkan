@@ -55,7 +55,7 @@ class Palette(Binary_file):
         all_palettes = Palette.get_palette_files()
         for palette_path in all_palettes:
             cur_pal = Palette(palette_path)
-            cur_pal.save(palette_path + ".png")
+            cur_pal.save(palette_path + '.png')
 
     @staticmethod
     def get_abs_path(rel_path):
