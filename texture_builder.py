@@ -1,21 +1,20 @@
 from texture_common import TextureCommon
 from texture_dib import TextureDib
-from texture_ngb import TextureNgb
-import os.path
+from texture_ngb import TextureNgbComplex, TextureNgbPlain
+from binary_file import Binary_file
+
 
 class TextureBuilder:
     @staticmethod
     def get_texture(path):
-        filename = os.path.basename(path)
-        _, ext = os.path.splitext(filename)
-        if ext not in TextureBuilder.get_texture_extensions():
-            print("Extension", ext, "not found")
+        binary = Binary_file(path)
+        compliant_textures = (texture_class for texture_class in TextureBuilder.get_texture_types()
+                              if texture_class.has_signature(binary))
+        for texture_class in compliant_textures:
+            return texture_class(path)
+            break
+        else:
             return None
-        if ext == '.DIB':
-            return TextureDib(path)
-        elif ext == '.NGB':
-            return TextureNgb(path)
-        return TextureCommon(path)
 
     @staticmethod
     def get_texture_extensions():
@@ -23,3 +22,7 @@ class TextureBuilder:
         singles = ['.DIB', '.NGB', '.F', '.W']
         animated_files = [base + str(x) for base in bases for x in range(1, 10)]
         return bases + animated_files + singles
+
+    @staticmethod
+    def get_texture_types():
+        return TextureCommon, TextureDib, TextureNgbPlain, TextureNgbComplex

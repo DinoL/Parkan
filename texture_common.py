@@ -33,3 +33,7 @@ class TextureCommon(Texture):
     def get_width_and_height(self):
         header, _ = self.get_header_and_texture()
         return map(Binary_file.bytes_seq_to_int, (header[4:8], header[8:12]))
+
+    @staticmethod
+    def has_signature(binary):
+        return ''.join(map(chr, binary.seq[:4])) == 'Texm'

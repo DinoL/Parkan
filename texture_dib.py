@@ -16,7 +16,7 @@ class TextureDib(Texture):
 
         wd, ht = self.get_width_and_height()
 
-        arr = np.array(pixels[0: 0 + ht * wd]).reshape(ht, wd, palette.get_used_channels_cnt())
+        arr = np.array(pixels[: ht * wd]).reshape(ht, wd, palette.get_used_channels_cnt())
         cv2.imwrite(out_file, arr)
 
     def get_header_and_texture(self):
@@ -25,3 +25,7 @@ class TextureDib(Texture):
     def get_width_and_height(self):
         header, _ = self.get_header_and_texture()
         return map(Binary_file.bytes_seq_to_int, (header[8:12], header[12:16]))
+
+    @staticmethod
+    def has_signature(binary):
+        return ''.join(map(chr, binary.seq[-10:-8])) == 'BC'
