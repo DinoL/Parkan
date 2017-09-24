@@ -43,7 +43,6 @@ class TextureNgbComplex(TextureNgb):
 
     def save(self, order, out_file, palette):
         wd, ht = self.get_width_and_height()
-        print(wd, ht)
         texture = [self.get_default_color()] * (wd * ht)
         for y in range(ht):
             for x in range(wd):
