@@ -8,17 +8,10 @@ class TextureCommon(Texture):
         super().__init__(path)
         self.header_size = 32
 
-    def get_texture(self, order):
+    def get_texture(self):
         _, body = self.get_header_and_body()
         wd, ht = self.get_width_and_height()
-        cur_pos = 0
-        cur_id = 0
-        while cur_pos < len(body):
-            if cur_id == order:
-                return np.array(body[cur_pos: cur_pos + wd * ht])
-            cur_id += 1
-            cur_pos += wd * ht
-            wd, ht = wd // 2, ht // 2
+        return np.array(body[: wd * ht])
 
     def get_header_and_body(self):
         return self.seq[:self.header_size], self.seq[self.header_size:]

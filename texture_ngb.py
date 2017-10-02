@@ -26,7 +26,7 @@ class TextureNgbPlain(TextureNgb):
     def has_signature(binary):
         return np.array_equal(binary.seq[12:16], [0xAB, 0xCD, 0xF0, 0x01])
 
-    def get_texture(self, order):
+    def get_texture(self):
         wd, ht = self.get_width_and_height()
         _, body = self.get_header_and_body()
         return np.array(body[: ht * wd])
@@ -84,7 +84,7 @@ class TextureNgbComplex(TextureNgb):
             cur += cur_wd
         return texture
 
-    def get_texture(self, order):
+    def get_texture(self):
         wd, ht = self.get_width_and_height()
         texture = [self.get_default_color()] * (wd * ht)
         for row in range(ht):

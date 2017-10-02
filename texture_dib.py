@@ -8,7 +8,7 @@ class TextureDib(Texture):
         super().__init__(path)
         self.header_size = 32
 
-    def get_texture(self, order):
+    def get_texture(self):
         wd, ht = self.get_width_and_height()
         return np.array(self.seq[: ht * wd])
 

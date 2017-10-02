@@ -39,7 +39,7 @@ class Folder:
                     print('Could not create texture for path', texture_path)
                     continue
                 palette = Palette(palette_path, shift=0)
-                cur_tex.save(0, self.get_output_filename(texture_path, palette.get_name()), palette=palette)
+                cur_tex.save(self.get_output_filename(texture_path, palette.get_name()), palette=palette)
                 processed += 1
                 print('{} out of {} processed, {}'.format(processed, len(all_textures),
                                                           str(int(100 * processed / len(all_textures))) + '%'))
