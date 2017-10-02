@@ -5,9 +5,8 @@ import os.path, glob
 
 
 class Palette(BinaryFile):
-    def __init__(self, path, shift = 0):
+    def __init__(self, path):
         super().__init__(path)
-        self.shift = shift
         self.palette_colors_cnt = 256
         self.channels_cnt = 4
         self.used_channels_cnt = 3
@@ -16,15 +15,11 @@ class Palette(BinaryFile):
 
         bytes_per_color = self.channels_cnt * self.bytes_per_channel
         bytes_per_used_channels = self.used_channels_cnt * self.bytes_per_channel
-        colors_seq = [self.seq[i: i + bytes_per_used_channels] for i in
-                      range(0, bytes_per_color * self.palette_colors_cnt, bytes_per_color)]
-        self.data = np.array(colors_seq).reshape(1, self.palette_colors_cnt, self.used_channels_cnt)
-
-    def get_shifted_id(self, col_id):
-        return (col_id + self.palette_colors_cnt - self.shift) % self.palette_colors_cnt
+        self.data = [self.seq[i: i + bytes_per_used_channels] for i in
+                     range(0, bytes_per_color * self.palette_colors_cnt, bytes_per_color)]
 
     def get_color_by_id(self, col_id):
-        return list(self.data[0][self.get_shifted_id(col_id)])
+        return self.data[col_id]
 
     def get_used_channels_cnt(self):
         return self.used_channels_cnt
