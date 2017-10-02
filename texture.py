@@ -9,7 +9,7 @@ class Texture(BinaryFile):
         """To be implemented in derived classes"""
         raise NotImplementedError('Abstract method call')
 
-    def get_header_and_texture(self):
+    def get_header_and_body(self):
         """To be implemented in derived classes"""
         raise NotImplementedError('Abstract method call')
 

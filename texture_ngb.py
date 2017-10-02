@@ -11,11 +11,11 @@ class TextureNgb(Texture):
     def get_default_color(self):
         return self.seq[8]
 
-    def get_header_and_texture(self):
+    def get_header_and_body(self):
         return self.seq[:self.header_size], self.seq[self.header_size:]
 
     def get_width_and_height(self):
-        header, _ = self.get_header_and_texture()
+        header, _ = self.get_header_and_body()
         header_words = [self.get_word(self.word_size * i) for i in range(4)]
         wd = header_words[2] - header_words[0] + 1
         ht = header_words[3] - header_words[1] + 1
@@ -29,7 +29,7 @@ class TextureNgbPlain(TextureNgb):
 
     def save(self, order, out_file, palette):
         wd, ht = self.get_width_and_height()
-        _, texture = self.get_header_and_texture()
+        _, texture = self.get_header_and_body()
         pixels = [palette.get_color_by_id(col_id) for col_id in texture]
         arr = np.array(pixels[: ht * wd]).reshape(ht, wd, palette.get_used_channels_cnt())
         cv2.imwrite(out_file, arr)

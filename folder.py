@@ -17,7 +17,7 @@ class Folder:
     @staticmethod
     def get_file_stats(texture_path):
         texture = TextureBuilder.get_texture(texture_path)
-        header, _ = texture.get_header_and_texture()
+        header, _ = texture.get_header_and_body()
         wd, ht = texture.get_width_and_height()
         print(texture_path, wd, ht, header[12], header[24], header[28], sep='\t')
 
