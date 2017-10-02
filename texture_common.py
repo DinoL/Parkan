@@ -1,7 +1,6 @@
 from texture import Texture
 from binary_file import BinaryFile
 import numpy as np
-import cv2
 
 
 class TextureCommon(Texture):
@@ -9,22 +8,16 @@ class TextureCommon(Texture):
         super().__init__(path)
         self.header_size = 32
 
-    def save(self, order, out_file, palette):
-        _, texture = self.get_header_and_body()
-
-        pixels = [palette.get_color_by_id(col_id) for col_id in texture]
-
+    def get_texture(self, order):
+        _, body = self.get_header_and_body()
         wd, ht = self.get_width_and_height()
-
-        cur = 0
+        cur_pos = 0
         cur_id = 0
-        while cur < len(pixels):
+        while cur_pos < len(body):
             if cur_id == order:
-                arr = np.array(pixels[cur: cur + ht * wd]).reshape(ht, wd, palette.get_used_channels_cnt())
-                cv2.imwrite(out_file, arr)
-                break
+                return np.array(body[cur_pos: cur_pos + wd * ht])
             cur_id += 1
-            cur += wd * ht
+            cur_pos += wd * ht
             wd, ht = wd // 2, ht // 2
 
     def get_header_and_body(self):

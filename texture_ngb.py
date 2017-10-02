@@ -1,6 +1,5 @@
 from texture import Texture
 import numpy as np
-import cv2
 
 
 class TextureNgb(Texture):
@@ -27,12 +26,10 @@ class TextureNgbPlain(TextureNgb):
     def has_signature(binary):
         return np.array_equal(binary.seq[12:16], [0xAB, 0xCD, 0xF0, 0x01])
 
-    def save(self, order, out_file, palette):
+    def get_texture(self, order):
         wd, ht = self.get_width_and_height()
-        _, texture = self.get_header_and_body()
-        pixels = [palette.get_color_by_id(col_id) for col_id in texture]
-        arr = np.array(pixels[: ht * wd]).reshape(ht, wd, palette.get_used_channels_cnt())
-        cv2.imwrite(out_file, arr)
+        _, body = self.get_header_and_body()
+        return np.array(body[: ht * wd])
 
 
 class TextureNgbComplex(TextureNgb):
@@ -87,19 +84,12 @@ class TextureNgbComplex(TextureNgb):
             cur += cur_wd
         return texture
 
-    def process_rows(self):
+    def get_texture(self, order):
         wd, ht = self.get_width_and_height()
         texture = [self.get_default_color()] * (wd * ht)
         for row in range(ht):
             self.process_row(row, texture)
         return texture
-
-    def save(self, order, out_file, palette):
-        wd, ht = self.get_width_and_height()
-        texture = self.process_rows()
-        pixels = [palette.get_color_by_id(col_id) for col_id in texture]
-        arr = np.array(pixels).reshape(ht, wd, palette.get_used_channels_cnt())
-        cv2.imwrite(out_file, arr)
 
     def get_row_info_position(self, row):
         s = self.header_size + self.row_info_pos_size * row

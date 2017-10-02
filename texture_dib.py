@@ -1,7 +1,6 @@
 from texture import Texture
 from binary_file import BinaryFile
 import numpy as np
-import cv2
 
 
 class TextureDib(Texture):
@@ -9,15 +8,9 @@ class TextureDib(Texture):
         super().__init__(path)
         self.header_size = 32
 
-    def save(self, order, out_file, palette):
-        _, texture = self.get_header_and_body()
-
-        pixels = [palette.get_color_by_id(col_id) for col_id in texture]
-
+    def get_texture(self, order):
         wd, ht = self.get_width_and_height()
-
-        arr = np.array(pixels[: ht * wd]).reshape(ht, wd, palette.get_used_channels_cnt())
-        cv2.imwrite(out_file, arr)
+        return np.array(self.seq[: ht * wd])
 
     def get_header_and_body(self):
         return self.seq[-self.header_size:], self.seq[: -self.header_size]

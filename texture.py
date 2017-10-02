@@ -1,4 +1,6 @@
 from binary_file import BinaryFile
+import cv2
+import numpy as np
 
 
 class Texture(BinaryFile):
@@ -6,6 +8,12 @@ class Texture(BinaryFile):
         super().__init__(path)
 
     def save(self, order, out_file, palette):
+        wd, ht = self.get_width_and_height()
+        pixels = [palette.get_color_by_id(col_id) for col_id in self.get_texture(order)]
+        arr = np.array(pixels).reshape(ht, wd, palette.get_used_channels_cnt())
+        cv2.imwrite(out_file, arr)
+
+    def get_texture(self, order):
         """To be implemented in derived classes"""
         raise NotImplementedError('Abstract method call')
 
