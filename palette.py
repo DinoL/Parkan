@@ -28,7 +28,8 @@ class Palette(BinaryFile):
         return self.name
 
     def save(self, out_file):
-        cv2.imwrite(out_file, self.data)
+        arr = [self.get_color_by_id(col_id) for col_id in range(self.palette_colors_cnt)]
+        cv2.imwrite(out_file, np.array(arr).reshape(1, self.palette_colors_cnt, 3))
 
     @staticmethod
     def get_palette_extensions():
