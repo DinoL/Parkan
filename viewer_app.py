@@ -1,6 +1,5 @@
 from palette import Palette
 from texture_builder import TextureBuilder
-from channels_converter import ChannelsConverter
 
 from PyQt5.QtCore import QDir
 from PyQt5.QtGui import QImage, QPalette, QPixmap
@@ -24,6 +23,7 @@ class ViewerApp(QMainWindow):
         self.setWindowTitle(self.name)
         self.resize(500, 400)
         self.palette = None
+        self.last_image = None
 
     def init_window_elements(self):
         self.create_image_label()
@@ -51,28 +51,31 @@ class ViewerApp(QMainWindow):
     def open(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open image', QDir.currentPath())
         if file_name and self.palette:
-            image_data = TextureBuilder().get_texture(file_name).get_pixels(self.palette)
-            image_data = ChannelsConverter.convert_bgr_to_rgb(image_data)
-            ht, wd, channels = image_data.shape
-            image = QImage(image_data, wd, ht, channels * wd, QImage.Format_RGB888)
-            if image.isNull():
-                QMessageBox.information(self, self.name, 'Cannot load image {}'.format(file_name))
-                return
-
-            self.image_label.setPixmap(QPixmap.fromImage(image))
+            self.last_image = TextureBuilder().get_texture(file_name)
             self.scale_factor = 1.0
-
-            self.fit_to_window_act.setEnabled(True)
+            self.update_image()
             self.update_actions()
-
-            if not self.fit_to_window_act.isChecked():
-                self.image_label.adjustSize()
 
     def load_palette(self):
         fileName, _ = QFileDialog.getOpenFileName(self, 'Open palette', QDir.currentPath())
         if fileName:
             self.palette = Palette(fileName)
+            self.update_image()
             self.update_actions()
+
+    def update_image(self):
+        if not self.last_image:
+            return
+
+        image_data = self.last_image.get_pixels(self.palette)
+        ht, wd, channels = image_data.shape
+        image = QImage(image_data, wd, ht, channels * wd, QImage.Format_RGB888)
+        if not image.isNull():
+            image = image.rgbSwapped()
+            self.image_label.setPixmap(QPixmap.fromImage(image))
+            self.fit_to_window_act.setEnabled(True)
+            if not self.fit_to_window_act.isChecked():
+                self.image_label.adjustSize()
 
     def zoom_in(self):
         self.scale_image(1 + self.scale_step)
