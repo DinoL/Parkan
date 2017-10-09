@@ -21,5 +21,4 @@ class TextureAlf(Texture):
 
     @staticmethod
     def has_signature(binary):
-        print(binary.seq[-17], binary.seq[-16])
         return binary.seq[-18] == 0x80 and binary.seq[-17] == 0x3F
