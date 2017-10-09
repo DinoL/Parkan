@@ -7,11 +7,13 @@ class Texture(BinaryFile):
     def __init__(self, path):
         super().__init__(path)
 
-    def save(self, out_file, palette):
+    def get_pixels(self, palette):
         wd, ht = self.get_width_and_height()
         pixels = [palette.get_color_by_id(col_id) for col_id in self.get_texture()]
-        arr = np.array(pixels).reshape(ht, wd, palette.get_used_channels_cnt())
-        cv2.imwrite(out_file, arr)
+        return np.array(pixels).reshape(ht, wd, palette.get_used_channels_cnt())
+
+    def save(self, out_file, palette):
+        cv2.imwrite(out_file, self.get_pixels(palette))
 
     def get_texture(self):
         """To be implemented in derived classes"""
