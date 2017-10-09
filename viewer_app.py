@@ -92,10 +92,10 @@ class ViewerApp(QMainWindow):
         self.update_actions()
 
     def create_actions(self):
-        self.open_act = QAction('&Open...', self, shortcut='Ctrl+O',
+        self.open_act = QAction('&Open image...', self, shortcut='Ctrl+O',
                                 enabled=False, triggered=self.open)
 
-        self.load_palette_act = QAction('&Load Palette...', self, shortcut='Ctrl+L',
+        self.load_palette_act = QAction('&Load palette...', self, shortcut='Ctrl+L',
                                         enabled=True, triggered=self.load_palette)
 
         self.exit_act = QAction('E&xit', self, shortcut='Ctrl+Q',
