@@ -31,6 +31,9 @@ class Palette(BinaryFile):
         arr = [self.get_color_by_id(col_id) for col_id in range(self.palette_colors_cnt)]
         cv2.imwrite(out_file, np.array(arr).reshape(1, self.palette_colors_cnt, 3))
 
+    def apply(self, texture):
+        return [self.get_color_by_id(col_id) for col_id in texture]
+
     @staticmethod
     def get_palette_extensions():
         return ['PAL', 'COL']

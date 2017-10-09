@@ -9,7 +9,7 @@ class Texture(BinaryFile):
 
     def get_pixels(self, palette):
         wd, ht = self.get_width_and_height()
-        pixels = [palette.get_color_by_id(col_id) for col_id in self.get_texture()]
+        pixels = palette.apply(self.get_texture())
         return np.array(pixels).reshape(ht, wd, palette.get_used_channels_cnt())
 
     def save(self, out_file, palette):
