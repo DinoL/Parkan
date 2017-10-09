@@ -1,6 +1,6 @@
 from palette import Palette
 from texture_builder import TextureBuilder
-
+from channels_converter import ChannelsConverter
 
 from PyQt5.QtCore import QDir
 from PyQt5.QtGui import QImage, QPalette, QPixmap
@@ -52,6 +52,7 @@ class ViewerApp(QMainWindow):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Open image', QDir.currentPath())
         if file_name and self.palette:
             image_data = TextureBuilder().get_texture(file_name).get_pixels(self.palette)
+            image_data = ChannelsConverter.convert_bgr_to_rgb(image_data)
             ht, wd, channels = image_data.shape
             image = QImage(image_data, wd, ht, channels * wd, QImage.Format_RGB888)
             if image.isNull():
