@@ -7,7 +7,8 @@ import os.path
 from PyQt5.QtCore import QDir
 from PyQt5.QtGui import QImage, QPalette, QPixmap
 from PyQt5.QtWidgets import (QAction, QFileDialog, QLabel,
-        QMainWindow, QMenu, QMessageBox, QScrollArea, QSizePolicy)
+        QMainWindow, QMenu, QScrollArea, QSizePolicy)
+from color_ramp_widget import ColorRampWidget
 
 
 class ViewerApp(QMainWindow):
@@ -27,6 +28,7 @@ class ViewerApp(QMainWindow):
         self.resize(500, 400)
         self.palette = None
         self.last_image = None
+        self.palette_window = None
 
     def init_window_elements(self):
         self.create_image_label()
@@ -65,6 +67,7 @@ class ViewerApp(QMainWindow):
             self.palette = Palette(fileName)
             self.update_image()
             self.update_actions()
+            self.palette_window = ColorRampWidget(self.palette)
 
     def update_image(self):
         if not self.last_image:
