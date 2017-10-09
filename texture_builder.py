@@ -1,6 +1,7 @@
 from texture_common import TextureCommon
 from texture_dib import TextureDib
 from texture_ngb import TextureNgbComplex, TextureNgbPlain
+from texture_alf import TextureAlf
 from binary_file import BinaryFile
 
 
@@ -25,4 +26,4 @@ class TextureBuilder:
 
     @staticmethod
     def get_texture_types():
-        return TextureCommon, TextureDib, TextureNgbPlain, TextureNgbComplex
+        return TextureCommon, TextureDib, TextureNgbPlain, TextureNgbComplex, TextureAlf
