@@ -29,7 +29,7 @@ class Folder:
             os.makedirs(out_folder)
         return os.path.join(out_folder, tex_name + '_' + palette_name + '.png')
 
-    def process(self, palette_path):
+    def process(self, palette):
         all_textures = self.get_texture_files()
         processed = 0
         if all_textures:
@@ -38,7 +38,6 @@ class Folder:
                 if cur_tex is None:
                     print('Could not create texture for path', texture_path)
                     continue
-                palette = Palette(palette_path)
                 cur_tex.save(self.get_output_filename(texture_path, palette.get_name()), palette=palette)
                 processed += 1
                 print('{} out of {} processed, {}'.format(processed, len(all_textures),
