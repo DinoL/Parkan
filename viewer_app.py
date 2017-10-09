@@ -1,5 +1,8 @@
 from palette import Palette
 from texture_builder import TextureBuilder
+from texture import Texture
+from palette import Palette
+import os.path
 
 from PyQt5.QtCore import QDir
 from PyQt5.QtGui import QImage, QPalette, QPixmap
@@ -49,7 +52,7 @@ class ViewerApp(QMainWindow):
         self.image_label = label
 
     def open(self):
-        file_name, _ = QFileDialog.getOpenFileName(self, 'Open image', QDir.currentPath())
+        file_name, _ = QFileDialog.getOpenFileName(self, 'Open image', os.path.join(QDir.currentPath(), Texture.get_textures_folder()))
         if file_name and self.palette:
             self.last_image = TextureBuilder().get_texture(file_name)
             self.scale_factor = 1.0
@@ -57,7 +60,7 @@ class ViewerApp(QMainWindow):
             self.update_actions()
 
     def load_palette(self):
-        fileName, _ = QFileDialog.getOpenFileName(self, 'Open palette', QDir.currentPath())
+        fileName, _ = QFileDialog.getOpenFileName(self, 'Open palette', os.path.join(QDir.currentPath(), Palette.get_palettes_folder()))
         if fileName:
             self.palette = Palette(fileName)
             self.update_image()
