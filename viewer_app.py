@@ -8,7 +8,7 @@ from functools import partial
 from PyQt5.QtCore import QDir
 from PyQt5.QtGui import QImage, QPalette, QPixmap
 from PyQt5.QtWidgets import (QAction, QFileDialog, QLabel,
-        QMainWindow, QMenu, QScrollArea, QSizePolicy)
+        QMainWindow, QMenu, QScrollArea, QSizePolicy, QComboBox)
 from color_ramp_widget import ColorRampWidget
 
 
@@ -63,6 +63,7 @@ class ViewerApp(QMainWindow):
             self.update_actions()
 
     def choose_palette(self, palette_file):
+        palette_file = Palette.get_abs_path(palette_file)
         if palette_file:
             self.palette = Palette(palette_file)
             self.update_image()
@@ -103,7 +104,7 @@ class ViewerApp(QMainWindow):
 
     def create_choose_palette_action(self, palette_file):
         return QAction(os.path.basename(palette_file), self,
-                       enabled=True, triggered=partial(self.choose_palette, palette_file))
+                       enabled=True, triggered=partial(self.choose_palette, os.path.basename(palette_file)))
 
     def create_actions(self):
         self.open_act = QAction('&Open image...', self, shortcut='Ctrl+O',
@@ -134,6 +135,12 @@ class ViewerApp(QMainWindow):
         self.fileMenu = QMenu("&File", self)
         self.fileMenu.addAction(self.open_act)
         self.fileMenu.addAction(self.save_single_image_act)
+
+        combo = QComboBox(self)
+        for palette_file in self.choose_palette_act_dict:
+            combo.addItem(palette_file)
+        combo.activated[str].connect(self.choose_palette)
+        combo.move(400,30)
 
         choose_palette_menu = self.fileMenu.addMenu('&Choose Palette')
         for palette_file, choose_palette_action in self.choose_palette_act_dict.items():
