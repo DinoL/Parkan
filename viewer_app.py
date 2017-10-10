@@ -1,7 +1,7 @@
-from palette import Palette
 from texture_builder import TextureBuilder
 from texture import Texture
 from palette import Palette
+from folder import Folder
 import os.path
 from functools import partial
 
@@ -10,6 +10,7 @@ from PyQt5.QtGui import QImage, QPalette, QPixmap
 from PyQt5.QtWidgets import (QAction, QFileDialog, QLabel,
         QMainWindow, QMenu, QScrollArea, QSizePolicy, QComboBox)
 from color_ramp_widget import ColorRampWidget
+from image_gallery import ImageGallery
 
 
 class ViewerApp(QMainWindow):
@@ -30,6 +31,7 @@ class ViewerApp(QMainWindow):
         self.palette = None
         self.last_image = None
         self.palette_window = None
+        self.gallery = ImageGallery()
 
     def init_window_elements(self):
         self.create_image_label()
@@ -79,6 +81,7 @@ class ViewerApp(QMainWindow):
         image = QImage(image_data, wd, ht, channels * wd, QImage.Format_RGB888)
         if not image.isNull():
             image = image.rgbSwapped()
+            QPixmap.fromImage(image)
             self.image_label.setPixmap(QPixmap.fromImage(image))
             self.fit_to_window_act.setEnabled(True)
             if not self.fit_to_window_act.isChecked():
@@ -131,6 +134,37 @@ class ViewerApp(QMainWindow):
         self.save_single_image_act = QAction('&Save image', self, enabled=False,
                                              shortcut='Ctrl+S', triggered=self.save_single_image)
 
+        self.create_gallery_act = QAction('&Create gallery', self, shortcut='Ctrl+G',
+                                          enabled=False, triggered=self.create_gallery_folder)
+
+    def create_gallery_folder(self):
+        folder_path = QFileDialog.getExistingDirectory(self, 'Choose folder with images',
+                                                   os.path.join(QDir.currentPath(), Texture.get_textures_folder()))
+        if folder_path:
+            folder_name = os.path.basename(folder_path)
+            self.create_gallery(folder_name)
+
+    def create_gallery(self, folder_name):
+        if not self.palette:
+            return
+
+        folder = Folder(folder_name)
+        all_textures = folder.get_texture_files()
+        images = []
+        for texture_filename in all_textures:
+            cur_texture = TextureBuilder().get_texture(texture_filename)
+            if not cur_texture:
+                continue
+
+            image_data = cur_texture.get_pixels(self.palette)
+            ht, wd, channels = image_data.shape
+            image = QImage(image_data, wd, ht, channels * wd, QImage.Format_RGB888)
+            if not image.isNull():
+                image = image.rgbSwapped()
+                images.append(QPixmap.fromImage(image))
+        self.gallery.populate(images=images, height=50)
+        self.gallery.show()
+
     def create_menus(self):
         self.fileMenu = QMenu("&File", self)
         self.fileMenu.addAction(self.open_act)
@@ -145,6 +179,8 @@ class ViewerApp(QMainWindow):
         choose_palette_menu = self.fileMenu.addMenu('&Choose Palette')
         for palette_file, choose_palette_action in self.choose_palette_act_dict.items():
             choose_palette_menu.addAction(choose_palette_action)
+
+        self.fileMenu.addAction(self.create_gallery_act)
 
         self.fileMenu.addSeparator()
         self.fileMenu.addAction(self.exit_act)
