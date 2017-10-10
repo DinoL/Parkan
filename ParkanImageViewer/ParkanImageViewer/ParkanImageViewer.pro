@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        viewer_app.cpp
+        viewer_app.cpp \
+    binary_file.cpp
 
-HEADERS  += viewer_app.h
+HEADERS  += viewer_app.h \
+    binary_file.h
 
 FORMS    += viewer_app.ui
