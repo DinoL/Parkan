@@ -121,15 +121,19 @@ class ViewerApp(QMainWindow):
         self.zoom_out_act = QAction('Zoom &Out ({}%)'.format(int(100*self.scale_step)), self, shortcut='Ctrl+-',
                                     enabled=False, triggered=self.zoom_out)
 
-        self.normal_size_act = QAction('&Normal Size', self, shortcut='Ctrl+S',
+        self.normal_size_act = QAction('&Normal Size', self, shortcut='Ctrl+N',
                                        enabled=False, triggered=self.normal_size)
 
         self.fit_to_window_act = QAction('&Fit to Window', self, enabled=False,
                                          checkable=True, shortcut='Ctrl+F', triggered=self.fit_to_window)
 
+        self.save_single_image_act = QAction('&Save image', self, enabled=False,
+                                             shortcut='Ctrl+S', triggered=self.save_single_image)
+
     def create_menus(self):
         self.fileMenu = QMenu("&File", self)
         self.fileMenu.addAction(self.open_act)
+        self.fileMenu.addAction(self.save_single_image_act)
 
         choose_palette_menu = self.fileMenu.addMenu('&Choose Palette')
         for palette_file, choose_palette_action in self.choose_palette_act_dict.items():
@@ -153,6 +157,19 @@ class ViewerApp(QMainWindow):
         self.zoom_in_act.setEnabled(not self.fit_to_window_act.isChecked())
         self.zoom_out_act.setEnabled(not self.fit_to_window_act.isChecked())
         self.normal_size_act.setEnabled(not self.fit_to_window_act.isChecked())
+        self.save_single_image_act.setEnabled(self.last_image is not None)
+
+    def save_single_image(self):
+        if not self.last_image or not self.palette:
+            return
+
+        file_name, _ = QFileDialog.getSaveFileName(self, 'Save image',
+                                                   os.path.join(QDir.currentPath(), Texture.get_textures_folder()),
+                                                   filter='*.png;;*.bmp')
+        if not file_name:
+            return
+
+        self.last_image.save(file_name, self.palette)
 
     def scale_image(self, factor):
         self.scale_factor *= factor
