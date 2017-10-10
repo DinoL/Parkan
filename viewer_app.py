@@ -159,12 +159,19 @@ class ViewerApp(QMainWindow):
         self.menuBar().addMenu(self.fileMenu)
         self.menuBar().addMenu(self.viewMenu)
 
+    def has_palette(self):
+        return self.palette is not None
+
+    def has_image(self):
+        return self.last_image is not None
+
     def update_actions(self):
-        self.open_act.setEnabled(self.palette is not None)
+        self.open_act.setEnabled(self.has_palette())
+        self.create_gallery_act.setEnabled(self.has_palette())
         self.zoom_in_act.setEnabled(not self.fit_to_window_act.isChecked())
         self.zoom_out_act.setEnabled(not self.fit_to_window_act.isChecked())
         self.normal_size_act.setEnabled(not self.fit_to_window_act.isChecked())
-        self.save_single_image_act.setEnabled(self.last_image is not None)
+        self.save_single_image_act.setEnabled(self.has_image())
 
     def save_single_image(self):
         if not self.last_image or not self.palette:
