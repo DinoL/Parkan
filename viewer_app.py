@@ -3,6 +3,7 @@ from texture_builder import TextureBuilder
 from texture import Texture
 from palette import Palette
 import os.path
+from functools import partial
 
 from PyQt5.QtCore import QDir
 from PyQt5.QtGui import QImage, QPalette, QPixmap
@@ -61,10 +62,9 @@ class ViewerApp(QMainWindow):
             self.update_image()
             self.update_actions()
 
-    def load_palette(self):
-        fileName, _ = QFileDialog.getOpenFileName(self, 'Open palette', os.path.join(QDir.currentPath(), Palette.get_palettes_folder()))
-        if fileName:
-            self.palette = Palette(fileName)
+    def choose_palette(self, palette_file):
+        if palette_file:
+            self.palette = Palette(palette_file)
             self.update_image()
             self.update_actions()
             self.palette_window = ColorRampWidget(self.palette)
@@ -101,12 +101,16 @@ class ViewerApp(QMainWindow):
 
         self.update_actions()
 
+    def create_choose_palette_action(self, palette_file):
+        return QAction(os.path.basename(palette_file), self,
+                       enabled=True, triggered=partial(self.choose_palette, palette_file))
+
     def create_actions(self):
         self.open_act = QAction('&Open image...', self, shortcut='Ctrl+O',
                                 enabled=False, triggered=self.open)
 
-        self.load_palette_act = QAction('&Load palette...', self, shortcut='Ctrl+L',
-                                        enabled=True, triggered=self.load_palette)
+        self.choose_palette_act_dict = {os.path.basename(palette_file): self.create_choose_palette_action(palette_file)
+                                        for palette_file in Palette.get_palette_files()}
 
         self.exit_act = QAction('E&xit', self, shortcut='Ctrl+Q',
                                 triggered=self.close)
@@ -126,7 +130,11 @@ class ViewerApp(QMainWindow):
     def create_menus(self):
         self.fileMenu = QMenu("&File", self)
         self.fileMenu.addAction(self.open_act)
-        self.fileMenu.addAction(self.load_palette_act)
+
+        choose_palette_menu = self.fileMenu.addMenu('&Choose Palette')
+        for palette_file, choose_palette_action in self.choose_palette_act_dict.items():
+            choose_palette_menu.addAction(choose_palette_action)
+
         self.fileMenu.addSeparator()
         self.fileMenu.addAction(self.exit_act)
 
