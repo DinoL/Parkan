@@ -1,15 +1,15 @@
 #ifndef BINARYFILE_H
 #define BINARYFILE_H
 
-#include <string>
 #include <vector>
+#include <QFileInfo>
 
 class BinaryFile
 {
 public:
-    using Sequence = std::vector<int>;
+    using Sequence = std::vector<quint8>;
 
-    BinaryFile(const std::string& i_path);
+    BinaryFile(const QFileInfo& i_path);
 
     int get_int(int start, int end);
 
@@ -17,7 +17,7 @@ public:
 
     static int bytes_seq_to_int(const Sequence& i_seq);
 
-private:
+protected:
     int m_word_size = 2;
     Sequence m_seq;
 };

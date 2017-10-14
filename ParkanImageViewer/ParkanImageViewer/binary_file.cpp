@@ -2,11 +2,15 @@
 
 #include <fstream>
 #include <iterator>
+#include <QFile>
+#include <iostream>
 
-BinaryFile::BinaryFile(const std::string& i_path)
+BinaryFile::BinaryFile(const QFileInfo& i_path)
 {
-    std::ifstream stream(i_path, std::ios::in | std::ios::binary);
-    m_seq = Sequence(std::istreambuf_iterator<char>(stream), std::istreambuf_iterator<char>());
+    QFile file(i_path.filePath());
+    file.open(QIODevice::ReadOnly);
+    const auto buf = file.readAll();
+    m_seq = Sequence(buf.begin(), buf.end());
 }
 
 int BinaryFile::get_int(int start, int end)
