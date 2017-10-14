@@ -15,10 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         viewer_app.cpp \
     binary_file.cpp \
-    palette.cpp
+    palette.cpp \
+    texture.cpp \
+    color_ramp_widget.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
-    palette.h
+    palette.h \
+    texture.h \
+    color_ramp_widget.h
 
 FORMS    += viewer_app.ui
