@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         viewer_app.cpp \
-    binary_file.cpp
+    binary_file.cpp \
+    palette.cpp
 
 HEADERS  += viewer_app.h \
-    binary_file.h
+    binary_file.h \
+    palette.h
 
 FORMS    += viewer_app.ui
