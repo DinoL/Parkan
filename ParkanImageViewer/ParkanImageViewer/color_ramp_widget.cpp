@@ -5,6 +5,7 @@ ColorRampWidget::ColorRampWidget(const Palette& i_palette, QWidget *parent)
     , m_palette(i_palette)
 {
     setGeometry(300, 300, 350, 350);
+    setWindowTitle(i_palette.get_name());
     show();
 }
 
