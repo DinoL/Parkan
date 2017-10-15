@@ -8,7 +8,9 @@
 BinaryFile::BinaryFile(const QFileInfo& i_path)
 {
     QFile file(i_path.filePath());
-    file.open(QIODevice::ReadOnly);
+    if(!file.open(QIODevice::ReadOnly))
+        return;
+
     const auto buf = file.readAll();
     m_seq = Sequence(buf.begin(), buf.end());
 }
