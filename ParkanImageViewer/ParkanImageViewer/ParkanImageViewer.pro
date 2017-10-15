@@ -26,3 +26,6 @@ HEADERS  += viewer_app.h \
     color_ramp_widget.h
 
 FORMS    += viewer_app.ui
+
+RESOURCES += \
+    palettes.qrc
