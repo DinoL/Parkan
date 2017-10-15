@@ -18,7 +18,14 @@ public:
     ~ViewerApp();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_select_palette_combo_box_activated(const QString &arg1);
+
+    void on_actionExit_triggered();
+
+    void on_actionOpen_Image_triggered();
+
+private:
+    QString get_palettes_folder() const;
 
 private:
     Ui::ViewerApp *ui;

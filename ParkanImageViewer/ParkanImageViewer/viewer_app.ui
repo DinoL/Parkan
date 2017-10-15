@@ -14,17 +14,14 @@
    <string>ViewerApp</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QComboBox" name="select_palette_combo_box">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>100</y>
-      <width>75</width>
-      <height>23</height>
+      <x>290</x>
+      <y>0</y>
+      <width>111</width>
+      <height>22</height>
      </rect>
-    </property>
-    <property name="text">
-     <string>ShowPalette</string>
     </property>
    </widget>
   </widget>
@@ -37,6 +34,15 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuOpen_Image">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_Image"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuOpen_Image"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -47,6 +53,22 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen_Image">
+   <property name="text">
+    <string>Open Image</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
