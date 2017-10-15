@@ -55,7 +55,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen_Image">
    <property name="text">
-    <string>Open Image</string>
+    <string>Open image...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
