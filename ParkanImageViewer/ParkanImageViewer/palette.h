@@ -14,6 +14,8 @@ public:
 
     int colors_cnt() const { return m_palette_colors_cnt; }
 
+    QString get_name() const { return m_name; }
+
 private:
     int m_palette_colors_cnt = 256;
     QString m_name;

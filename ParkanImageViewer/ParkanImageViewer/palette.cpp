@@ -2,7 +2,7 @@
 
 Palette::Palette(const QFileInfo& i_path)
     : BinaryFile(i_path)
-    , m_name(i_path.baseName())
+    , m_name(i_path.fileName())
     , m_colors(m_palette_colors_cnt)
 {
     m_colors.resize(m_palette_colors_cnt);
