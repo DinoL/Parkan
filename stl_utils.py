@@ -70,11 +70,11 @@ class Loop(Indented):
         x = edge_01[1] * edge_12[2] - edge_01[2] * edge_12[1]
         y = edge_01[2] * edge_12[0] - edge_01[0] * edge_12[2]
         z = edge_01[0] * edge_12[1] - edge_01[1] * edge_12[0]
-        norm = (x ** 2 + y ** 2 + z ** 2)**0.5
-        if norm <= 1e-6:
+        norm_sqr = (x ** 2 + y ** 2 + z ** 2)
+        if norm_sqr <= 1e-6:
             return default
 
-        return [coordinate / norm for coordinate in (x, y, z)]
+        return [coordinate / norm_sqr**0.5 for coordinate in (x, y, z)]
 
     def to_str(self, level):
         res = self.get_indent(level) + 'outer loop\n'
