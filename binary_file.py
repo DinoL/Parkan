@@ -1,4 +1,17 @@
 import numpy as np
+import struct
+
+
+def float_from_bytes(bytes_string):
+    return struct.unpack('f', bytes_string)[0]
+
+
+def seq_to_bytes(seq):
+    return bytes.fromhex(''.join(['{:02x}'.format(el) for el in seq]))
+
+
+def float_from_seq(seq):
+    return float_from_bytes(seq_to_bytes(seq))
 
 
 class BinaryFile:
@@ -16,6 +29,9 @@ class BinaryFile:
 
     def get_int(self, start, end):
         return BinaryFile.bytes_seq_to_int(self.seq[start:end])
+
+    def get_float(self, start, end):
+        return float_from_seq(self.seq[start:end])
 
     def get_word(self, start):
         return self.get_int(start, start + self.word_size)

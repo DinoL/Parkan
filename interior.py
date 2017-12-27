@@ -30,7 +30,7 @@ def convert_bin_to_stl(input_path, output_path, name):
         v_start = get_start_from_vertex_id(v_id)
         coord_starts = range(v_start, v_start + desc.vertex_size, desc.vertex_coord_size)
         coord_ends = [c_start + desc.vertex_coord_size for c_start in coord_starts]
-        return [seq.get_int(coord_starts[coord_id], coord_ends[coord_id]) // 2**16 for coord_id in range(desc.vertex_coord_cnt)]
+        return [seq.get_float(coord_starts[coord_id], coord_ends[coord_id]) for coord_id in range(desc.vertex_coord_cnt)]
 
     vertices = [vertex_from_seq(v_id, binary) for v_id in range(vertices_cnt)]
 
