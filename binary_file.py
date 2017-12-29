@@ -21,8 +21,8 @@ class BinaryFile:
     def get_int(self, start, end):
         return BinaryFile.bytes_seq_to_int(self.seq[start:end])
 
-    def get_float(self, start, end):
-        return struct.unpack('f', self.get_bytes(start, end))[0]
+    def get_float(self, pos):
+        return struct.unpack('f', self.get_bytes(pos, pos + 4))[0]
 
     def get_word(self, start):
         return self.get_int(start, start + self.word_size)
