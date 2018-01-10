@@ -17,7 +17,7 @@ Palette::Palette(const QFileInfo& i_path) :
         const quint8 b = m_seq[0];
         const quint8 g = m_seq[1];
         const quint8 r = m_seq[2];
-        cur_color = QColor(r, g, b);
+        cur_color = QColor(r, g, b).rgb();
     }
 }
 
@@ -28,5 +28,5 @@ size_t Palette::get_colors_cnt() const
 
 QColor Palette::get_color_by_id(int i_col_id) const
 {
-    return m_colors[i_col_id];
+    return QColor(m_colors[i_col_id]);
 }
