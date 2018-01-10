@@ -1,18 +1,32 @@
 #include "palette.h"
 
-Palette::Palette(const QFileInfo& i_path)
-    : BinaryFile(i_path)
-    , m_name(i_path.fileName())
-    , m_colors(m_palette_colors_cnt)
+#include <QFile>
+
+Palette::Palette(const QFileInfo& i_path) :
+    m_name(i_path.fileName()),
+    m_colors(256)
 {
-    m_colors.resize(m_palette_colors_cnt);
-    const int channels_cnt = 4;
-    for (int i = 0; i < m_palette_colors_cnt; ++i)
+    QFile file(i_path.filePath());
+    if(!file.open(QIODevice::ReadOnly))
+        throw "Cannot create palette from file " + i_path.filePath();
+
+    const qint64 channels_cnt = 4;
+    for (auto& cur_color : m_colors)
     {
-        int pos = i * channels_cnt;
-        int b = m_seq[pos];
-        int g = m_seq[pos + 1];
-        int r = m_seq[pos + 2];
-        m_colors[i] = QColor(r, g, b);
+        const QByteArray m_seq = file.read(channels_cnt);
+        const quint8 b = m_seq[0];
+        const quint8 g = m_seq[1];
+        const quint8 r = m_seq[2];
+        cur_color = QColor(r, g, b);
     }
+}
+
+size_t Palette::get_colors_cnt() const
+{
+    return m_colors.size();
+}
+
+QColor Palette::get_color_by_id(int i_col_id) const
+{
+    return m_colors[i_col_id];
 }

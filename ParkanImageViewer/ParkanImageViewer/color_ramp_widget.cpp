@@ -11,7 +11,7 @@ ColorRampWidget::ColorRampWidget(const Palette& i_palette, QWidget *parent)
 
 void ColorRampWidget::draw_rectangles(QPainter &qp)
 {
-    const int cnt = m_palette.colors_cnt();
+    const size_t cnt = m_palette.get_colors_cnt();
     const int wd = 20;
     const int ht = 20;
     const int col_per_row = 16;

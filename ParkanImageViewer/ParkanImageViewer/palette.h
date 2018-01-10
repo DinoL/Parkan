@@ -1,23 +1,24 @@
 #ifndef PALETTE_H
 #define PALETTE_H
 
-#include "binary_file.h"
 #include <QColor>
 #include <QString>
+#include <QFileInfo>
 
-class Palette : public BinaryFile
+#include <vector>
+
+class Palette
 {
 public:
     Palette(const QFileInfo& i_path);
 
-    QColor get_color_by_id(int i_col_id) { return m_colors[i_col_id]; }
+    QColor get_color_by_id(int i_col_id) const;
 
-    int colors_cnt() const { return m_palette_colors_cnt; }
+    size_t get_colors_cnt() const;
 
     QString get_name() const { return m_name; }
 
 private:
-    int m_palette_colors_cnt = 256;
     QString m_name;
     std::vector<QColor> m_colors;
 };
