@@ -17,13 +17,19 @@ SOURCES += main.cpp\
     binary_file.cpp \
     palette.cpp \
     texture.cpp \
-    color_ramp_widget.cpp
+    color_ramp_widget.cpp \
+    binary_stream.cpp \
+    input_binary_stream.cpp \
+    output_binary_stream.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
     palette.h \
     texture.h \
-    color_ramp_widget.h
+    color_ramp_widget.h \
+    binary_stream.h \
+    input_binary_stream.h \
+    output_binary_stream.h
 
 FORMS    += viewer_app.ui
 

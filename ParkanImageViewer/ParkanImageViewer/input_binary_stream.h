@@ -1,0 +1,46 @@
+#ifndef INPUTBINARYSTREAM_H
+#define INPUTBINARYSTREAM_H
+
+#include <iostream>
+#include <type_traits>
+#include <QByteArray>
+
+class InputBinaryStream
+{
+public:
+    InputBinaryStream(std::istream& i_s);
+
+    template<typename T>
+    friend InputBinaryStream& read_raw_bytes(InputBinaryStream& s, T& v,
+                                             typename std::enable_if<
+                                             std::is_integral<T>::value ||
+                                             std::is_floating_point<T>::value
+                                             >::type* = nullptr);
+
+private:
+    std::istream& m_s;
+
+};
+
+template<typename T>
+InputBinaryStream& read_raw_bytes(InputBinaryStream& s, T& v,
+                                  typename std::enable_if<
+                                  std::is_integral<T>::value ||
+                                  std::is_floating_point<T>::value
+                                  >::type*)
+{
+    s.m_s.read((char*)&v, sizeof(v));
+    std::cout << "Reading " << v << std::endl;
+    return s;
+}
+
+template<typename T>
+InputBinaryStream& operator>>(InputBinaryStream& s, T& v)
+{
+    return read_raw_bytes(s, v);
+}
+
+template<>
+InputBinaryStream& operator>>(InputBinaryStream& s, QByteArray& v);
+
+#endif // INPUTBINARYSTREAM_H
