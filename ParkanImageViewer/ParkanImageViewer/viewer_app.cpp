@@ -2,6 +2,7 @@
 #include "ui_viewer_app.h"
 
 #include "color_ramp_widget.h"
+#include "texture.h"
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -44,7 +45,11 @@ void ViewerApp::on_actionOpen_Image_triggered()
     const QString file_name = QFileDialog::getOpenFileName();
     if (!file_name.isEmpty())
     {
-        auto* mb = new QMessageBox(QMessageBox::NoIcon, "Open", file_name);
+        Texture image(file_name);
+
+        const QString message = QString("Texture file %1: width %2, height %3")
+                .arg(file_name).arg(image.width()).arg(image.height());
+        auto* mb = new QMessageBox(QMessageBox::NoIcon, "Open", message);
         mb->show();
     }
 }
