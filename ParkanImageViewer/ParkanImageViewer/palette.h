@@ -4,8 +4,7 @@
 #include <QColor>
 #include <QString>
 #include <QFileInfo>
-
-#include <vector>
+#include <QVector>
 
 class Palette
 {
@@ -14,7 +13,7 @@ public:
 
     QColor get_color_by_id(int i_col_id) const;
 
-    std::vector<QRgb> get_color_table() const;
+    QVector<QRgb> get_color_table() const;
 
     size_t get_colors_cnt() const;
 
@@ -22,7 +21,7 @@ public:
 
 private:
     QString m_name;
-    std::vector<QRgb> m_colors;
+    QVector<QRgb> m_colors;
 };
 
 #endif // PALETTE_H

@@ -1,6 +1,7 @@
 #include "palette.h"
 
 #include <QFile>
+#include <QByteArray>
 
 Palette::Palette(const QFileInfo& i_path) :
     m_name(i_path.fileName()),
@@ -19,6 +20,11 @@ Palette::Palette(const QFileInfo& i_path) :
         const quint8 r = m_seq[2];
         cur_color = QColor(r, g, b).rgb();
     }
+}
+
+QVector<QRgb> Palette::get_color_table() const
+{
+    return m_colors;
 }
 
 size_t Palette::get_colors_cnt() const
