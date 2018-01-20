@@ -27,7 +27,6 @@ OutputBinaryStream& write_raw_bytes(OutputBinaryStream& s, const T& v,
                                     std::is_floating_point<T>::value
                                     >::type*)
 {
-    std::cout << "Writing " << v << std::endl;
     s.m_s.write((char*)&v, sizeof(v));
     return s;
 }

@@ -30,7 +30,6 @@ InputBinaryStream& read_raw_bytes(InputBinaryStream& s, T& v,
                                   >::type*)
 {
     s.m_s.read((char*)&v, sizeof(v));
-    std::cout << "Reading " << v << std::endl;
     return s;
 }
 
