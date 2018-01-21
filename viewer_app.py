@@ -141,14 +141,13 @@ class ViewerApp(QMainWindow):
         folder_path = QFileDialog.getExistingDirectory(self, 'Choose folder with images',
                                                    os.path.join(QDir.currentPath(), Texture.get_textures_folder()))
         if folder_path:
-            folder_name = os.path.basename(folder_path)
-            self.create_gallery(folder_name)
+            self.create_gallery(folder_path)
 
-    def create_gallery(self, folder_name):
+    def create_gallery(self, folder_path):
         if not self.palette:
             return
 
-        folder = Folder(folder_name)
+        folder = Folder(os.path.basename(folder_path), folder_path)
         all_textures = folder.get_texture_files()
         images = []
         for texture_filename in all_textures:

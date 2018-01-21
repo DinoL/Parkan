@@ -5,13 +5,15 @@ import glob, os.path
 
 
 class Folder:
-    def __init__(self, name):
+    def __init__(self, name, path):
         self.name = name
+        self.path = path
 
     def get_texture_files(self):
         ext_list = TextureBuilder.get_texture_extensions()
+        print([os.path.join(Texture.get_textures_folder(), self.name, '*' + ext) for ext in ext_list])
         return [file for files_with_ext in
-                map(lambda ext: glob.glob(os.path.join(Texture.get_textures_folder(), self.name, '*' + ext)), ext_list)
+                map(lambda ext: glob.glob(os.path.join(self.path, '*' + ext)), ext_list)
                 for file in files_with_ext]
 
     @staticmethod
