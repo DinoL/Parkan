@@ -9,9 +9,9 @@ class ImageGallery(QDialog):
         self.setWindowTitle('Image Gallery')
         self.setLayout(QGridLayout(self))
 
-    def populate(self, images, height, images_per_row = 4):
+    def populate(self, images, size, images_per_row=4):
         for pic_num, pixmap in enumerate(images):
             label = QLabel()
-            label.setPixmap(pixmap.scaled(height, height, Qt.KeepAspectRatio))
+            label.setPixmap(pixmap.scaled(size, size, Qt.KeepAspectRatio))
             row, col = divmod(pic_num, images_per_row)
             self.layout().addWidget(label, row, col)

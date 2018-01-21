@@ -161,7 +161,7 @@ class ViewerApp(QMainWindow):
             if not image.isNull():
                 image = image.rgbSwapped()
                 images.append(QPixmap.fromImage(image))
-        self.gallery.populate(images=images, height=50)
+        self.gallery.populate(images=images, size=50)
         self.gallery.show()
 
     def create_menus(self):
