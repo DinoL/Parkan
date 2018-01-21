@@ -12,4 +12,9 @@ Texture::Texture(const QFileInfo& i_path)
 
     QByteArray signature(4, '\0');
     bis >> signature >> m_width >> m_height;
+
+    m_data.resize(m_width * m_height);
+    bis >> m_data;
+
+    m_img =  QImage((uchar*)m_data.data(), m_width, m_height, QImage::QImage::Format_Indexed8);
 }
