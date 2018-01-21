@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QLabel, QDialog, QGridLayout
+from PyQt5.QtCore import Qt
 
 
 class ImageGallery(QDialog):
@@ -11,6 +12,6 @@ class ImageGallery(QDialog):
     def populate(self, images, height, images_per_row = 4):
         for pic_num, pixmap in enumerate(images):
             label = QLabel()
-            label.setPixmap(pixmap.scaledToHeight(height))
+            label.setPixmap(pixmap.scaled(height, height, Qt.KeepAspectRatio))
             row, col = divmod(pic_num, images_per_row)
             self.layout().addWidget(label, row, col)
