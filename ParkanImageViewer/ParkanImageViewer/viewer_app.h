@@ -2,7 +2,10 @@
 #define VIEWER_APP_H
 
 #include <QMainWindow>
+#include <QLabel>
+#include <QScrollArea>
 #include "color_ramp_widget.h"
+#include "texture.h"
 #include <memory>
 
 namespace Ui {
@@ -30,7 +33,7 @@ private:
 private:
     Ui::ViewerApp *ui;
     std::unique_ptr<ColorRampWidget> m_crw;
-
+    std::unique_ptr<Texture> m_img;
 };
 
 #endif // VIEWER_APP_H

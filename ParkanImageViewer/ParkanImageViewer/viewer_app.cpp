@@ -9,7 +9,9 @@
 
 ViewerApp::ViewerApp(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::ViewerApp), m_crw(nullptr)
+    ui(new Ui::ViewerApp),
+    m_crw(nullptr),
+    m_img(nullptr)
 {
     ui->setupUi(this);
     setWindowTitle("Parkan Image Viewer");
@@ -28,6 +30,11 @@ void ViewerApp::on_select_palette_combo_box_activated(const QString& file_name)
     const QFileInfo file(get_palettes_folder() + file_name);
     const Palette palette(file);
     m_crw.reset(new ColorRampWidget(palette));
+    if (m_img)
+    {
+        m_img->set_palette(m_crw->m_palette);
+        ui->image_label->setPixmap(QPixmap::fromImage(m_img->image()));
+    }
 }
 
 QString ViewerApp::get_palettes_folder() const
@@ -45,11 +52,8 @@ void ViewerApp::on_actionOpen_Image_triggered()
     const QString file_name = QFileDialog::getOpenFileName();
     if (!file_name.isEmpty())
     {
-        Texture image(file_name);
-
-        const QString message = QString("Texture file %1: width %2, height %3")
-                .arg(file_name).arg(image.width()).arg(image.height());
-        auto* mb = new QMessageBox(QMessageBox::NoIcon, "Open", message);
-        mb->show();
+        m_img.reset(new Texture(file_name));
+        m_img->set_palette(m_crw->m_palette);
+        ui->image_label->setPixmap(QPixmap::fromImage(m_img->image()));
     }
 }
