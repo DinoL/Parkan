@@ -51,6 +51,8 @@ std::ostream& operator<<(std::ostream& s, const ShortPair& v);
 struct ShortString
 {
     char str[16];
+
+    std::string to_std_string() const;
 };
 
 InputBinaryStream& operator>>(InputBinaryStream& s, ShortString& v);

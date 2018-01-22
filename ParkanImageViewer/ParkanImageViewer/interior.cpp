@@ -73,6 +73,17 @@ std::ostream &operator<<(std::ostream &s, const ShortPair &v)
     return s;
 }
 
+std::string ShortString::to_std_string() const
+{
+    int i = 0;
+    while(i < 16 && isprint(str[i]))
+    {
+        ++i;
+    }
+    return std::string(str, i);
+}
+
+
 InputBinaryStream &operator>>(InputBinaryStream &s, ShortString &v)
 {
     for(auto& el : v.str)
@@ -94,11 +105,7 @@ OutputBinaryStream &operator<<(OutputBinaryStream &s, const ShortString &v)
 std::ostream &operator<<(std::ostream &s, const ShortString &v)
 {
     s << "\"";
-    for(const auto& el : v.str)
-    {
-        if(isprint(el))
-            s << el;
-    }
+    s << v.to_std_string();
     s << "\" ";
     return s;
 }
