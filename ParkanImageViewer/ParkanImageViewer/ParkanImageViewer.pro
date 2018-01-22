@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     image_widget.cpp \
     binary_stream.cpp \
     input_binary_stream.cpp \
-    output_binary_stream.cpp
+    output_binary_stream.cpp \
+    interior.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -31,7 +32,8 @@ HEADERS  += viewer_app.h \
     image_widget.h \
     binary_stream.h \
     input_binary_stream.h \
-    output_binary_stream.h
+    output_binary_stream.h \
+    interior.h
 
 FORMS    += viewer_app.ui
 
