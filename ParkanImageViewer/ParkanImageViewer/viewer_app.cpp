@@ -97,3 +97,18 @@ void ViewerApp::on_actionExport_all_used_textures_triggered()
     const QFileInfoList all_interiors = interiors_folder.entryInfoList();
     InteriorExporter().export_all_used_textures(all_interiors, out_file_name);
 }
+
+void ViewerApp::on_actionSave_image_triggered()
+{
+    if(!m_img)
+    {
+        auto* mb = new QMessageBox(QMessageBox::Warning, "No image", "Please open image first");
+        mb->show();
+        return;
+    }
+    const QString out_file_name = QFileDialog::getSaveFileName();
+    if(out_file_name.isEmpty())
+        return;
+
+    m_img->save(out_file_name);
+}

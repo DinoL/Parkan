@@ -31,6 +31,8 @@ private slots:
 
     void on_actionExport_all_used_textures_triggered();
 
+    void on_actionSave_image_triggered();
+
 private:
     QString get_palettes_folder() const;
 

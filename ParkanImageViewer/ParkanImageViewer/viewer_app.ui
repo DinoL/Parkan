@@ -58,6 +58,7 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen_Image"/>
+    <addaction name="actionSave_image"/>
     <addaction name="actionOpen_interior"/>
     <addaction name="actionExport_all_used_textures"/>
     <addaction name="separator"/>
@@ -101,6 +102,11 @@
   <action name="actionExport_all_used_textures">
    <property name="text">
     <string>Export all used textures</string>
+   </property>
+  </action>
+  <action name="actionSave_image">
+   <property name="text">
+    <string>Save image</string>
    </property>
   </action>
  </widget>
