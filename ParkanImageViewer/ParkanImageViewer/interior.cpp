@@ -76,11 +76,14 @@ std::ostream &operator<<(std::ostream &s, const ShortPair &v)
 std::string ShortString::to_std_string() const
 {
     int i = 0;
-    while(i < 16 && isprint(str[i]))
-    {
+    while(i < 16 && !isprint(str[i]))
         ++i;
-    }
-    return std::string(str, i);
+
+    int j = i;
+    while(j < 16 && isprint(str[j]))
+          ++j;
+
+    return std::string(str + i, j - i);
 }
 
 
