@@ -299,3 +299,8 @@ std::ostream &operator<<(std::ostream &s, const InteriorFile &file)
     s << "Signature:\n"           << file.signature           << std::endl;
     return s;
 }
+
+QString InteriorFile::get_textures_palette_name()
+{
+    return "B0001.COL";
+}

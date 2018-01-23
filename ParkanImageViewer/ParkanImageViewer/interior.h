@@ -2,6 +2,7 @@
 #define INTERIOR_H
 
 #include "binary_stream.h"
+#include <QString>
 #include <vector>
 #include <iostream>
 
@@ -171,6 +172,8 @@ struct InteriorFile
     DataArray<HorizontalPolygon> horizontal_polygons; // size 128
     DataArray<VertexInfo> vertex_infos;               // size 16
     DataArray<InteriorSignature> signature;           // size 20
+
+    static QString get_textures_palette_name();
 };
 
 InputBinaryStream& operator>>(InputBinaryStream& s, InteriorFile& file);
