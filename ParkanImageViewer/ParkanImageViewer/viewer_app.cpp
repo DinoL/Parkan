@@ -52,12 +52,19 @@ void ViewerApp::on_actionExit_triggered()
 void ViewerApp::on_actionOpen_Image_triggered()
 {
     const QString file_name = QFileDialog::getOpenFileName();
-    if (!file_name.isEmpty())
+    if (file_name.isEmpty())
+        return;
+
+    if(!m_crw)
     {
-        m_img.reset(new Texture(file_name));
-        m_img->set_palette(m_crw->m_palette);
-        ui->image_label->setPixmap(QPixmap::fromImage(m_img->image()));
+        auto* mb = new QMessageBox(QMessageBox::Warning, "No palette", "Please select palette first");
+        mb->show();
+        return;
     }
+
+    m_img.reset(new Texture(file_name));
+    m_img->set_palette(m_crw->m_palette);
+    ui->image_label->setPixmap(QPixmap::fromImage(m_img->image()));
 }
 
 void ViewerApp::on_actionOpen_interior_triggered()
