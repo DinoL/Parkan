@@ -128,10 +128,8 @@ struct DataArray
 template<typename T>
 InputBinaryStream& operator>>(InputBinaryStream& s, DataArray<T>& arr)
 {
-    std::cout << "Reading ObjectsArray " << std::endl;
     quint16 size;
     s >> size;
-    std::cout << "Size is " << size << std::endl;
     arr.vec.resize(size);
     for(auto& el : arr.vec)
     {
