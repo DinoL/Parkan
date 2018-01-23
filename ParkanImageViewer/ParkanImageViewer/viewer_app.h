@@ -29,6 +29,8 @@ private slots:
 
     void on_actionOpen_interior_triggered();
 
+    void on_actionExport_all_used_textures_triggered();
+
 private:
     QString get_palettes_folder() const;
 

@@ -6,6 +6,7 @@
 #include "interior_exporter.h"
 
 #include <QDir>
+#include <QFileInfoList>
 #include <QFileDialog>
 #include <QMessageBox>
 
@@ -78,4 +79,20 @@ void ViewerApp::on_actionOpen_interior_triggered()
         return;
 
     InteriorExporter().export_interior(file_name, out_file_name, InteriorExporter::ExportFormat::Text);
+}
+
+void ViewerApp::on_actionExport_all_used_textures_triggered()
+{
+    const QString dir_name = QFileDialog::getExistingDirectory();
+    if (dir_name.isEmpty())
+        return;
+
+    const QString out_file_name = QFileDialog::getSaveFileName();
+    if(out_file_name.isEmpty())
+        return;
+
+    QDir interiors_folder(dir_name);
+    interiors_folder.setNameFilters(QStringList() << "*.BIN");
+    const QFileInfoList all_interiors = interiors_folder.entryInfoList();
+    InteriorExporter().export_all_used_textures(all_interiors, out_file_name);
 }
