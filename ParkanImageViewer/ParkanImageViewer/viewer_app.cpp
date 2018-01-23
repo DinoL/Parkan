@@ -3,12 +3,11 @@
 
 #include "color_ramp_widget.h"
 #include "texture.h"
+#include "interior_exporter.h"
+
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
-#include <fstream>
-#include "binary_stream.h"
-#include "interior.h"
 
 ViewerApp::ViewerApp(QWidget *parent) :
     QMainWindow(parent),
@@ -67,15 +66,9 @@ void ViewerApp::on_actionOpen_interior_triggered()
     if (file_name.isEmpty())
         return;
 
-    std::ifstream file(file_name.toStdString(), std::ios::binary);
-    InputBinaryStream bis(file);
-    InteriorFile interior;
-    bis >> interior;
-
     const QString out_file_name = QFileDialog::getSaveFileName();
     if(out_file_name.isEmpty())
         return;
 
-    std::ofstream out_file(out_file_name.toStdString());
-    out_file << interior;
+    InteriorExporter().export_interior(file_name, out_file_name, InteriorExporter::ExportFormat::Text);
 }
