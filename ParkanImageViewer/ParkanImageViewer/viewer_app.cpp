@@ -78,7 +78,8 @@ void ViewerApp::on_actionOpen_interior_triggered()
     if(out_file_name.isEmpty())
         return;
 
-    InteriorExporter().export_interior(file_name, out_file_name, InteriorExporter::ExportFormat::Text);
+    std::cout << "Exporting from " << file_name.toStdString() << " to " << out_file_name.toStdString() << std::endl;
+    InteriorExporter().export_interior(file_name, out_file_name);
 }
 
 void ViewerApp::on_actionExport_all_used_textures_triggered()
