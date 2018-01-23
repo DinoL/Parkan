@@ -58,6 +58,7 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen_Image"/>
+    <addaction name="actionOpen_interior"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -86,6 +87,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionOpen_interior">
+   <property name="text">
+    <string>Open interior...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
    </property>
   </action>
  </widget>

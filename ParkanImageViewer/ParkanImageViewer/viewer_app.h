@@ -27,6 +27,8 @@ private slots:
 
     void on_actionOpen_Image_triggered();
 
+    void on_actionOpen_interior_triggered();
+
 private:
     QString get_palettes_folder() const;
 

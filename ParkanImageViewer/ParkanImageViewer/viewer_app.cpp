@@ -6,6 +6,9 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <fstream>
+#include "binary_stream.h"
+#include "interior.h"
 
 ViewerApp::ViewerApp(QWidget *parent) :
     QMainWindow(parent),
@@ -56,4 +59,23 @@ void ViewerApp::on_actionOpen_Image_triggered()
         m_img->set_palette(m_crw->m_palette);
         ui->image_label->setPixmap(QPixmap::fromImage(m_img->image()));
     }
+}
+
+void ViewerApp::on_actionOpen_interior_triggered()
+{
+    const QString file_name = QFileDialog::getOpenFileName();
+    if (file_name.isEmpty())
+        return;
+
+    std::ifstream file(file_name.toStdString(), std::ios::binary);
+    InputBinaryStream bis(file);
+    InteriorFile interior;
+    bis >> interior;
+
+    const QString out_file_name = QFileDialog::getSaveFileName();
+    if(out_file_name.isEmpty())
+        return;
+
+    std::ofstream out_file(out_file_name.toStdString());
+    out_file << interior;
 }
