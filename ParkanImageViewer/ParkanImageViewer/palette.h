@@ -3,6 +3,7 @@
 
 #include <QColor>
 #include <QString>
+#include <QStringList>
 #include <QFileInfo>
 #include <QVector>
 
@@ -19,9 +20,16 @@ public:
 
     QString get_name() const { return m_name; }
 
+    static QStringList get_all_palettes();
+
+    static Palette get_palette_by_name(const QString& i_file_name);
+
 private:
     QString m_name;
     QVector<QRgb> m_colors;
+
+private:
+    static QString get_palettes_folder();
 };
 
 #endif // PALETTE_H

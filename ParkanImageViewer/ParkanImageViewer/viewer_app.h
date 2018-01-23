@@ -34,9 +34,6 @@ private slots:
     void on_actionSave_image_triggered();
 
 private:
-    QString get_palettes_folder() const;
-
-private:
     Ui::ViewerApp *ui;
     std::unique_ptr<ColorRampWidget> m_crw;
     std::unique_ptr<Texture> m_img;

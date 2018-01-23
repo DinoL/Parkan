@@ -19,7 +19,7 @@ ViewerApp::ViewerApp(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("Parkan Image Viewer");
 
-    QStringList all_palettes = QDir(get_palettes_folder()).entryList();
+    QStringList all_palettes = Palette::get_all_palettes();
     ui->select_palette_combo_box->addItems(all_palettes);
 }
 
@@ -28,21 +28,15 @@ ViewerApp::~ViewerApp()
     delete ui;
 }
 
-void ViewerApp::on_select_palette_combo_box_activated(const QString& file_name)
+void ViewerApp::on_select_palette_combo_box_activated(const QString& i_palette_name)
 {
-    const QFileInfo file(get_palettes_folder() + file_name);
-    const Palette palette(file);
+    const Palette palette = Palette::get_palette_by_name(i_palette_name);
     m_crw.reset(new ColorRampWidget(palette));
     if (m_img)
     {
         m_img->set_palette(m_crw->m_palette);
         ui->image_label->setPixmap(QPixmap::fromImage(m_img->image()));
     }
-}
-
-QString ViewerApp::get_palettes_folder() const
-{
-    return ":/palettes/";
 }
 
 void ViewerApp::on_actionExit_triggered()
