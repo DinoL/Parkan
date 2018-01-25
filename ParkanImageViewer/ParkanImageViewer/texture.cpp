@@ -13,6 +13,9 @@ Texture::Texture(const QFileInfo& i_path)
     QByteArray signature(4, '\0');
     bis >> signature >> m_width >> m_height;
 
+    QByteArray header(20, '\0');
+    bis >> header;
+
     m_data.resize(m_width * m_height);
     bis >> m_data;
 
