@@ -302,5 +302,6 @@ std::ostream &operator<<(std::ostream &s, const InteriorFile &file)
 
 QString InteriorFile::get_textures_palette_name()
 {
-    return "B0001.COL";
+    return "PAL.PAL";
+}
 }
