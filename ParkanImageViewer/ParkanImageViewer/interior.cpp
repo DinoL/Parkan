@@ -304,4 +304,27 @@ QString InteriorFile::get_textures_palette_name()
 {
     return "PAL.PAL";
 }
+
+QString InteriorFile::get_textures_folder()
+{
+    return "TEXTURES.LIB.dir\\";
+}
+
+std::string InteriorFile::get_texture_fullpath(const std::string& i_texture_file)
+{
+    return InteriorFile::get_textures_folder().toStdString() + i_texture_file;
+}
+
+std::set<std::string> InteriorFile::all_texture_names() const
+{
+    std::set<std::string> texture_names;
+    for(const auto& p : vertical_polygons.vec)
+    {
+        texture_names.insert(InteriorFile::get_texture_fullpath(p.texture.to_std_string()));
+    }
+    for(const auto& p : horizontal_polygons.vec)
+    {
+        texture_names.insert(InteriorFile::get_texture_fullpath(p.texture.to_std_string()));
+    }
+    return texture_names;
 }

@@ -4,6 +4,8 @@
 #include "binary_stream.h"
 #include <QString>
 #include <vector>
+#include <set>
+#include <string>
 #include <iostream>
 
 struct Vertex
@@ -174,6 +176,12 @@ struct InteriorFile
     DataArray<InteriorSignature> signature;           // size 20
 
     static QString get_textures_palette_name();
+
+    static QString get_textures_folder();
+
+    static std::string get_texture_fullpath(const std::string& i_texture_file);
+
+    std::set<std::string> all_texture_names() const;
 };
 
 InputBinaryStream& operator>>(InputBinaryStream& s, InteriorFile& file);
