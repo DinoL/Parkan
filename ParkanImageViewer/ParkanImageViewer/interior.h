@@ -2,7 +2,10 @@
 #define INTERIOR_H
 
 #include "binary_stream.h"
+#include "data_array.h"
+
 #include <QString>
+#include <QDir>
 #include <vector>
 #include <set>
 #include <string>
@@ -120,52 +123,6 @@ struct InteriorSignature
 InputBinaryStream& operator>>(InputBinaryStream& s, InteriorSignature& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const InteriorSignature& v);
 std::ostream& operator<<(std::ostream& s, const InteriorSignature& v);
-
-
-template<typename T>
-struct DataArray
-{
-    std::vector<T> vec;
-};
-
-template<typename T>
-InputBinaryStream& operator>>(InputBinaryStream& s, DataArray<T>& arr)
-{
-    quint16 size;
-    s >> size;
-    arr.vec.resize(size);
-    for(auto& el : arr.vec)
-    {
-        s >> el;
-    }
-    return s;
-}
-
-template<typename T>
-OutputBinaryStream& operator<<(OutputBinaryStream& s, const DataArray<T>& arr)
-{
-    quint16 size = arr.vec.size();
-    s << size;
-
-    for(const auto& el : arr.vec)
-    {
-        s << el;
-    }
-    return s;
-}
-
-template<typename T>
-std::ostream& operator<<(std::ostream& s, const DataArray<T>& arr)
-{
-    quint16 size = arr.vec.size();
-    s << "Size: " << size << std::endl;
-
-    for(const auto& el : arr.vec)
-    {
-        s << el << std::endl;
-    }
-    return s;
-}
 
 struct InteriorFile
 {

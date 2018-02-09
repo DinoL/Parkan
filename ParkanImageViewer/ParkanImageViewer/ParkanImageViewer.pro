@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     interior.cpp \
     interior_exporter.cpp \
     texture_exporter.cpp \
-    obj_model.cpp
+    obj_model.cpp \
+    data_array.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -39,7 +40,8 @@ HEADERS  += viewer_app.h \
     interior.h \
     interior_exporter.h \
     texture_exporter.h \
-    obj_model.h
+    obj_model.h \
+    data_array.h
 
 FORMS    += viewer_app.ui
 
