@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     input_binary_stream.cpp \
     output_binary_stream.cpp \
     interior.cpp \
-    interior_exporter.cpp
+    interior_exporter.cpp \
+    texture_exporter.cpp \
+    obj_model.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -35,7 +37,9 @@ HEADERS  += viewer_app.h \
     input_binary_stream.h \
     output_binary_stream.h \
     interior.h \
-    interior_exporter.h
+    interior_exporter.h \
+    texture_exporter.h \
+    obj_model.h
 
 FORMS    += viewer_app.ui
 
