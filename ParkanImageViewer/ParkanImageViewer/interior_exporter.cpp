@@ -12,14 +12,14 @@
 #include <fstream>
 
 
-bool InteriorExporter::export_interior(const QString &i_from, const QString &i_to) const
+bool InteriorExporter::export_interior(const QString& i_from, const QString& i_to) const
 {
     InteriorExporter::ExportFormat format = auto_detect_format(i_to);
     return export_interior(i_from, i_to, format);
 }
 
-bool InteriorExporter::export_interior(const QString &i_from,
-                                       const QString &i_to,
+bool InteriorExporter::export_interior(const QString& i_from,
+                                       const QString& i_to,
                                        InteriorExporter::ExportFormat i_format) const
 {
     switch(i_format)
@@ -35,7 +35,7 @@ bool InteriorExporter::export_interior(const QString &i_from,
     }
 }
 
-bool InteriorExporter::export_all_used_textures(const QFileInfoList &i_all_interiors, const QString &i_to) const
+bool InteriorExporter::export_all_used_textures(const QFileInfoList& i_all_interiors, const QString& i_to) const
 {
     if(i_all_interiors.empty())
         return false;
@@ -73,7 +73,7 @@ bool InteriorExporter::export_all_used_textures(const QFileInfoList &i_all_inter
     return true;
 }
 
-bool InteriorExporter::import_interior(const QString &i_from, InteriorFile& o_interior) const
+bool InteriorExporter::import_interior(const QString& i_from, InteriorFile& o_interior) const
 {
     if(i_from.isEmpty())
         return false;
@@ -84,7 +84,7 @@ bool InteriorExporter::import_interior(const QString &i_from, InteriorFile& o_in
     return true;
 }
 
-bool InteriorExporter::export_as_text(const QString &i_from, const QString &i_to) const
+bool InteriorExporter::export_as_text(const QString& i_from, const QString& i_to) const
 {
     std::cout << "Exporting as text to " << i_to.toStdString() << std::endl;
     if(i_to.isEmpty())
@@ -99,7 +99,7 @@ bool InteriorExporter::export_as_text(const QString &i_from, const QString &i_to
     return true;
 }
 
-bool InteriorExporter::export_as_obj(const QString &i_from, const QString &i_to) const
+bool InteriorExporter::export_as_obj(const QString& i_from, const QString& i_to) const
 {
     std::cout << "Exporting as obj to " << i_to.toStdString() << std::endl;
     if(i_to.isEmpty())
@@ -112,7 +112,7 @@ bool InteriorExporter::export_as_obj(const QString &i_from, const QString &i_to)
     return export_as_obj(interior, i_to);
 }
 
-bool InteriorExporter::export_as_obj(const InteriorFile &i_interior, const QString &i_to) const
+bool InteriorExporter::export_as_obj(const InteriorFile& i_interior, const QString& i_to) const
 {
     if(i_to.isEmpty())
         return false;
@@ -144,7 +144,7 @@ bool InteriorExporter::export_as_obj(const InteriorFile &i_interior, const QStri
     return true;
 }
 
-bool InteriorExporter::export_as_textured_obj(const QString &i_from, const QString &i_to) const
+bool InteriorExporter::export_as_textured_obj(const QString& i_from, const QString& i_to) const
 {
     std::cout << "Exporting as textured obj to " << i_to.toStdString() << std::endl;
     if(i_to.isEmpty())
@@ -157,7 +157,7 @@ bool InteriorExporter::export_as_textured_obj(const QString &i_from, const QStri
     return export_as_textured_obj(interior, i_to);
 }
 
-bool InteriorExporter::export_as_textured_obj(const InteriorFile &i_interior, const QString &i_to) const
+bool InteriorExporter::export_as_textured_obj(const InteriorFile& i_interior, const QString& i_to) const
 {
     if(i_to.isEmpty())
         return false;
@@ -180,7 +180,7 @@ bool InteriorExporter::export_as_textured_obj(const InteriorFile &i_interior, co
     return true;
 }
 
-InteriorExporter::ExportFormat InteriorExporter::auto_detect_format(const QString &i_file_name) const
+InteriorExporter::ExportFormat InteriorExporter::auto_detect_format(const QString& i_file_name) const
 {
     return QFileInfo(i_file_name).suffix() == "obj" ?
                 InteriorExporter::ExportFormat::TexturedObj :

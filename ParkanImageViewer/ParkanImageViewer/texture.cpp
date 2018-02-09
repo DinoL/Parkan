@@ -22,7 +22,7 @@ Texture::Texture(const QFileInfo& i_path)
     m_img =  QImage((uchar*)m_data.data(), m_width, m_height, QImage::QImage::Format_Indexed8);
 }
 
-void Texture::save(const QString &i_path) const
+void Texture::save(const QString& i_path) const
 {
     image().save(i_path);
 }

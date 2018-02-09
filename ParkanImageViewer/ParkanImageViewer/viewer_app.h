@@ -21,7 +21,7 @@ public:
     ~ViewerApp();
 
 private slots:
-    void on_select_palette_combo_box_activated(const QString &arg1);
+    void on_select_palette_combo_box_activated(const QString& i_palette_name);
 
     void on_actionExit_triggered();
 
@@ -34,7 +34,7 @@ private slots:
     void on_actionSave_image_triggered();
 
 private:
-    Ui::ViewerApp *ui;
+    Ui::ViewerApp* ui;
     std::unique_ptr<ColorRampWidget> m_crw;
     std::unique_ptr<Texture> m_img;
 };

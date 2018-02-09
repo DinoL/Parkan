@@ -1,6 +1,6 @@
 #include "image_widget.h"
 
-ImageWidget::ImageWidget(const QImage& i_img, const QString& title, QWidget *parent)
+ImageWidget::ImageWidget(const QImage& i_img, const QString& title, QWidget* parent)
     : QWidget(parent)
     , m_img(i_img)
 {
@@ -9,7 +9,7 @@ ImageWidget::ImageWidget(const QImage& i_img, const QString& title, QWidget *par
     show();
 }
 
-void ImageWidget::draw_image(QPainter &qp)
+void ImageWidget::draw_image(QPainter& qp)
 {
     qp.drawImage(0, 0, m_img);
 }

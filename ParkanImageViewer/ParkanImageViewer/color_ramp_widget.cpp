@@ -1,6 +1,6 @@
 #include "color_ramp_widget.h"
 
-ColorRampWidget::ColorRampWidget(const Palette& i_palette, QWidget *parent)
+ColorRampWidget::ColorRampWidget(const Palette& i_palette, QWidget* parent)
     : QWidget(parent)
     , m_palette(i_palette)
 {
@@ -9,7 +9,7 @@ ColorRampWidget::ColorRampWidget(const Palette& i_palette, QWidget *parent)
     show();
 }
 
-void ColorRampWidget::draw_rectangles(QPainter &qp)
+void ColorRampWidget::draw_rectangles(QPainter& qp)
 {
     const size_t cnt = m_palette.get_colors_cnt();
     const int wd = 20;

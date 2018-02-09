@@ -9,9 +9,9 @@ class ColorRampWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ColorRampWidget(const Palette& i_palette, QWidget *parent = 0);
+    explicit ColorRampWidget(const Palette& i_palette, QWidget* parent = 0);
 
-    void paintEvent(QPaintEvent *)
+    void paintEvent(QPaintEvent*)
     {
         QPainter qp(this);
         draw_rectangles(qp);

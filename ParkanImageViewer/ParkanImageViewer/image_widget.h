@@ -9,9 +9,9 @@ class ImageWidget: public QWidget
 {
     Q_OBJECT
 public:
-    explicit ImageWidget(const QImage& i_img, const QString& title, QWidget *parent = 0);
+    explicit ImageWidget(const QImage& i_img, const QString& title, QWidget* parent = 0);
 
-    void paintEvent(QPaintEvent *)
+    void paintEvent(QPaintEvent*)
     {
         QPainter qp(this);
         draw_image(qp);

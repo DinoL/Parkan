@@ -1,73 +1,73 @@
 #include "interior.h"
 
 
-InputBinaryStream &operator>>(InputBinaryStream &s, Vertex &v)
+InputBinaryStream& operator>>(InputBinaryStream& s, Vertex& v)
 {
     s >> v.x >> v.y >> v.z;
     return s;
 }
 
-OutputBinaryStream &operator<<(OutputBinaryStream &s, const Vertex &v)
+OutputBinaryStream& operator<<(OutputBinaryStream& s, const Vertex& v)
 {
     s << v.x << v.y << v.z;
     return s;
 }
 
-std::ostream &operator<<(std::ostream &s, const Vertex &v)
+std::ostream& operator<<(std::ostream& s, const Vertex& v)
 {
     s << "Vertex(" << v.x << ' ' << v.y << ' ' << v.z << ") ";
     return s;
 }
 
-InputBinaryStream &operator>>(InputBinaryStream &s, CoordinatesShort &v)
+InputBinaryStream& operator>>(InputBinaryStream& s, CoordinatesShort& v)
 {
     s >> v.i >> v.j >> v.k;
     return s;
 }
 
-OutputBinaryStream &operator<<(OutputBinaryStream &s, const CoordinatesShort &v)
+OutputBinaryStream& operator<<(OutputBinaryStream& s, const CoordinatesShort& v)
 {
     s << v.i << v.j << v.k;
     return s;
 }
 
-std::ostream &operator<<(std::ostream &s, const CoordinatesShort &v)
+std::ostream& operator<<(std::ostream& s, const CoordinatesShort& v)
 {
     s << "Indices(" << v.i << ' ' << v.j << ' ' << v.k << ") ";
     return s;
 }
 
-InputBinaryStream &operator>>(InputBinaryStream &s, Point &v)
+InputBinaryStream& operator>>(InputBinaryStream& s, Point& v)
 {
     s >> v.id >> v.u >> v.v;
     return s;
 }
 
-OutputBinaryStream &operator<<(OutputBinaryStream &s, const Point &v)
+OutputBinaryStream& operator<<(OutputBinaryStream& s, const Point& v)
 {
     s << v.id << v.u << v.v;
     return s;
 }
 
-std::ostream &operator<<(std::ostream &s, const Point &v)
+std::ostream& operator<<(std::ostream& s, const Point& v)
 {
     s << "Point(" << v.id << ' ' << v.u << ' ' << v.v << ") ";
     return s;
 }
 
-InputBinaryStream &operator>>(InputBinaryStream &s, ShortPair &v)
+InputBinaryStream& operator>>(InputBinaryStream& s, ShortPair& v)
 {
     s >> v.x >> v.y;
     return s;
 }
 
-OutputBinaryStream &operator<<(OutputBinaryStream &s, const ShortPair &v)
+OutputBinaryStream& operator<<(OutputBinaryStream& s, const ShortPair& v)
 {
     s << v.x << v.y;
     return s;
 }
 
-std::ostream &operator<<(std::ostream &s, const ShortPair &v)
+std::ostream& operator<<(std::ostream& s, const ShortPair& v)
 {
     s << "IndicesPair(" << v.x << ' ' << v.y << ") ";
     return s;
@@ -87,7 +87,7 @@ std::string ShortString::to_std_string() const
 }
 
 
-InputBinaryStream &operator>>(InputBinaryStream &s, ShortString &v)
+InputBinaryStream& operator>>(InputBinaryStream& s, ShortString& v)
 {
     for(auto& el : v.str)
     {
@@ -96,7 +96,7 @@ InputBinaryStream &operator>>(InputBinaryStream &s, ShortString &v)
     return s;
 }
 
-OutputBinaryStream &operator<<(OutputBinaryStream &s, const ShortString &v)
+OutputBinaryStream& operator<<(OutputBinaryStream& s, const ShortString& v)
 {
     for(const auto& el : v.str)
     {
@@ -105,7 +105,7 @@ OutputBinaryStream &operator<<(OutputBinaryStream &s, const ShortString &v)
     return s;
 }
 
-std::ostream &operator<<(std::ostream &s, const ShortString &v)
+std::ostream& operator<<(std::ostream& s, const ShortString& v)
 {
     s << "\"";
     s << v.to_std_string();
@@ -131,7 +131,7 @@ std::ostream& operator<<(std::ostream& s, const SmallIndices& v)
     return s;
 }
 
-InputBinaryStream &operator>>(InputBinaryStream &s, VerticalPolygon &v)
+InputBinaryStream& operator>>(InputBinaryStream& s, VerticalPolygon& v)
 {
     for(auto& el : v.ps)
     {
@@ -145,7 +145,7 @@ InputBinaryStream &operator>>(InputBinaryStream &s, VerticalPolygon &v)
     return s;
 }
 
-OutputBinaryStream &operator<<(OutputBinaryStream &s, const VerticalPolygon &v)
+OutputBinaryStream& operator<<(OutputBinaryStream& s, const VerticalPolygon& v)
 {
     for(const auto& el : v.ps)
     {
@@ -159,7 +159,7 @@ OutputBinaryStream &operator<<(OutputBinaryStream &s, const VerticalPolygon &v)
     return s;
 }
 
-std::ostream &operator<<(std::ostream &s, const VerticalPolygon &v)
+std::ostream& operator<<(std::ostream& s, const VerticalPolygon& v)
 {
     for(const auto& el : v.ps)
     {
@@ -175,7 +175,7 @@ std::ostream &operator<<(std::ostream &s, const VerticalPolygon &v)
     return s;
 }
 
-InputBinaryStream &operator>>(InputBinaryStream &s, HorizontalPolygon &v)
+InputBinaryStream& operator>>(InputBinaryStream& s, HorizontalPolygon& v)
 {
     for(auto& el : v.ps)
     {
@@ -193,7 +193,7 @@ InputBinaryStream &operator>>(InputBinaryStream &s, HorizontalPolygon &v)
     return s;
 }
 
-OutputBinaryStream &operator<<(OutputBinaryStream &s, const HorizontalPolygon &v)
+OutputBinaryStream& operator<<(OutputBinaryStream& s, const HorizontalPolygon& v)
 {
     for(const auto& el : v.ps)
     {
@@ -211,7 +211,7 @@ OutputBinaryStream &operator<<(OutputBinaryStream &s, const HorizontalPolygon &v
     return s;
 }
 
-std::ostream &operator<<(std::ostream &s, const HorizontalPolygon &v)
+std::ostream& operator<<(std::ostream& s, const HorizontalPolygon& v)
 {
     for(const auto& el : v.ps)
     {
@@ -234,43 +234,43 @@ std::ostream &operator<<(std::ostream &s, const HorizontalPolygon &v)
     return s;
 }
 
-InputBinaryStream &operator>>(InputBinaryStream &s, VertexInfo &v)
+InputBinaryStream& operator>>(InputBinaryStream& s, VertexInfo& v)
 {
     s >> v.v >> v.sp;
     return s;
 }
 
-OutputBinaryStream &operator<<(OutputBinaryStream &s, const VertexInfo &v)
+OutputBinaryStream& operator<<(OutputBinaryStream& s, const VertexInfo& v)
 {
     s << v.v << v.sp;
     return s;
 }
 
-std::ostream &operator<<(std::ostream &s, const VertexInfo &v)
+std::ostream& operator<<(std::ostream& s, const VertexInfo& v)
 {
     s << v.v << v.sp;
     return s;
 }
 
-InputBinaryStream &operator>>(InputBinaryStream &s, InteriorSignature &v)
+InputBinaryStream& operator>>(InputBinaryStream& s, InteriorSignature& v)
 {
     s >> v.sp >> v.signature;
     return s;
 }
 
-OutputBinaryStream &operator<<(OutputBinaryStream &s, const InteriorSignature &v)
+OutputBinaryStream& operator<<(OutputBinaryStream& s, const InteriorSignature& v)
 {
     s << v.sp << v.signature;
     return s;
 }
 
-std::ostream &operator<<(std::ostream &s, const InteriorSignature &v)
+std::ostream& operator<<(std::ostream& s, const InteriorSignature& v)
 {
     s << v.sp << v.signature;
     return s;
 }
 
-InputBinaryStream &operator>>(InputBinaryStream &s, InteriorFile &file)
+InputBinaryStream& operator>>(InputBinaryStream& s, InteriorFile& file)
 {
     s >> file.vertices;
     s >> file.vertical_polygons;
@@ -280,7 +280,7 @@ InputBinaryStream &operator>>(InputBinaryStream &s, InteriorFile &file)
     return s;
 }
 
-OutputBinaryStream &operator<<(OutputBinaryStream &s, const InteriorFile &file)
+OutputBinaryStream& operator<<(OutputBinaryStream& s, const InteriorFile& file)
 {
     s << file.vertices;
     s << file.vertical_polygons;
@@ -290,7 +290,7 @@ OutputBinaryStream &operator<<(OutputBinaryStream &s, const InteriorFile &file)
     return s;
 }
 
-std::ostream &operator<<(std::ostream &s, const InteriorFile &file)
+std::ostream& operator<<(std::ostream& s, const InteriorFile& file)
 {
     s << "Vertices:\n"            << file.vertices            << std::endl;
     s << "Vertical polygons:\n"   << file.vertical_polygons   << std::endl;

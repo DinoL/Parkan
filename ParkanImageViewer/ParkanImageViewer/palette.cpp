@@ -33,7 +33,7 @@ size_t Palette::get_colors_cnt() const
     return m_colors.size();
 }
 
-Palette Palette::get_palette_by_name(const QString &i_palette_name)
+Palette Palette::get_palette_by_name(const QString& i_palette_name)
 {
     const QFileInfo file_info(Palette::get_palettes_folder() + i_palette_name);
     return Palette(file_info);

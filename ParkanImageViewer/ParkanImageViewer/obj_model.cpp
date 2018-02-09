@@ -1,6 +1,6 @@
 #include "obj_model.h"
 
-ObjModel::ObjModel(const InteriorFile &i_interior)
+ObjModel::ObjModel(const InteriorFile& i_interior)
 {
     for(const auto& vx : i_interior.vertices.vec)
     {
@@ -45,7 +45,7 @@ ObjModel::ObjModel(const InteriorFile &i_interior)
     }
 }
 
-void ObjModel::save_material_file(const std::string &to) const
+void ObjModel::save_material_file(const std::string& to) const
 {
     std::set<std::string> textures;
     for(const auto& f : fs)
@@ -61,7 +61,7 @@ void ObjModel::save_material_file(const std::string &to) const
     }
 }
 
-void ObjModel::save(const std::string &i_to, const std::string &i_mtl_file) const
+void ObjModel::save(const std::string& i_to, const std::string& i_mtl_file) const
 {
     save_material_file(i_mtl_file);
 
@@ -91,7 +91,7 @@ void ObjModel::save(const std::string &i_to, const std::string &i_mtl_file) cons
     }
 }
 
-int AllUVs::add_one(const UV &uv)
+int AllUVs::add_one(const UV& uv)
 {
     uvs.push_back(uv);
     return uvs.size() - 1;
