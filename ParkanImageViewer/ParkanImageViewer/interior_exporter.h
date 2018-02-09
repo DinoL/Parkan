@@ -12,7 +12,8 @@ public:
     enum class ExportFormat
     {
         Text,
-        Obj
+        Obj,
+        TexturedObj
     };
 
     bool export_interior(const QString& i_from,
@@ -30,6 +31,8 @@ private:
     bool export_as_text(const QString& i_from, const QString& i_to) const;
     bool export_as_obj(const QString& i_from, const QString& i_to) const;
     bool export_as_obj(const InteriorFile& i_interior, const QString& i_to) const;
+    bool export_as_textured_obj(const QString& i_from, const QString& i_to) const;
+    bool export_as_textured_obj(const InteriorFile& i_interior, const QString& i_to) const;
 
     ExportFormat auto_detect_format(const QString& i_file_name) const;
 

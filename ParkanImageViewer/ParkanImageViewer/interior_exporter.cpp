@@ -1,6 +1,12 @@
 #include "interior_exporter.h"
 
+#include "texture_exporter.h"
+#include "palette.h"
+#include "obj_model.h"
+
 #include <QFileInfo>
+#include <QDir>
+#include <QString>
 
 #include <set>
 #include <fstream>
@@ -22,6 +28,8 @@ bool InteriorExporter::export_interior(const QString &i_from,
         return export_as_text(i_from, i_to);
     case ExportFormat::Obj:
         return export_as_obj(i_from, i_to);
+    case ExportFormat::TexturedObj:
+        return export_as_textured_obj(i_from, i_to);
     default:
         return false;
     }
@@ -47,17 +55,11 @@ bool InteriorExporter::export_all_used_textures(const QFileInfoList &i_all_inter
             continue;
         }
 
-        for(const auto& p : interior.vertical_polygons.vec)
-        {
-            texture_names.insert(p.texture.to_std_string());
-        }
-        for(const auto& p : interior.horizontal_polygons.vec)
-        {
-            texture_names.insert(p.texture.to_std_string());
-        }
+        const auto new_names = interior.all_texture_names();
+        texture_names.insert(new_names.begin(), new_names.end());
 
         const auto new_size = texture_names.size();
-        std::cout << "Found " << new_size - old_size << " textures" << std::endl;
+        std::cout << "Found " << new_size - old_size << " new textures" << std::endl;
     }
 
     if(texture_names.empty())
@@ -142,9 +144,45 @@ bool InteriorExporter::export_as_obj(const InteriorFile &i_interior, const QStri
     return true;
 }
 
+bool InteriorExporter::export_as_textured_obj(const QString &i_from, const QString &i_to) const
+{
+    std::cout << "Exporting as textured obj to " << i_to.toStdString() << std::endl;
+    if(i_to.isEmpty())
+        return false;
+
+    InteriorFile interior;
+    if(!import_interior(i_from, interior))
+        return false;
+
+    return export_as_textured_obj(interior, i_to);
+}
+
+bool InteriorExporter::export_as_textured_obj(const InteriorFile &i_interior, const QString &i_to) const
+{
+    if(i_to.isEmpty())
+        return false;
+
+    QFileInfo file_info(i_to);
+    QString obj_file_name = file_info.baseName();
+    QDir obj_file_dir = file_info.dir();
+
+    const auto all_textures = i_interior.all_texture_names();
+
+    const Palette palette = Palette::get_palette_by_name(InteriorFile::get_textures_palette_name());
+    TextureExporter().export_textures(all_textures, palette, obj_file_dir);
+
+    ObjModel model(i_interior);
+    const auto mtl_file = obj_file_dir.absoluteFilePath(obj_file_name + ".mtl").toStdString();
+
+    model.save(i_to.toStdString(), mtl_file);
+
+    std::cout << "Successfully exported to " << i_to.toStdString() << " MTL " << mtl_file << std::endl;
+    return true;
+}
+
 InteriorExporter::ExportFormat InteriorExporter::auto_detect_format(const QString &i_file_name) const
 {
     return QFileInfo(i_file_name).suffix() == "obj" ?
-                InteriorExporter::ExportFormat::Obj :
+                InteriorExporter::ExportFormat::TexturedObj :
                 InteriorExporter::ExportFormat::Text;
 }
