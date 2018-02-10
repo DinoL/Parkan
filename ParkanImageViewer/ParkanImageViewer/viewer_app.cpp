@@ -106,3 +106,19 @@ void ViewerApp::on_actionSave_image_triggered()
 
     m_img->save(out_file_name);
 }
+
+void ViewerApp::on_actionExport_all_interiors_triggered()
+{
+    const QString dir_name = QFileDialog::getExistingDirectory();
+    if (dir_name.isEmpty())
+        return;
+
+    const QString out_directory = QFileDialog::getExistingDirectory();
+    if(out_directory.isEmpty())
+        return;
+
+    QDir interiors_folder(dir_name);
+    interiors_folder.setNameFilters(QStringList() << "*.BIN");
+    const QFileInfoList all_interiors = interiors_folder.entryInfoList();
+    InteriorExporter().export_all_interiors(all_interiors, QDir(out_directory));
+}

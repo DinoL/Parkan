@@ -33,6 +33,8 @@ private slots:
 
     void on_actionSave_image_triggered();
 
+    void on_actionExport_all_interiors_triggered();
+
 private:
     Ui::ViewerApp* ui;
     std::unique_ptr<ColorRampWidget> m_crw;

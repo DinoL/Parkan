@@ -25,6 +25,8 @@ public:
 
     bool export_all_used_textures(const QFileInfoList& i_all_interiors, const QString& i_to) const;
 
+    bool export_all_interiors(const QFileInfoList& i_all_interiors, const QDir& i_out_directory) const;
+
 private:
 
     bool import_interior(const QString& i_from, InteriorFile& o_interior) const;

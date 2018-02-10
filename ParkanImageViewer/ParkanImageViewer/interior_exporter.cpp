@@ -74,6 +74,24 @@ bool InteriorExporter::export_all_used_textures(const QFileInfoList& i_all_inter
     return true;
 }
 
+QFileInfo replace_dir_and_extension(const QFileInfo& i_filepath, const QDir& i_new_dir, const QString& i_new_ext)
+{
+    return QFileInfo(i_new_dir, i_filepath.baseName() + i_new_ext);
+}
+
+bool InteriorExporter::export_all_interiors(const QFileInfoList& i_all_interiors, const QDir& i_out_directory) const
+{
+    bool success = true;
+    for(const auto& interior_file : i_all_interiors)
+    {
+        const QFileInfo output_file = replace_dir_and_extension(interior_file, i_out_directory, ".obj");
+        success &= export_interior(interior_file.absoluteFilePath(),
+                                   output_file.absoluteFilePath(),
+                                   ExportFormat::TexturedObj);
+    }
+    return success;
+}
+
 bool InteriorExporter::import_interior(const QString& i_from, InteriorFile& o_interior) const
 {
     if(i_from.isEmpty())
