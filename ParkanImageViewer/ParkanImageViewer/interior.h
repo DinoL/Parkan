@@ -1,11 +1,13 @@
 #ifndef INTERIOR_H
 #define INTERIOR_H
 
-#include "binary_stream.h"
+#include "io_utils.h"
 #include "data_array.h"
 
 #include <QString>
 #include <QDir>
+#include <QFileInfo>
+
 #include <vector>
 #include <set>
 #include <string>
@@ -58,7 +60,7 @@ struct ShortString
 {
     char str[16];
 
-    std::string to_std_string() const;
+    QString to_string() const;
 };
 
 InputBinaryStream& operator>>(InputBinaryStream& s, ShortString& v);
@@ -134,11 +136,11 @@ struct InteriorFile
 
     static QString get_textures_palette_name();
 
-    static QString get_textures_folder();
+    static QDir get_textures_folder();
 
-    static std::string get_texture_fullpath(const std::string& i_texture_file);
+    static QFileInfo get_texture_fullpath(const QString& i_texture_name);
 
-    std::set<std::string> all_texture_names() const;
+    std::set<QString> all_texture_names() const;
 };
 
 InputBinaryStream& operator>>(InputBinaryStream& s, InteriorFile& file);

@@ -1,5 +1,6 @@
 #include "interior.h"
 
+#include <QByteArray>
 
 InputBinaryStream& operator>>(InputBinaryStream& s, Vertex& v)
 {
@@ -73,7 +74,7 @@ std::ostream& operator<<(std::ostream& s, const ShortPair& v)
     return s;
 }
 
-std::string ShortString::to_std_string() const
+QString ShortString::to_string() const
 {
     int i = 0;
     while(i < 16 && !isprint(str[i]))
@@ -81,9 +82,9 @@ std::string ShortString::to_std_string() const
 
     int j = i;
     while(j < 16 && isprint(str[j]))
-          ++j;
+        ++j;
 
-    return std::string(str + i, j - i);
+    return QString(QByteArray(str + i, j - i));
 }
 
 
@@ -108,7 +109,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const ShortString& v)
 std::ostream& operator<<(std::ostream& s, const ShortString& v)
 {
     s << "\"";
-    s << v.to_std_string();
+    s << v.to_string().toStdString();
     s << "\" ";
     return s;
 }
@@ -305,26 +306,26 @@ QString InteriorFile::get_textures_palette_name()
     return "PAL.PAL";
 }
 
-QString InteriorFile::get_textures_folder()
+QDir InteriorFile::get_textures_folder()
 {
-    return "TEXTURES.LIB.dir\\";
+    return QDir(R"(TEXTURES.LIB.dir)");
 }
 
-std::string InteriorFile::get_texture_fullpath(const std::string& i_texture_file)
+QFileInfo InteriorFile::get_texture_fullpath(const QString& i_texture_name)
 {
-    return InteriorFile::get_textures_folder().toStdString() + i_texture_file;
+    return QFileInfo(InteriorFile::get_textures_folder(), i_texture_name);
 }
 
-std::set<std::string> InteriorFile::all_texture_names() const
+std::set<QString> InteriorFile::all_texture_names() const
 {
-    std::set<std::string> texture_names;
+    std::set<QString> texture_names;
     for(const auto& p : vertical_polygons.vec)
     {
-        texture_names.insert(InteriorFile::get_texture_fullpath(p.texture.to_std_string()));
+        texture_names.insert(InteriorFile::get_texture_fullpath(p.texture.to_string()).absoluteFilePath());
     }
     for(const auto& p : horizontal_polygons.vec)
     {
-        texture_names.insert(InteriorFile::get_texture_fullpath(p.texture.to_std_string()));
+        texture_names.insert(InteriorFile::get_texture_fullpath(p.texture.to_string()).absoluteFilePath());
     }
     return texture_names;
 }

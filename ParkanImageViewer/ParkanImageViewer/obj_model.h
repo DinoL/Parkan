@@ -1,13 +1,15 @@
 #ifndef OBJ_MODEL_H
 #define OBJ_MODEL_H
 
+#include "interior.h"
+
+#include <QString>
+#include <QFileInfo>
+
 #include <map>
 #include <vector>
 #include <string>
-#include "interior.h"
 #include <fstream>
-#include <QFileInfo>
-
 
 struct UV
 {
@@ -37,7 +39,7 @@ struct ObjVertex
 
 struct ObjFace
 {
-    std::string texture;
+    QString texture;
     std::vector<ObjVertex> face_vxs;
 };
 

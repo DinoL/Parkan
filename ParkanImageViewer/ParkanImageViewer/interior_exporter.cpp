@@ -1,5 +1,6 @@
 #include "interior_exporter.h"
 
+#include "io_utils.h"
 #include "texture_exporter.h"
 #include "palette.h"
 #include "obj_model.h"
@@ -40,7 +41,7 @@ bool InteriorExporter::export_all_used_textures(const QFileInfoList& i_all_inter
     if(i_all_interiors.empty())
         return false;
 
-    std::set<std::string> texture_names;
+    std::set<QString> texture_names;
 
     for(const auto& interior_file : i_all_interiors)
     {

@@ -10,7 +10,7 @@ ObjModel::ObjModel(const InteriorFile& i_interior)
     for(const auto& poly : i_interior.vertical_polygons.vec)
     {
         ObjFace cur_poly;
-        cur_poly.texture = poly.texture.to_std_string();
+        cur_poly.texture = poly.texture.to_string();
         for(int i = 0; i < 4; ++i)
         {
             ObjVertex cur_vx;
@@ -28,7 +28,7 @@ ObjModel::ObjModel(const InteriorFile& i_interior)
     for(const auto& poly : i_interior.horizontal_polygons.vec)
     {
         ObjFace cur_poly;
-        cur_poly.texture = poly.texture.to_std_string();
+        cur_poly.texture = poly.texture.to_string();
         for(int i = 0; i < 4; ++i)
         {
             ObjVertex cur_vx;
@@ -47,7 +47,7 @@ ObjModel::ObjModel(const InteriorFile& i_interior)
 
 void ObjModel::save_material_file(const std::string& to) const
 {
-    std::set<std::string> textures;
+    std::set<QString> textures;
     for(const auto& f : fs)
     {
         textures.insert(f.texture);
