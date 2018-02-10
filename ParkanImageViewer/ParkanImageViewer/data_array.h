@@ -28,7 +28,7 @@ InputBinaryStream& operator>>(InputBinaryStream& s, DataArray<T>& arr)
 template<typename T>
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const DataArray<T>& arr)
 {
-    quint16 size = arr.vec.size();
+    quint16 size = static_cast<quint16>(arr.vec.size());
     s << size;
 
     for(const auto& el : arr.vec)
@@ -41,7 +41,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const DataArray<T>& arr)
 template<typename T>
 std::ostream& operator<<(std::ostream& s, const DataArray<T>& arr)
 {
-    quint16 size = arr.vec.size();
+    size_t size = arr.vec.size();
     s << "Size: " << size << std::endl;
 
     for(const auto& el : arr.vec)

@@ -91,7 +91,7 @@ void ObjModel::save(const std::string& i_to, const std::string& i_mtl_file) cons
     }
 }
 
-int AllUVs::add_one(const UV& uv)
+size_t AllUVs::add_one(const UV& uv)
 {
     uvs.push_back(uv);
     return uvs.size() - 1;

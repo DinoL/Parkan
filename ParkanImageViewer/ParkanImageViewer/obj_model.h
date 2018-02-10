@@ -28,13 +28,13 @@ struct AllUVs
 {
     std::vector<UV> uvs;
 
-    int add_one(const UV& uv);
+    size_t add_one(const UV& uv);
 };
 
 struct ObjVertex
 {
-    int vid;
-    int uvid;
+    size_t vid;
+    size_t uvid;
 };
 
 struct ObjFace
