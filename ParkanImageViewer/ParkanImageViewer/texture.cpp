@@ -3,10 +3,11 @@
 #include <fstream>
 
 Texture::Texture(const QFileInfo& i_path)
+    : Image(i_path)
 {
     std::ifstream file(i_path.filePath().toStdString(), std::ios::binary);
     if(file.fail())
-        throw "Cannot open texture file file " + i_path.filePath();
+        throw "Cannot open texture file " + i_path.filePath();
 
     InputBinaryStream bis(file);
 
@@ -20,9 +21,4 @@ Texture::Texture(const QFileInfo& i_path)
     bis >> m_data;
 
     m_img =  QImage((uchar*)m_data.data(), m_width, m_height, QImage::QImage::Format_Indexed8);
-}
-
-void Texture::save(const QString& i_path) const
-{
-    image().save(i_path);
 }
