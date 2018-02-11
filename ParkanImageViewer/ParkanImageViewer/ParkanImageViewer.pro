@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     data_array.cpp \
     io_utils.cpp \
     image.cpp \
-    texture_factory.cpp
+    texture_factory.cpp \
+    image_dib.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -47,7 +48,8 @@ HEADERS  += viewer_app.h \
     data_array.h \
     io_utils.h \
     image.h \
-    texture_factory.h
+    texture_factory.h \
+    image_dib.h
 
 
 FORMS    += viewer_app.ui
