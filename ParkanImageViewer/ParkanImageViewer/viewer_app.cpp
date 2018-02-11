@@ -2,7 +2,7 @@
 #include "ui_viewer_app.h"
 
 #include "color_ramp_widget.h"
-#include "texture.h"
+#include "texture_factory.h"
 #include "interior_exporter.h"
 
 #include <QDir>
@@ -57,7 +57,10 @@ void ViewerApp::on_actionOpen_Image_triggered()
         return;
     }
 
-    m_img.reset(new Texture(file_name));
+    m_img = TextureFactory::build_image(file_name);
+    if (!m_img)
+        return;
+
     m_img->set_palette(m_crw->m_palette);
     ui->image_label->setPixmap(QPixmap::fromImage(m_img->image()));
 }

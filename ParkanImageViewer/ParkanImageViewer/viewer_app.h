@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QScrollArea>
 #include "color_ramp_widget.h"
-#include "texture.h"
+#include "image.h"
 #include <memory>
 
 namespace Ui {
@@ -38,7 +38,7 @@ private slots:
 private:
     Ui::ViewerApp* ui;
     std::unique_ptr<ColorRampWidget> m_crw;
-    std::unique_ptr<Texture> m_img;
+    std::unique_ptr<Image> m_img;
 };
 
 #endif // VIEWER_APP_H

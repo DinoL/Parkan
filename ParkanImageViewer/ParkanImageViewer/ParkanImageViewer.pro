@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     obj_model.cpp \
     data_array.cpp \
     io_utils.cpp \
-    image.cpp
+    image.cpp \
+    texture_factory.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -45,7 +46,9 @@ HEADERS  += viewer_app.h \
     obj_model.h \
     data_array.h \
     io_utils.h \
-    image.h
+    image.h \
+    texture_factory.h
+
 
 FORMS    += viewer_app.ui
 
