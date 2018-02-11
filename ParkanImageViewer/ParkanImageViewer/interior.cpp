@@ -308,7 +308,7 @@ QString InteriorFile::get_textures_palette_name()
 
 QDir InteriorFile::get_textures_folder()
 {
-    return QDir(R"(TEXTURES.LIB.dir)");
+    return QDir(R"(C:\Users\Leonid\Downloads\PARKAN THE IMPERIAL CHRONICLES\TEXTURES.LIB.dir)");
 }
 
 QFileInfo InteriorFile::get_texture_fullpath(const QString& i_texture_name)
