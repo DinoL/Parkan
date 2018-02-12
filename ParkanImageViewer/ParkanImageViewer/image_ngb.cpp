@@ -15,16 +15,21 @@ ImageNgb::ImageNgb(const QFileInfo& i_path)
 
     InputBinaryStream bis(file);
 
-    std::vector<quint16> words(8);
+    std::vector<quint16> words(4);
     for(auto& word : words)
     {
         bis >> word;
     }
 
+    QByteArray signature(7, '\0');
+    bis >> m_default_color >> signature;
+
     m_width = words[2] - words[0] + 1;
     m_height = words[3] - words[1] + 1;
 
     m_data.resize(m_width * m_height);
+
+    bis >> m_data;
 
     m_img = QImage((uchar*)m_data.data(), m_width, m_height, QImage::QImage::Format_Indexed8);
 }

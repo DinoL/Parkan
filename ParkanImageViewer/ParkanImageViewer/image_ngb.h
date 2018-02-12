@@ -12,6 +12,7 @@ public:
 
 private:
     QByteArray m_data;
+    uchar m_default_color;
 };
 
 
