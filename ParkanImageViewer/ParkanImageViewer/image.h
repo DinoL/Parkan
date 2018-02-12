@@ -26,6 +26,7 @@ protected:
     quint32 m_width = 0;
     quint32 m_height = 0;
 
+    QByteArray m_data;
     QImage m_img;
 };
 
