@@ -3,6 +3,7 @@
 #include "texture.h"
 #include "image_dib.h"
 #include "image_ngb.h"
+#include "image_ngb_complex.h"
 
 std::unique_ptr<Image> TextureFactory::
 build_image(const QFileInfo& i_file_info)
@@ -14,7 +15,7 @@ build_image(const QFileInfo& i_file_info)
     }
     else if(ext.toLower() == "ngb")
     {
-        return std::unique_ptr<Image>(new ImageNgb(i_file_info));
+        return std::unique_ptr<Image>(new ImageNgbComplex(i_file_info));
     }
     return std::unique_ptr<Image>(new Texture(i_file_info));
 }
