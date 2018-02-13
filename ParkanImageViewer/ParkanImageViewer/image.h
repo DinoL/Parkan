@@ -23,6 +23,9 @@ public:
     void save(const QString& i_path) const;
 
 protected:
+    bool prepare_image();
+
+protected:
     quint32 m_width = 0;
     quint32 m_height = 0;
 

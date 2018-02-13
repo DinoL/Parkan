@@ -60,6 +60,6 @@ ImageNgbComplex::ImageNgbComplex(const QFileInfo& i_path)
         m_data.append(cur_row);
     }
 
+    prepare_image();
 
-    m_img = QImage((uchar*)m_data.data(), m_width, m_height, QImage::QImage::Format_Indexed8);
 }

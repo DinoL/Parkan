@@ -31,5 +31,5 @@ ImageNgb::ImageNgb(const QFileInfo& i_path)
 
     bis >> m_data;
 
-    m_img = QImage((uchar*)m_data.data(), m_width, m_height, QImage::QImage::Format_Indexed8);
+    prepare_image();
 }
