@@ -37,35 +37,29 @@ ImageNgbComplex::ImageNgbComplex(const QFileInfo& i_path)
 
     for(int row = 0; row < m_height; ++row)
     {
-
         QByteArray cur_row(m_width, m_default_color);
 
         int cur_x = 0;
-        int cnt = 0;
-        while(cur_x < m_width)
+        while(cur_x <= m_width)
         {
             quint16 shift, cur_width;
-            bis >> shift >> cur_width;
+            bis >> shift;
+
+            if (shift == 0xFFFF)
+                break;
+
+            bis >> cur_width;
 
             QByteArray buffer(cur_width, '\0');
             bis >> buffer;
-            if(cur_x + shift + cur_width < m_width)
-            {
-                cur_row.replace(cur_x + shift, cur_width, buffer);
-            }
-
+            int pos = cur_x + shift;
+            cur_row.replace(pos, cur_width, buffer);
             cur_x += (cur_width + shift);
         }
-        quint16 end_row;
-        bis >> end_row;
 
         m_data.append(cur_row);
-
-
     }
 
 
-    auto size = m_data.size();
-    std::cout << size;
     m_img = QImage((uchar*)m_data.data(), m_width, m_height, QImage::QImage::Format_Indexed8);
 }
