@@ -1,11 +1,11 @@
 #include "image.h"
 
-quint32 Image::width() const
+qint32 Image::width() const
 {
     return m_width;
 }
 
-quint32 Image::height() const
+qint32 Image::height() const
 {
     return m_height;
 }

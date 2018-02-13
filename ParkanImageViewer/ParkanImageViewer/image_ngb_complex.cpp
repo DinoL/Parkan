@@ -35,11 +35,11 @@ ImageNgbComplex::ImageNgbComplex(const QFileInfo& i_path)
 
     m_data.clear();
 
-    for(int row = 0; row < m_height; ++row)
+    for(qint32 row = 0; row < m_height; ++row)
     {
         QByteArray cur_row(m_width, m_default_color);
 
-        int cur_x = 0;
+        qint32 cur_x = 0;
         while(cur_x <= m_width)
         {
             quint16 shift, cur_width;
@@ -52,7 +52,7 @@ ImageNgbComplex::ImageNgbComplex(const QFileInfo& i_path)
 
             QByteArray buffer(cur_width, '\0');
             bis >> buffer;
-            int pos = cur_x + shift;
+            qint32 pos = cur_x + shift;
             cur_row.replace(pos, cur_width, buffer);
             cur_x += (cur_width + shift);
         }
@@ -61,5 +61,4 @@ ImageNgbComplex::ImageNgbComplex(const QFileInfo& i_path)
     }
 
     prepare_image();
-
 }

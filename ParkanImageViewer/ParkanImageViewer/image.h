@@ -13,8 +13,8 @@ public:
     Image(const QFileInfo&)
     {}
 
-    quint32 width() const;
-    quint32 height() const;
+    qint32 width() const;
+    qint32 height() const;
 
     const QImage& image() const;
 
@@ -26,8 +26,8 @@ protected:
     bool prepare_image();
 
 protected:
-    quint32 m_width = 0;
-    quint32 m_height = 0;
+    qint32 m_width = 0;
+    qint32 m_height = 0;
 
     QByteArray m_data;
     QImage m_img;
