@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QScrollArea>
+#include <QScrollBar>
+
 #include "color_ramp_widget.h"
 #include "image.h"
 #include <memory>
@@ -35,10 +37,44 @@ private slots:
 
     void on_actionExport_all_interiors_triggered();
 
+    void on_actionZoom_In_triggered();
+
+    void on_actionZoom_Out_triggered();
+
+    void on_actionNormal_Size_triggered();
+
+    void on_actionFit_to_Window_triggered();
+
+private:
+
+    void setup_scroll_area();
+
+    void update_image();
+
+    void update_actions();
+
+    bool has_image() const;
+
+    bool has_palette() const;
+
+    bool is_fit_to_window_mode() const;
+
+    void scale_image(float i_factor);
+
+    void adjust_scroll_bar(QScrollBar* i_scroll_bar, float i_factor);
+
 private:
     Ui::ViewerApp* ui;
     std::unique_ptr<ColorRampWidget> m_crw;
     std::unique_ptr<Image> m_img;
+
+    QLabel* m_image_label;
+    QScrollArea* m_scroll_area;
+
+    float m_scale_factor = 0.f;
+    float m_scale_step = 0.25f;
+    float m_min_zoom = 0.333f;
+    float m_max_zoom = 3.f;
 };
 
 #endif // VIEWER_APP_H
