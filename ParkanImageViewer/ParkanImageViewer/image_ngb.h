@@ -1,9 +1,9 @@
 #ifndef IMAGE_NGB_H
 #define IMAGE_NGB_H
 
-#include "image.h"
+#include "image_data.h"
 
-class ImageNgb : public Image
+class ImageNgb : public ImageData
 {
 public:
     ImageNgb(const QFileInfo& i_path);

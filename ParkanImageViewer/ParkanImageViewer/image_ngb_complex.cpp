@@ -7,7 +7,7 @@
 #include <vector>
 
 ImageNgbComplex::ImageNgbComplex(const QFileInfo& i_path)
-    : Image(i_path)
+    : ImageData(i_path)
 {
     std::ifstream file(i_path.filePath().toStdString(), std::ios::binary);
     if(file.fail())
@@ -59,6 +59,4 @@ ImageNgbComplex::ImageNgbComplex(const QFileInfo& i_path)
 
         m_data.append(cur_row);
     }
-
-    prepare_image();
 }

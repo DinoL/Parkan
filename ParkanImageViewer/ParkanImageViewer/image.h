@@ -3,15 +3,15 @@
 
 #include "palette.h"
 
-#include <QFileInfo>
 #include <QString>
 #include <QImage>
 
 class Image
 {
 public:
-    Image(const QFileInfo&)
-    {}
+    Image(const QImage& i_img);
+
+    bool is_valid() const;
 
     qint32 width() const;
     qint32 height() const;
@@ -26,10 +26,6 @@ protected:
     bool prepare_image();
 
 protected:
-    qint32 m_width = 0;
-    qint32 m_height = 0;
-
-    QByteArray m_data;
     QImage m_img;
 };
 

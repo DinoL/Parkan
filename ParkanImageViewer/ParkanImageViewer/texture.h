@@ -1,9 +1,9 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include "image.h"
+#include "image_data.h"
 
-class Texture : public Image
+class Texture : public ImageData
 {
 public:
     Texture(const QFileInfo& i_path);

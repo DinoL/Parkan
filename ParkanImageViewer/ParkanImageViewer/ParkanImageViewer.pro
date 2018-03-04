@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     texture_factory.cpp \
     image_dib.cpp \
     image_ngb.cpp \
-    image_ngb_complex.cpp
+    image_ngb_complex.cpp \
+    image_data.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -53,7 +54,8 @@ HEADERS  += viewer_app.h \
     texture_factory.h \
     image_dib.h \
     image_ngb.h \
-    image_ngb_complex.h
+    image_ngb_complex.h \
+    image_data.h
 
 
 FORMS    += viewer_app.ui

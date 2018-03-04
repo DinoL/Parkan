@@ -1,9 +1,9 @@
 #ifndef IMAGE_DIB_H
 #define IMAGE_DIB_H
 
-#include "image.h"
+#include "image_data.h"
 
-class ImageDib : public Image
+class ImageDib : public ImageData
 {
 public:
     ImageDib(const QFileInfo& i_path);
