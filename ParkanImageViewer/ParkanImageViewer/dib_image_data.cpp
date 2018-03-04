@@ -5,7 +5,7 @@
 
 #include <fstream>
 
-ImageDib::ImageDib(const QFileInfo& i_path)
+DibImageData::DibImageData(const QFileInfo& i_path)
     : ImageData(i_path)
 {
     std::ifstream file(i_path.filePath().toStdString(), std::ios::binary | std::ios::ate);

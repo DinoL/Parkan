@@ -2,7 +2,7 @@
 #define TEXTURE_EXPORTER_H
 
 #include "palette.h"
-#include "texture.h"
+#include "simle_image_data.h"
 
 #include <QFileInfo>
 #include <QString>
@@ -23,7 +23,7 @@ public:
         {
             const QString in_path(to_std_string(path).c_str());
             const QFileInfo info(in_path);
-            const Texture raw_data(info);
+            const SimpleImageData raw_data(info);
             Image texture(raw_data.get_image());
             texture.set_palette(i_palette);
 

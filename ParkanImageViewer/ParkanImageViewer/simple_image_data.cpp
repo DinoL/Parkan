@@ -1,8 +1,8 @@
-#include "texture.h"
+#include "simle_image_data.h"
 #include "binary_stream.h"
 #include <fstream>
 
-Texture::Texture(const QFileInfo& i_path)
+SimpleImageData::SimpleImageData(const QFileInfo& i_path)
     : ImageData(i_path)
 {
     std::ifstream file(i_path.filePath().toStdString(), std::ios::binary);

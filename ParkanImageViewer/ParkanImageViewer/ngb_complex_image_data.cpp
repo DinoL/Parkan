@@ -6,7 +6,7 @@
 #include <fstream>
 #include <vector>
 
-ImageNgbComplex::ImageNgbComplex(const QFileInfo& i_path)
+NgbComplexImageData::NgbComplexImageData(const QFileInfo& i_path)
     : ImageData(i_path)
 {
     std::ifstream file(i_path.filePath().toStdString(), std::ios::binary);

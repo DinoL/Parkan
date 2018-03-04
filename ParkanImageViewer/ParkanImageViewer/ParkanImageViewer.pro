@@ -16,7 +16,6 @@ SOURCES += main.cpp\
         viewer_app.cpp \
     binary_file.cpp \
     palette.cpp \
-    texture.cpp \
     color_ramp_widget.cpp \
     image_widget.cpp \
     binary_stream.cpp \
@@ -30,15 +29,15 @@ SOURCES += main.cpp\
     io_utils.cpp \
     image.cpp \
     texture_factory.cpp \
-    image_dib.cpp \
-    image_ngb.cpp \
-    image_ngb_complex.cpp \
-    image_data.cpp
+    image_data.cpp \
+    simple_image_data.cpp \
+    dib_image_data.cpp \
+    nbg_image_data.cpp \
+    ngb_complex_image_data.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
     palette.h \
-    texture.h \
     color_ramp_widget.h \
     image_widget.h \
     binary_stream.h \
@@ -52,10 +51,11 @@ HEADERS  += viewer_app.h \
     io_utils.h \
     image.h \
     texture_factory.h \
-    image_dib.h \
-    image_ngb.h \
-    image_ngb_complex.h \
-    image_data.h
+    image_data.h \
+    simle_image_data.h \
+    dib_image_data.h \
+    ngb_image_data.h \
+    ngb_complex_image_data.h
 
 
 FORMS    += viewer_app.ui
