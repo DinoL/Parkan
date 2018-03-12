@@ -52,7 +52,7 @@ HEADERS  += viewer_app.h \
     image.h \
     texture_factory.h \
     image_data.h \
-    simle_image_data.h \
+    simple_image_data.h \
     dib_image_data.h \
     ngb_image_data.h \
     ngb_complex_image_data.h

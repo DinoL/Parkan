@@ -1,4 +1,4 @@
-#include "image_dib.h"
+#include "dib_image_data.h"
 #include "binary_stream.h"
 
 #include <QFile>

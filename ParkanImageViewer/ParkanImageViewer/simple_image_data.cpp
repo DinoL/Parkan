@@ -1,4 +1,4 @@
-#include "simle_image_data.h"
+#include "simple_image_data.h"
 #include "binary_stream.h"
 #include <fstream>
 

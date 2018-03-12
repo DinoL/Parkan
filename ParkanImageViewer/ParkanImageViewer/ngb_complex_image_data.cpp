@@ -1,4 +1,4 @@
-#include "image_ngb_complex.h"
+#include "ngb_complex_image_data.h"
 #include "binary_stream.h"
 
 #include <QFile>

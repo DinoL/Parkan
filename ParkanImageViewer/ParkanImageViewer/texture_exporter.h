@@ -2,7 +2,7 @@
 #define TEXTURE_EXPORTER_H
 
 #include "palette.h"
-#include "simle_image_data.h"
+#include "simple_image_data.h"
 
 #include <QFileInfo>
 #include <QString>

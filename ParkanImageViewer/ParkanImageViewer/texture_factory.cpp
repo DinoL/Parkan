@@ -1,9 +1,9 @@
 #include "texture_factory.h"
 
-#include "simle_image_data.h"
-#include "image_dib.h"
-#include "image_ngb.h"
-#include "image_ngb_complex.h"
+#include "simple_image_data.h"
+#include "dib_image_data.h"
+#include "ngb_image_data.h"
+#include "ngb_complex_image_data.h"
 
 std::unique_ptr<Image> TextureFactory::build_image(const QFileInfo& i_file_info)
 {
