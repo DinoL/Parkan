@@ -7,14 +7,31 @@
 
 std::unique_ptr<Image> TextureFactory::build_image(const QFileInfo& i_file_info)
 {
-    const QString ext = i_file_info.suffix();
-    if(ext.toLower() == "dib")
+    std::unique_ptr<ImageData> data;
+
+    data.reset(new SimpleImageData(i_file_info));
+    if(data && data->is_valid())
     {
-        return std::make_unique<Image>(DibImageData(i_file_info).get_image());
+        return std::make_unique<Image>(data->get_image());
     }
-    else if(ext.toLower() == "ngb")
+
+    data.reset(new DibImageData(i_file_info));
+    if(data && data->is_valid())
     {
-        return std::make_unique<Image>(NgbComplexImageData(i_file_info).get_image());
+        return std::make_unique<Image>(data->get_image());
     }
-    return std::make_unique<Image>(SimpleImageData(i_file_info).get_image());
+
+    data.reset(new NgbImageData(i_file_info));
+    if(data && data->is_valid())
+    {
+        return std::make_unique<Image>(data->get_image());
+    }
+
+    data.reset(new NgbComplexImageData(i_file_info));
+    if(data && data->is_valid())
+    {
+        return std::make_unique<Image>(data->get_image());
+    }
+
+    throw "Incorrect image opened!";
 }

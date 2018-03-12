@@ -1,5 +1,7 @@
 #include "simple_image_data.h"
 #include "binary_stream.h"
+#include "image_description_guard.h"
+
 #include <fstream>
 
 SimpleImageData::SimpleImageData(const QFileInfo& i_path)
@@ -10,12 +12,16 @@ SimpleImageData::SimpleImageData(const QFileInfo& i_path)
         throw "Cannot open texture file " + i_path.filePath();
 
     InputBinaryStream bis(file);
+    {
+        HeaderGuard guard(32, file);
 
-    QByteArray signature(4, '\0');
-    bis >> signature >> m_width >> m_height;
+        QByteArray signature(4, '\0');
+        bis >> signature;
+        if(signature != QByteArray("Texm"))
+            return;
 
-    QByteArray header(20, '\0');
-    bis >> header;
+        bis >> m_width >> m_height;
+    }
 
     m_data.resize(m_width * m_height);
     bis >> m_data;

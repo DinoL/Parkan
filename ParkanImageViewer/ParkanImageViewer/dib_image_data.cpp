@@ -1,5 +1,6 @@
 #include "dib_image_data.h"
 #include "binary_stream.h"
+#include "image_description_guard.h"
 
 #include <QFile>
 
@@ -12,17 +13,22 @@ DibImageData::DibImageData(const QFileInfo& i_path)
     if(file.fail())
         throw "Cannot open texture file " + i_path.filePath();
 
-    const size_t file_size = file.tellg();
-    const size_t footer_size = 32;
-
-    file.seekg(file_size - footer_size);
-
     InputBinaryStream bis(file);
+    {
+        FooterGuard guard(32, file);
 
-    QByteArray signature(8, '\0');
-    bis >> signature >> m_width >> m_height;
+        qint32 width, height;
+        QByteArray skip(8, '\0');
+        bis >> skip >> width >> height;
+        QByteArray skip2(6, '\0');
+        QByteArray signature(2, '\0');
+        bis >> skip2 >> signature;
+        if(signature != QByteArray("BC"))
+            return;
 
-    file.seekg(0);
+        m_width = width;
+        m_height = height;
+    }
 
     m_data.resize(m_width * m_height);
     bis >> m_data;
