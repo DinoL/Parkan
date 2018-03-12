@@ -5,24 +5,37 @@ ImageDescriptionGuard::ImageDescriptionGuard(int i_size, std::istream& io_stream
     m_stream(io_stream)
 {}
 
+int ImageDescriptionGuard::size() const
+{
+    return m_size;
+}
+
+void ImageDescriptionGuard::set_position(int i_pos)
+{
+    if(i_pos >= 0)
+        m_stream.seekg(i_pos);
+    else
+        m_stream.seekg(i_pos, std::ios_base::end);
+}
+
 HeaderGuard::HeaderGuard(int i_size, std::istream& io_stream) :
     ImageDescriptionGuard(i_size, io_stream)
 {
-    m_stream.seekg(0);
+    set_position(0);
 }
 
 HeaderGuard::~HeaderGuard()
 {
-    m_stream.seekg(m_size);
+    set_position(size());
 }
 
 FooterGuard::FooterGuard(int i_size, std::istream& io_stream) :
     ImageDescriptionGuard(i_size, io_stream)
 {
-    m_stream.seekg(-m_size, std::ios_base::end);
+    set_position(-size());
 }
 
 FooterGuard::~FooterGuard()
 {
-    m_stream.seekg(0);
+    set_position(0);
 }

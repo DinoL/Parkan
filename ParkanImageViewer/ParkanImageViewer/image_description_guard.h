@@ -9,6 +9,10 @@ public:
     ImageDescriptionGuard(int i_size, std::istream& io_stream);
 
 protected:
+    int size() const;
+    void set_position(int i_pos);
+
+private:
     int m_size;
     std::istream& m_stream;
 };
