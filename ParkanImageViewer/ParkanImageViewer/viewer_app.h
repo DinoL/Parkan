@@ -49,6 +49,8 @@ private:
 
     void setup_scroll_area();
 
+    void open_image(const QString& i_path);
+
     void update_image();
 
     void update_actions();

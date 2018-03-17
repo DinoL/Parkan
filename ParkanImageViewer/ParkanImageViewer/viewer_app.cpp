@@ -82,17 +82,7 @@ void ViewerApp::on_actionOpen_Image_triggered()
         mb->show();
         return;
     }
-
-    m_img = TextureFactory::build_image(file_name);
-    if (!m_img)
-        return;
-
-    m_img->set_palette(m_crw->m_palette);
-    m_image_label->setPixmap(QPixmap::fromImage(m_img->image()));
-
-    m_scale_factor = 1.f;
-    update_image();
-    update_actions();
+    open_image(file_name);
 }
 
 void ViewerApp::on_actionOpen_interior_triggered()
@@ -175,6 +165,23 @@ void ViewerApp::on_actionFit_to_Window_triggered()
     if (!fit_to_window)
         on_actionNormal_Size_triggered();
 
+    update_actions();
+}
+
+void ViewerApp::open_image(const QString& i_path)
+{
+    if(!m_crw)
+        return;
+
+    m_img = TextureFactory::build_image(i_path);
+    if (!m_img)
+        return;
+
+    m_img->set_palette(m_crw->m_palette);
+    m_image_label->setPixmap(QPixmap::fromImage(m_img->image()));
+
+    m_scale_factor = 1.f;
+    update_image();
     update_actions();
 }
 
