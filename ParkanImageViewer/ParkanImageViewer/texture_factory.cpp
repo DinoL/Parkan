@@ -41,3 +41,33 @@ std::unique_ptr<Image> TextureFactory::build_image(const QFileInfo& i_file_info)
     }
     return nullptr;
 }
+
+QStringList get_image_extensions()
+{
+    QStringList all_exts{"*.DIB", "*.NGB", "*.F", "*.W"};
+    for(QString ext : {"*.A", "*.V"})
+    {
+        for(int i = 0; i < 10; ++i)
+        {
+            all_exts << (i == 0 ? ext : ext + QString::number(i));
+        }
+    }
+    return all_exts;
+}
+
+QFileInfoList get_images(const QString& i_dir, bool i_recursive)
+{
+    const QStringList extensions = get_image_extensions();
+    QFileInfoList all_images = get_files_from_dir_by_mask(i_dir, extensions);
+
+    if(i_recursive)
+    {
+        for(auto& sub_dir : QDir(i_dir).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot))
+        {
+            QString sub_dir_path = sub_dir.absoluteFilePath();
+            all_images += get_images(sub_dir_path, true);
+        }
+    }
+    return all_images;
+}
+
