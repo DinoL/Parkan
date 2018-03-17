@@ -1,4 +1,5 @@
 #include "image_iterator.h"
+#include "texture_factory.h"
 
 ImageIterator::ImageIterator(const QString& i_dir)
 {
