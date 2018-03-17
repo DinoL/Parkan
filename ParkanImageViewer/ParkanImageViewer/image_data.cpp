@@ -1,5 +1,9 @@
 #include "image_data.h"
 
+ImageData::ImageData(const QFileInfo& i_path) :
+    m_path(i_path)
+{}
+
 qint32 ImageData::width() const
 {
     return m_width;
@@ -31,5 +35,5 @@ Image ImageData::get_image() const
             row[x] = m_data[x + m_width * y];
         }
     }
-    return Image(image);
+    return Image(image, m_path);
 }

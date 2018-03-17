@@ -5,11 +5,13 @@
 
 #include <QString>
 #include <QImage>
+#include <QFileInfo>
+#include <QDir>
 
 class Image
 {
 public:
-    Image(const QImage& i_img);
+    Image(const QImage& i_img, const QFileInfo& i_path);
 
     bool is_valid() const;
 
@@ -17,6 +19,8 @@ public:
     qint32 height() const;
 
     const QImage& image() const;
+
+    QDir dir() const;
 
     void set_palette(const Palette& i_palette);
 
@@ -27,6 +31,7 @@ protected:
 
 protected:
     QImage m_img;
+    QFileInfo m_path;
 };
 
 #endif // IMAGE_H

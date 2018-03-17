@@ -1,6 +1,8 @@
 #include "image.h"
 
-Image::Image(const QImage& i_img) : m_img(i_img)
+Image::Image(const QImage& i_img, const QFileInfo& i_path) :
+    m_img(i_img),
+    m_path(i_path)
 {}
 
 bool Image::is_valid() const
@@ -21,6 +23,11 @@ qint32 Image::height() const
 const QImage& Image::image() const
 {
     return m_img;
+}
+
+QDir Image::dir() const
+{
+    return m_path.absoluteDir();
 }
 
 void Image::set_palette(const Palette& i_palette)

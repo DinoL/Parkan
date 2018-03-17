@@ -10,8 +10,7 @@
 class ImageData
 {
 public:
-    ImageData(const QFileInfo&)
-    {}
+    ImageData(const QFileInfo& i_path);
 
     bool is_valid() const;
 
@@ -25,6 +24,7 @@ protected:
     qint32 m_height = 0;
 
     QByteArray m_data;
+    QFileInfo m_path;
 };
 
 #endif // IMAGE_DATA_H
