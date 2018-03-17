@@ -170,7 +170,7 @@ void ViewerApp::on_actionFit_to_Window_triggered()
 
 void ViewerApp::open_image(const QString& i_path)
 {
-    if(!m_crw)
+    if(!m_crw || i_path.isEmpty())
         return;
 
     m_img = TextureFactory::build_image(i_path);
