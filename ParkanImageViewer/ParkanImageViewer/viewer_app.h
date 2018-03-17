@@ -8,6 +8,8 @@
 
 #include "color_ramp_widget.h"
 #include "image.h"
+#include "image_iterator.h"
+
 #include <memory>
 
 namespace Ui {
@@ -45,6 +47,10 @@ private slots:
 
     void on_actionFit_to_Window_triggered();
 
+    void on_actionNext_triggered();
+
+    void on_actionPrevious_triggered();
+
 private:
 
     void setup_scroll_area();
@@ -69,6 +75,8 @@ private:
     Ui::ViewerApp* ui;
     std::unique_ptr<ColorRampWidget> m_crw;
     std::unique_ptr<Image> m_img;
+
+    ImageIterator m_it;
 
     QLabel* m_image_label;
     QScrollArea* m_scroll_area;

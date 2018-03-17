@@ -82,7 +82,11 @@ void ViewerApp::on_actionOpen_Image_triggered()
         mb->show();
         return;
     }
-    open_image(file_name);
+
+    const QString cur_dir = QFileInfo(file_name).absolutePath();
+    m_it = ImageIterator(cur_dir);
+    if(m_it)
+        open_image(m_it->absoluteFilePath());
 }
 
 void ViewerApp::on_actionOpen_interior_triggered()
@@ -220,6 +224,8 @@ void ViewerApp::update_actions()
     ui->actionZoom_Out->setEnabled(can_zoom);
     ui->actionNormal_Size->setEnabled(can_zoom);
     ui->actionSave_image->setEnabled(has_image());
+    ui->actionNext->setEnabled(has_image());
+    ui->actionPrevious->setEnabled(has_image());
 }
 
 void ViewerApp::scale_image(float i_factor)
@@ -241,4 +247,16 @@ void ViewerApp::adjust_scroll_bar(QScrollBar* i_scroll_bar, float i_factor)
 
     i_scroll_bar->setValue(int(i_factor * i_scroll_bar->value()
                                + ((i_factor - 1) * i_scroll_bar->pageStep() / 2)));
+}
+
+void ViewerApp::on_actionNext_triggered()
+{
+    if(m_it)
+        open_image((++m_it)->absoluteFilePath());
+}
+
+void ViewerApp::on_actionPrevious_triggered()
+{
+    if(m_it)
+        open_image((--m_it)->absoluteFilePath());
 }
