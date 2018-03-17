@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <QScrollBar>
+#include <QFileInfo>
 
 #include <memory>
 
@@ -55,6 +56,7 @@ private:
 
     void setup_scroll_area();
 
+    void open_image(const QFileInfo& i_path);
     void open_image(const QString& i_path);
 
     void update_image();

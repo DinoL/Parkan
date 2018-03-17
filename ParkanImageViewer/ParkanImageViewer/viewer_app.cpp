@@ -172,6 +172,11 @@ void ViewerApp::on_actionFit_to_Window_triggered()
     update_actions();
 }
 
+void ViewerApp::open_image(const QFileInfo& i_path)
+{
+    open_image(i_path.absoluteFilePath());
+}
+
 void ViewerApp::open_image(const QString& i_path)
 {
     if(!m_crw || i_path.isEmpty())
@@ -252,11 +257,11 @@ void ViewerApp::adjust_scroll_bar(QScrollBar* i_scroll_bar, float i_factor)
 void ViewerApp::on_actionNext_triggered()
 {
     if(m_it)
-        open_image((++m_it)->absoluteFilePath());
+        open_image(*(++m_it));
 }
 
 void ViewerApp::on_actionPrevious_triggered()
 {
     if(m_it)
-        open_image((--m_it)->absoluteFilePath());
+        open_image(*(--m_it));
 }
