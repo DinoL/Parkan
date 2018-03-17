@@ -1,14 +1,14 @@
 #ifndef VIEWER_APP_H
 #define VIEWER_APP_H
 
+#include "color_ramp_widget.h"
+#include "image.h"
+#include "image_iterator.h"
+
 #include <QMainWindow>
 #include <QLabel>
 #include <QScrollArea>
 #include <QScrollBar>
-
-#include "color_ramp_widget.h"
-#include "image.h"
-#include "image_iterator.h"
 
 #include <memory>
 
