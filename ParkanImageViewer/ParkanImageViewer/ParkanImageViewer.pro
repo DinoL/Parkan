@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     dib_image_data.cpp \
     nbg_image_data.cpp \
     ngb_complex_image_data.cpp \
-    image_description_guard.cpp
+    image_description_guard.cpp \
+    files_filter.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -57,7 +58,8 @@ HEADERS  += viewer_app.h \
     dib_image_data.h \
     ngb_image_data.h \
     ngb_complex_image_data.h \
-    image_description_guard.h
+    image_description_guard.h \
+    files_filter.h
 
 
 FORMS    += viewer_app.ui
