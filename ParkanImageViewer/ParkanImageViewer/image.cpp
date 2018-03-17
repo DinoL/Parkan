@@ -30,6 +30,11 @@ QDir Image::dir() const
     return m_path.absoluteDir();
 }
 
+QFileInfo Image::path() const
+{
+    return m_path;
+}
+
 void Image::set_palette(const Palette& i_palette)
 {
     m_img.setColorTable(i_palette.get_color_table());

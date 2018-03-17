@@ -21,6 +21,7 @@ public:
     const QImage& image() const;
 
     QDir dir() const;
+    QFileInfo path() const;
 
     void set_palette(const Palette& i_palette);
 
