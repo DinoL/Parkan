@@ -17,6 +17,16 @@ QFileInfo ImageIterator::operator*() const
     return m_images[m_pos];
 }
 
+QFileInfo* ImageIterator::operator->()
+{
+    if(m_images.isEmpty())
+        return nullptr;
+
+    return &m_images[m_pos];
+}
+
+ImageIterator::operator bool() const { return size() > 0; }
+
 ImageIterator&ImageIterator::inc()
 {
     ++m_pos;

@@ -15,6 +15,9 @@ public:
     ImageIterator& operator--()    { return dec(); }
 
     QFileInfo operator*() const;
+    QFileInfo* operator->();
+    operator bool() const;
+
 private:
     ImageIterator& inc();
     ImageIterator& dec();
