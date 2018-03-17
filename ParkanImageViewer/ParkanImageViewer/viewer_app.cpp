@@ -83,10 +83,9 @@ void ViewerApp::on_actionOpen_Image_triggered()
         return;
     }
 
-    const QString cur_dir = QFileInfo(file_name).absolutePath();
-    m_it = ImageIterator(cur_dir);
+    m_it = ImageIterator(file_name);
     if(m_it)
-        open_image(m_it->absoluteFilePath());
+        open_image(*m_it);
 }
 
 void ViewerApp::on_actionOpen_interior_triggered()

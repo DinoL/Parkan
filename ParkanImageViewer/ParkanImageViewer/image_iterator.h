@@ -23,6 +23,7 @@ private:
     ImageIterator& dec();
 
     int size() const { return m_images.size(); }
+    void init_images(const QString& i_dir);
 
 private:
     int m_pos = 0;

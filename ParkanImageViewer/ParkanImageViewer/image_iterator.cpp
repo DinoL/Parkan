@@ -1,12 +1,26 @@
 #include "image_iterator.h"
 #include "texture_factory.h"
 
-ImageIterator::ImageIterator(const QString& i_dir)
+#include <QFileInfo>
+
+ImageIterator::ImageIterator(const QString& i_path)
 {
-    if(i_dir.isEmpty())
+    if(i_path.isEmpty())
         return;
 
-    m_images = get_images(i_dir);
+    QFileInfo info(i_path);
+
+    if(info.isDir())
+    {
+        init_images(i_path);
+    }
+    else if(info.isFile())
+    {
+        init_images(info.absolutePath());
+        int pos = m_images.indexOf(i_path);
+        if(pos >= 0)
+            m_pos = pos;
+    }
 }
 
 QFileInfo ImageIterator::operator*() const
@@ -41,4 +55,9 @@ ImageIterator&ImageIterator::dec()
     if(m_pos < 0)
         m_pos += size();
     return *this;
+}
+
+void ImageIterator::init_images(const QString& i_dir)
+{
+    m_images = get_images(i_dir);
 }
