@@ -4,6 +4,7 @@
 #include "color_ramp_widget.h"
 #include "texture_factory.h"
 #include "interior_exporter.h"
+#include "files_filter.h"
 
 #include <QDir>
 #include <QFileInfoList>
@@ -118,9 +119,7 @@ void ViewerApp::on_actionExport_all_used_textures_triggered()
     if(out_file_name.isEmpty())
         return;
 
-    QDir interiors_folder(dir_name);
-    interiors_folder.setNameFilters(QStringList() << "*.BIN");
-    const QFileInfoList all_interiors = interiors_folder.entryInfoList();
+    const QFileInfoList all_interiors = get_interior_files(dir_name);
     InteriorExporter().export_all_used_textures(all_interiors, out_file_name);
 }
 
@@ -149,9 +148,7 @@ void ViewerApp::on_actionExport_all_interiors_triggered()
     if(out_directory.isEmpty())
         return;
 
-    QDir interiors_folder(dir_name);
-    interiors_folder.setNameFilters(QStringList() << "*.BIN");
-    const QFileInfoList all_interiors = interiors_folder.entryInfoList();
+    const QFileInfoList all_interiors = get_interior_files(dir_name);
     InteriorExporter().export_all_interiors(all_interiors, QDir(out_directory));
 }
 
