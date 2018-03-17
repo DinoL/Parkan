@@ -2,6 +2,8 @@
 #define INTERIOR_EXPORTER_H
 
 #include "interior.h"
+#include "files_filter.h"
+
 #include <QString>
 #include <QFileInfoList>
 
@@ -37,8 +39,8 @@ private:
     bool export_as_textured_obj(const InteriorFile& i_interior, const QString& i_to) const;
 
     ExportFormat auto_detect_format(const QString& i_file_name) const;
-
-
 };
+
+QFileInfoList get_interior_files(const QString& i_dir_name);
 
 #endif // INTERIOR_EXPORTER_H
