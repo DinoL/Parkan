@@ -206,7 +206,7 @@ InteriorExporter::ExportFormat InteriorExporter::auto_detect_format(const QStrin
                 InteriorExporter::ExportFormat::Text;
 }
 
-QFileInfoList get_interior_files(const QString& i_dir_name)
+QFileInfoList get_interior_files(const QString& i_dir)
 {
-    return get_files_from_dir_by_mask(i_dir_name, "*.BIN");
+    return get_files_from_dir_by_mask(i_dir, "*.BIN");
 }

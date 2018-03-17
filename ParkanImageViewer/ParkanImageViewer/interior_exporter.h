@@ -41,6 +41,6 @@ private:
     ExportFormat auto_detect_format(const QString& i_file_name) const;
 };
 
-QFileInfoList get_interior_files(const QString& i_dir_name);
+QFileInfoList get_interior_files(const QString& i_dir);
 
 #endif // INTERIOR_EXPORTER_H

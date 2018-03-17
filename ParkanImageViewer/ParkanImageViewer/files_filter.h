@@ -5,8 +5,8 @@
 #include <QFileInfo>
 #include <QStringList>
 
-QFileInfoList get_files_from_dir_by_mask(const QString& i_dir_name, const QStringList& i_file_masks);
+QFileInfoList get_files_from_dir_by_mask(const QString& i_dir, const QStringList& i_file_masks);
 
-QFileInfoList get_files_from_dir_by_mask(const QString& i_dir_name, const QString& i_file_mask);
+QFileInfoList get_files_from_dir_by_mask(const QString& i_dir, const QString& i_file_mask);
 
 #endif // FILES_FILTER_H
