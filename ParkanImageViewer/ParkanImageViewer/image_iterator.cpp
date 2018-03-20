@@ -39,9 +39,12 @@ QFileInfo* ImageIterator::operator->()
     return &m_images[m_pos];
 }
 
-ImageIterator::operator bool() const { return size() > 0; }
+ImageIterator::operator bool() const
+{
+    return size() > 0;
+}
 
-ImageIterator&ImageIterator::inc()
+ImageIterator& ImageIterator::inc()
 {
     ++m_pos;
     if(m_pos >= size())
@@ -49,7 +52,7 @@ ImageIterator&ImageIterator::inc()
     return *this;
 }
 
-ImageIterator&ImageIterator::dec()
+ImageIterator& ImageIterator::dec()
 {
     --m_pos;
     if(m_pos < 0)
