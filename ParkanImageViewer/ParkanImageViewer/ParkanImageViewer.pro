@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     ngb_complex_image_data.cpp \
     image_description_guard.cpp \
     files_filter.cpp \
-    image_iterator.cpp
+    image_iterator.cpp \
+    simple_animated_image_data.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -61,7 +62,8 @@ HEADERS  += viewer_app.h \
     ngb_complex_image_data.h \
     image_description_guard.h \
     files_filter.h \
-    image_iterator.h
+    image_iterator.h \
+    simple_animated_image_data.h
 
 
 FORMS    += viewer_app.ui
