@@ -172,6 +172,9 @@
    </property>
   </action>
   <action name="actionNext">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Next</string>
    </property>
@@ -180,6 +183,9 @@
    </property>
   </action>
   <action name="actionPrevious">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Previous</string>
    </property>
