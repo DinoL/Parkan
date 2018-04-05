@@ -5,11 +5,13 @@
 #include "texture_factory.h"
 #include "interior_exporter.h"
 #include "files_filter.h"
+#include "simple_animated_image_data.h"
 
 #include <QDir>
 #include <QFileInfoList>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QTimer>
 
 ViewerApp::ViewerApp(QWidget *parent) :
     QMainWindow(parent),
@@ -27,6 +29,10 @@ ViewerApp::ViewerApp(QWidget *parent) :
 
     QStringList all_palettes = Palette::get_all_palettes();
     ui->select_palette_combo_box->addItems(all_palettes);
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update_animation()));
+    timer->start(200);
 }
 
 void ViewerApp::setup_scroll_area()
@@ -221,6 +227,7 @@ bool ViewerApp::is_fit_to_window_mode() const
 void ViewerApp::update_actions()
 {    
     ui->actionOpen_Image->setEnabled(has_palette());
+    ui->actionOpen_animation->setEnabled(has_palette());
 
     const bool can_zoom = has_image() && !is_fit_to_window_mode();
 
@@ -263,4 +270,38 @@ void ViewerApp::on_actionPrevious_triggered()
 {
     if(m_it)
         open_image(*(--m_it));
+}
+
+void ViewerApp::on_actionOpen_animation_triggered()
+{
+    const QString file_name = QFileDialog::getOpenFileName();
+    if (file_name.isEmpty())
+        return;
+
+    if(!m_crw)
+    {
+        auto* mb = new QMessageBox(QMessageBox::Warning, "No palette", "Please select palette first");
+        mb->show();
+        return;
+    }
+
+    m_animation.reset(new SimpleAnimatedImageData{QFileInfo(file_name)});
+}
+
+void ViewerApp::update_animation()
+{
+    if(!m_animation || !m_animation->is_valid())
+        return;
+
+    SimpleImageData im = m_animation->next_image();
+    m_img.reset(new Image(im.get_image()));
+    if (!m_img)
+        return;
+
+    m_img->set_palette(m_crw->m_palette);
+    m_image_label->setPixmap(QPixmap::fromImage(m_img->image()));
+
+    m_scale_factor = 1.f;
+    update_image();
+    update_actions();
 }

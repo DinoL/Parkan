@@ -40,6 +40,7 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen_Image"/>
+    <addaction name="actionOpen_animation"/>
     <addaction name="actionSave_image"/>
     <addaction name="actionOpen_interior"/>
     <addaction name="actionExport_all_interiors"/>
@@ -184,6 +185,14 @@
    </property>
    <property name="shortcut">
     <string>Left</string>
+   </property>
+  </action>
+  <action name="actionOpen_animation">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Open animation</string>
    </property>
   </action>
  </widget>
