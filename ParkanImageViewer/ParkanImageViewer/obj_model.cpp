@@ -45,6 +45,28 @@ ObjModel::ObjModel(const InteriorFile& i_interior)
     }
 }
 
+ObjModel::ObjModel(const Object3d& i_object)
+{
+    vxs = i_object.get_vertices();
+
+    for(const Face& poly : i_object.get_faces())
+    {
+        ObjFace cur_poly;
+        cur_poly.texture = QString(poly.texture.c_str());
+        for(int i = 0; i < 3; ++i)
+        {
+            ObjVertex cur_vx;
+
+            const FacePoint& cur = poly.pts[i];
+            cur_vx.vid = cur.id + 1;
+            cur_vx.uvid = uvs.add_one(cur.uv) + 1;
+
+            cur_poly.face_vxs.push_back(cur_vx);
+        }
+        fs.push_back(cur_poly);
+    }
+}
+
 void ObjModel::save_material_file(const std::string& to) const
 {
     std::set<QString> textures;

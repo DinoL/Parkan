@@ -35,6 +35,7 @@ class ObjModel
 {
 public:
     ObjModel(const InteriorFile& i_interior);
+    ObjModel(const Object3d& i_object);
 
     void save(const std::string& i_to, const std::string& i_mtl_file) const;
 
