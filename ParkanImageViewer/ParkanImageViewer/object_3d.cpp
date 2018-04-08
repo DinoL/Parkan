@@ -10,5 +10,11 @@ void Object3d::read(std::istream& i_s)
     {
         i_s >> v;
     }
-    m_vertices;
+    int faces_cnt;
+    i_s >> faces_cnt;
+    m_faces.resize(faces_cnt);
+    for(Face& f : m_faces)
+    {
+        i_s >> f;
+    }
 }

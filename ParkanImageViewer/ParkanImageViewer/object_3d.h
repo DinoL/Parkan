@@ -2,6 +2,7 @@
 #define OBJECT_3D_H
 
 #include "vertex.h"
+#include "face.h"
 
 #include <vector>
 
@@ -15,6 +16,7 @@ public:
 
 private:
     std::vector<Vertex> m_vertices;
+    std::vector<Face> m_faces;
 };
 
 #endif // OBJECT_3D_H
