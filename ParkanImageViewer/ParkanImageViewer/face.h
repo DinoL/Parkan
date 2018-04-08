@@ -3,12 +3,23 @@
 
 #include "binary_stream.h"
 #include "vertex.h"
+#include "vector_2d.h"
 
 #include <iostream>
+#include <string>
+#include <vector>
+
+struct FacePoint
+{
+    int id;
+    Vector2d uv;
+    int k;
+};
 
 struct Face
 {
-    Vertex vx[3];
+    std::vector<FacePoint> pts;
+    std::string texture;
 
 };
 
