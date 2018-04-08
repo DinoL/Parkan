@@ -18,3 +18,13 @@ void Object3d::read(std::istream& i_s)
         i_s >> f;
     }
 }
+
+std::vector<Vertex> Object3d::get_vertices() const
+{
+    return m_vertices;
+}
+
+std::vector<Face> Object3d::get_faces() const
+{
+    return m_faces;
+}
