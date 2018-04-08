@@ -2,6 +2,7 @@
 #define INTERIOR_EXPORTER_H
 
 #include "interior.h"
+#include "object_3d.h"
 #include "files_filter.h"
 
 #include <QString>
@@ -32,6 +33,7 @@ public:
 private:
 
     bool import_interior(const QString& i_from, InteriorFile& o_interior) const;
+    bool import_3d_object(const QString& i_from, Object3d& o_object) const;
     bool export_as_text(const QString& i_from, const QString& i_to) const;
     bool export_as_obj(const QString& i_from, const QString& i_to) const;
     bool export_as_obj(const InteriorFile& i_interior, const QString& i_to) const;

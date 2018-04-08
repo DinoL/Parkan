@@ -98,8 +98,24 @@ bool InteriorExporter::import_interior(const QString& i_from, InteriorFile& o_in
         return false;
 
     std::ifstream file(i_from.toStdString(), std::ios::binary);
+    if(!file.good())
+        return false;
+
     InputBinaryStream bis(file);
     bis >> o_interior;
+    return true;
+}
+
+bool InteriorExporter::import_3d_object(const QString& i_from, Object3d& o_object) const
+{
+    if(i_from.isEmpty())
+        return false;
+
+    std::ifstream file(i_from.toStdString());
+    if(!file.good())
+        return false;
+
+    o_object.read(file);
     return true;
 }
 
