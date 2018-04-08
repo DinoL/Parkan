@@ -4,6 +4,7 @@
 #include "io_utils.h"
 #include "data_array.h"
 #include "vertex.h"
+#include "short_string.h"
 
 #include <QString>
 #include <QDir>
@@ -45,17 +46,6 @@ struct ShortPair
 InputBinaryStream& operator>>(InputBinaryStream& s, ShortPair& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const ShortPair& v);
 std::ostream& operator<<(std::ostream& s, const ShortPair& v);
-
-struct ShortString
-{
-    char str[16];
-
-    QString to_string() const;
-};
-
-InputBinaryStream& operator>>(InputBinaryStream& s, ShortString& v);
-OutputBinaryStream& operator<<(OutputBinaryStream& s, const ShortString& v);
-std::ostream& operator<<(std::ostream& s, const ShortString& v);
 
 struct SmallIndices
 {
