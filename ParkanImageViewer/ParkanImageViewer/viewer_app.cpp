@@ -5,7 +5,6 @@
 #include "texture_factory.h"
 #include "interior_exporter.h"
 #include "files_filter.h"
-#include "simple_animated_image_data.h"
 
 #include <QDir>
 #include <QFileInfoList>
@@ -192,9 +191,12 @@ void ViewerApp::open_image(const QString& i_path)
         return;
 
     m_img->set_palette(m_crw->m_palette);
-    m_image_label->setPixmap(QPixmap::fromImage(m_img->image()));
 
-    m_scale_factor = 1.f;
+    const QPixmap pixmap = QPixmap::fromImage(m_img->image());
+    m_image_label->setPixmap(pixmap);
+    m_image_label->adjustSize();
+    m_image_label->resize(m_scale_factor * pixmap.size());
+
     update_image();
     update_actions();
 }
@@ -205,8 +207,6 @@ void ViewerApp::update_image()
         return;
 
     ui->actionFit_to_Window->setEnabled(true);
-    if (!ui->actionFit_to_Window->isChecked())
-        m_image_label->adjustSize();
 }
 
 bool ViewerApp::has_image() const
@@ -285,7 +285,7 @@ void ViewerApp::on_actionOpen_animation_triggered()
         return;
     }
 
-    m_animation.reset(new SimpleAnimatedImageData{QFileInfo(file_name)});
+    m_animation.reset(new AnimatedImage{QFileInfo(file_name)});
 }
 
 void ViewerApp::update_animation()
@@ -293,15 +293,13 @@ void ViewerApp::update_animation()
     if(!m_animation || !m_animation->is_valid())
         return;
 
-    SimpleImageData im = m_animation->next_image();
-    m_img.reset(new Image(im.get_image()));
+    m_img.reset(new Image(m_animation->next_image()));
     if (!m_img)
         return;
 
     m_img->set_palette(m_crw->m_palette);
     m_image_label->setPixmap(QPixmap::fromImage(m_img->image()));
 
-    m_scale_factor = 1.f;
     update_image();
     update_actions();
 }

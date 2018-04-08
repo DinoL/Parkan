@@ -1,5 +1,7 @@
-#include "simple_animated_image_data.h"
+#include "animated_image.h"
+#include "texture_factory.h"
 
+#include <QRegExp>
 
 QFileInfoList populate(const QFileInfo& i_path)
 {
@@ -21,29 +23,28 @@ QFileInfoList populate(const QFileInfo& i_path)
     return res;
 }
 
-SimpleAnimatedImageData::SimpleAnimatedImageData(const QFileInfo& i_path)
+AnimatedImage::AnimatedImage(const QFileInfo& i_path)
 {
     const QFileInfoList files = populate(i_path);
     for(const auto file : files)
     {
-        SimpleImageData image_data(file);
-        m_frames.push_back(image_data);
+        m_frames.push_back(*TextureFactory::build_image(file));
     }
 }
 
-SimpleImageData SimpleAnimatedImageData::get_image(int i_frame) const
+Image AnimatedImage::get_image(int i_frame) const
 {
     return m_frames[i_frame % m_frames.size()];
 }
 
-SimpleImageData SimpleAnimatedImageData::next_image()
+Image AnimatedImage::next_image()
 {
     ++m_frame;
     m_frame %= m_frames.size();
     return get_image(m_frame);
 }
 
-bool SimpleAnimatedImageData::is_valid() const
+bool AnimatedImage::is_valid() const
 {
     return !m_frames.empty();
 }

@@ -4,7 +4,7 @@
 #include "color_ramp_widget.h"
 #include "image.h"
 #include "image_iterator.h"
-#include "simple_animated_image_data.h"
+#include "animated_image.h"
 
 #include <QMainWindow>
 #include <QLabel>
@@ -84,14 +84,14 @@ private:
     std::unique_ptr<ColorRampWidget> m_crw;
     std::unique_ptr<Image> m_img;
 
-    std::unique_ptr<SimpleAnimatedImageData> m_animation;
+    std::unique_ptr<AnimatedImage> m_animation;
 
     ImageIterator m_it;
 
     QLabel* m_image_label;
     QScrollArea* m_scroll_area;
 
-    float m_scale_factor = 0.f;
+    float m_scale_factor = 1.f;
     float m_scale_step = 0.25f;
     float m_min_zoom = 0.333f;
     float m_max_zoom = 3.f;

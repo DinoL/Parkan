@@ -37,7 +37,7 @@ SOURCES += main.cpp\
     image_description_guard.cpp \
     files_filter.cpp \
     image_iterator.cpp \
-    simple_animated_image_data.cpp
+    animated_image.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -63,7 +63,7 @@ HEADERS  += viewer_app.h \
     image_description_guard.h \
     files_filter.h \
     image_iterator.h \
-    simple_animated_image_data.h
+    animated_image.h
 
 
 FORMS    += viewer_app.ui
