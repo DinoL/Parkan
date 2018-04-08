@@ -11,8 +11,10 @@ public:
     Object3d()
     {}
 
+    void read(std::istream& i_s);
+
 private:
-    std::vector<Vertex> vertices;
+    std::vector<Vertex> m_vertices;
 };
 
 #endif // OBJECT_3D_H
