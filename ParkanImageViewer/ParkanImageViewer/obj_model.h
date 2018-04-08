@@ -2,6 +2,7 @@
 #define OBJ_MODEL_H
 
 #include "interior.h"
+#include "object_3d.h"
 
 #include <QString>
 #include <QFileInfo>
@@ -11,24 +12,11 @@
 #include <string>
 #include <fstream>
 
-struct UV
-{
-    float u;
-    float v;
-};
-
-struct PolygonVertex
-{
-    float x;
-    float y;
-    float z;
-};
-
 struct AllUVs
 {
-    std::vector<UV> uvs;
+    std::vector<Vector2d> uvs;
 
-    size_t add_one(const UV& uv);
+    size_t add_one(const Vector2d& uv);
 };
 
 struct ObjVertex
@@ -54,7 +42,7 @@ private:
     void save_material_file(const std::string& to) const;
 
 private:
-    std::vector<PolygonVertex> vxs;
+    std::vector<Vertex> vxs;
     AllUVs uvs;
     std::vector<ObjFace> fs;
 };

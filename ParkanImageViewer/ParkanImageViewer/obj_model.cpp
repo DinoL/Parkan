@@ -4,7 +4,7 @@ ObjModel::ObjModel(const InteriorFile& i_interior)
 {
     for(const auto& vx : i_interior.vertices.vec)
     {
-        vxs.push_back(PolygonVertex{vx.x, vx.y, vx.z});
+        vxs.push_back(Vertex{vx.x, vx.y, vx.z});
     }
 
     for(const auto& poly : i_interior.vertical_polygons.vec)
@@ -18,7 +18,7 @@ ObjModel::ObjModel(const InteriorFile& i_interior)
             const auto& cur = poly.ps[i];
             cur_vx.vid = cur.id + 1;
 
-            UV cur_uv{cur.u, cur.v};
+            Vector2d cur_uv{cur.u, cur.v};
             cur_vx.uvid = uvs.add_one(cur_uv) + 1;
 
             cur_poly.face_vxs.push_back(cur_vx);
@@ -36,7 +36,7 @@ ObjModel::ObjModel(const InteriorFile& i_interior)
             const auto& cur = poly.ps[i];
             cur_vx.vid = cur.id + 1;
 
-            UV cur_uv{cur.u, cur.v};
+            Vector2d cur_uv{cur.u, cur.v};
             cur_vx.uvid = uvs.add_one(cur_uv) + 1;
 
             cur_poly.face_vxs.push_back(cur_vx);
@@ -91,7 +91,7 @@ void ObjModel::save(const std::string& i_to, const std::string& i_mtl_file) cons
     }
 }
 
-size_t AllUVs::add_one(const UV& uv)
+size_t AllUVs::add_one(const Vector2d& uv)
 {
     uvs.push_back(uv);
     return uvs.size() - 1;
