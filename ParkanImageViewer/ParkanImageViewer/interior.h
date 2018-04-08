@@ -3,6 +3,7 @@
 
 #include "io_utils.h"
 #include "data_array.h"
+#include "vertex.h"
 
 #include <QString>
 #include <QDir>
@@ -12,17 +13,6 @@
 #include <set>
 #include <string>
 #include <iostream>
-
-struct Vertex
-{
-    float x;
-    float y;
-    float z;
-};
-
-InputBinaryStream& operator>>(InputBinaryStream& s, Vertex& v);
-OutputBinaryStream& operator<<(OutputBinaryStream& s, const Vertex& v);
-std::ostream& operator<<(std::ostream& s, const Vertex& v);
 
 struct CoordinatesShort
 {

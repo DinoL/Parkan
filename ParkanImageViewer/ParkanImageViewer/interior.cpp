@@ -2,24 +2,6 @@
 
 #include <QByteArray>
 
-InputBinaryStream& operator>>(InputBinaryStream& s, Vertex& v)
-{
-    s >> v.x >> v.y >> v.z;
-    return s;
-}
-
-OutputBinaryStream& operator<<(OutputBinaryStream& s, const Vertex& v)
-{
-    s << v.x << v.y << v.z;
-    return s;
-}
-
-std::ostream& operator<<(std::ostream& s, const Vertex& v)
-{
-    s << "Vertex(" << v.x << ' ' << v.y << ' ' << v.z << ") ";
-    return s;
-}
-
 InputBinaryStream& operator>>(InputBinaryStream& s, CoordinatesShort& v)
 {
     s >> v.i >> v.j >> v.k;

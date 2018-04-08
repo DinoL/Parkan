@@ -38,7 +38,9 @@ SOURCES += main.cpp\
     files_filter.cpp \
     image_iterator.cpp \
     animated_image.cpp \
-    ngb_simple_image_data.cpp
+    ngb_simple_image_data.cpp \
+    object_3d.cpp \
+    vertex.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -65,7 +67,9 @@ HEADERS  += viewer_app.h \
     files_filter.h \
     image_iterator.h \
     animated_image.h \
-    ngb_simple_image_data.h
+    ngb_simple_image_data.h \
+    object_3d.h \
+    vertex.h
 
 
 FORMS    += viewer_app.ui
