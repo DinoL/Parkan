@@ -1,16 +1,16 @@
 #ifndef NGB_COMPLEX_IMAGE_DATA_H
 #define NGB_COMPLEX_IMAGE_DATA_H
 
+#include "ngb_image_data.h"
+#include "binary_stream.h"
 
-#include "image_data.h"
-
-class NgbComplexImageData : public ImageData
+class NgbComplexImageData : public NgbImageData
 {
 public:
     NgbComplexImageData(const QFileInfo& i_path);
 
-private:
-    uchar m_default_color;
+protected:
+    void fill_data(std::istream& io_file) override;
 };
 
 

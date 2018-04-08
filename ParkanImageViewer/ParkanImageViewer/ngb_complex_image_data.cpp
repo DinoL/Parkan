@@ -1,43 +1,24 @@
 #include "ngb_complex_image_data.h"
-#include "binary_stream.h"
 #include "image_description_guard.h"
-
-#include <QFile>
+#include "binary_stream.h"
 
 #include <fstream>
-#include <vector>
 
 NgbComplexImageData::NgbComplexImageData(const QFileInfo& i_path)
-    : ImageData(i_path)
+    : NgbImageData(i_path)
 {
     std::ifstream file(i_path.filePath().toStdString(), std::ios::binary);
     if(file.fail())
         throw "Cannot open texture file " + i_path.filePath();
 
-    InputBinaryStream bis(file);
+    const std::vector<uchar> signature{0xAB, 0xCD, 0xEF, 0x01};
+    if(has_signature(file, signature))
+        fill_data(file);
+}
 
-    {
-        HeaderGuard guard(16, file);
-
-        std::vector<quint16> words(4);
-        for(auto& word : words)
-        {
-            bis >> word;
-        }
-        uchar default_color;
-        QByteArray skip(3, '\0');
-        QByteArray signature(4, '\0');
-        bis >> default_color >> skip >> signature;
-
-        std::vector<uchar> signature_vec(signature.begin(), signature.end());
-        if(signature_vec != std::vector<uchar>{0xAB, 0xCD, 0xEF, 0x01})
-            return;
-
-        m_width = words[2] - words[0] + 1;
-        m_height = words[3] - words[1] + 1;
-        m_default_color = default_color;
-    }
-
+void NgbComplexImageData::fill_data(std::istream& io_file)
+{
+    InputBinaryStream bis(io_file);
     std::vector<qint32> row_starts(m_height);
     for(auto& rs : row_starts)
     {

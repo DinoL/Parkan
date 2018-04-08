@@ -3,12 +3,19 @@
 
 #include "image_data.h"
 
+#include <iostream>
+#include <vector>
+
 class NgbImageData : public ImageData
 {
 public:
     NgbImageData(const QFileInfo& i_path);
 
-private:
+protected:
+    virtual void fill_data(std::istream&);
+    bool has_signature(std::istream& io_file, const std::vector<uchar>& i_signature);
+
+protected:
     uchar m_default_color;
 };
 
