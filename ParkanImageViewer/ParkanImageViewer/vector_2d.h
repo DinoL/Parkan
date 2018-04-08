@@ -7,8 +7,8 @@
 
 struct Vector2d
 {
-    float u = 0.f;
-    float v = 0.f;
+    float u;
+    float v;
 };
 
 InputBinaryStream& operator>>(InputBinaryStream& s, Vector2d& v);
