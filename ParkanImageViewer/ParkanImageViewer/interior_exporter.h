@@ -38,7 +38,9 @@ private:
     bool export_as_obj(const QString& i_from, const QString& i_to) const;
     bool export_as_obj(const InteriorFile& i_interior, const QString& i_to) const;
     bool export_as_textured_obj(const QString& i_from, const QString& i_to) const;
-    bool export_as_textured_obj(const InteriorFile& i_interior, const QString& i_to) const;
+
+    template<typename Model>
+    bool export_model_as_textured_obj(const Model& i_model, const QString& i_to) const;
 
     ExportFormat auto_detect_format(const QString& i_file_name) const;
 };

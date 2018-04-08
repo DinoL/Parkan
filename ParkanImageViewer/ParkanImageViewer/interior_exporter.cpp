@@ -185,14 +185,28 @@ bool InteriorExporter::export_as_textured_obj(const QString& i_from, const QStri
     if(i_to.isEmpty())
         return false;
 
-    InteriorFile interior;
-    if(!import_interior(i_from, interior))
-        return false;
+    QString ext = QFileInfo(i_from).suffix().toUpper();
+    if(ext == "BIN")
+    {
+        InteriorFile interior;
+        if(!import_interior(i_from, interior))
+            return false;
 
-    return export_as_textured_obj(interior, i_to);
+        return export_model_as_textured_obj(interior, i_to);
+    }
+    if(ext == "3D")
+    {
+        Object3d object;
+        if(!import_3d_object(i_from, object))
+            return false;
+
+        return export_model_as_textured_obj(object, i_to);
+    }
+    return false;
 }
 
-bool InteriorExporter::export_as_textured_obj(const InteriorFile& i_interior, const QString& i_to) const
+template<typename Model>
+bool InteriorExporter::export_model_as_textured_obj(const Model& i_model, const QString& i_to) const
 {
     if(i_to.isEmpty())
         return false;
@@ -201,12 +215,12 @@ bool InteriorExporter::export_as_textured_obj(const InteriorFile& i_interior, co
     QString obj_file_name = file_info.baseName();
     QDir obj_file_dir = file_info.dir();
 
-    const auto all_textures = i_interior.all_texture_names();
+    const auto all_textures = i_model.all_texture_names();
 
-    const Palette palette = Palette::get_palette_by_name(InteriorFile::get_textures_palette_name());
+    const Palette palette = Palette::get_palette_by_name(Model::get_textures_palette_name());
     TextureExporter().export_textures(all_textures, palette, obj_file_dir);
 
-    ObjModel model(i_interior);
+    ObjModel model(i_model);
     const auto mtl_file = obj_file_dir.absoluteFilePath(obj_file_name + ".mtl").toStdString();
 
     model.save(i_to.toStdString(), mtl_file);
@@ -226,3 +240,6 @@ QFileInfoList get_interior_files(const QString& i_dir)
 {
     return get_files_from_dir_by_mask(i_dir, "*.BIN");
 }
+
+template bool InteriorExporter::export_model_as_textured_obj(const InteriorFile&, const QString&) const;
+template bool InteriorExporter::export_model_as_textured_obj(const Object3d&, const QString&) const;
