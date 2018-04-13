@@ -1,7 +1,7 @@
 #ifndef OBJ_MODEL_H
 #define OBJ_MODEL_H
 
-#include "interior.h"
+#include "interior_file.h"
 #include "object_3d.h"
 
 #include <QString>

@@ -46,7 +46,8 @@ SOURCES += main.cpp\
     short_string.cpp \
     string_utils.cpp \
     exceptions.cpp \
-    geometry_3d.cpp
+    geometry_3d.cpp \
+    interior_file.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -81,7 +82,8 @@ HEADERS  += viewer_app.h \
     short_string.h \
     string_utils.h \
     exceptions.h \
-    geometry_3d.h
+    geometry_3d.h \
+    interior_file.h
 
 
 FORMS    += viewer_app.ui
