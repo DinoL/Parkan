@@ -3,6 +3,7 @@
 
 #include "vertex.h"
 #include "face.h"
+#include "geometry_3d.h"
 
 #include <QDir>
 #include <QString>
@@ -11,7 +12,7 @@
 #include <vector>
 #include <set>
 
-class Object3d
+class Object3d : public Geometry3d
 {
 public:
     Object3d()
@@ -22,10 +23,9 @@ public:
     std::vector<Vertex> get_vertices() const;
     std::vector<Face> get_faces() const;
 
-    QString get_textures_palette_name() const;
-    QDir get_textures_folder() const;
-    QFileInfo get_texture_fullpath(const QString& i_texture_name) const;
-    std::set<QString> all_texture_names() const;
+    virtual QString get_textures_palette_name() const override;
+    virtual QDir get_textures_folder() const override;
+    virtual std::set<QString> all_texture_names() const override;
 
 private:
     std::vector<Vertex> m_vertices;
