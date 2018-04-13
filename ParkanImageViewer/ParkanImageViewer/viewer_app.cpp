@@ -3,7 +3,7 @@
 
 #include "color_ramp_widget.h"
 #include "texture_factory.h"
-#include "interior_exporter.h"
+#include "geometry_exporter.h"
 #include "files_filter.h"
 #include "exceptions.h"
 
@@ -107,7 +107,7 @@ void ViewerApp::on_actionOpen_3d_geometry_triggered()
         return;
 
     std::cout << "Exporting from " << file_name.toStdString() << " to " << out_file_name.toStdString() << std::endl;
-    InteriorExporter().export_interior(file_name, out_file_name);
+    GeometryExporter().export_geometry(file_name, out_file_name);
 }
 
 void ViewerApp::on_actionExport_all_used_textures_triggered()
@@ -120,8 +120,8 @@ void ViewerApp::on_actionExport_all_used_textures_triggered()
     if(out_file_name.isEmpty())
         return;
 
-    const QFileInfoList all_interiors = get_interior_files(dir_name);
-    InteriorExporter().export_all_used_textures(all_interiors, out_file_name);
+    const QFileInfoList all_geometry_files = get_geometry_files(dir_name);
+    GeometryExporter().export_all_used_textures(all_geometry_files, out_file_name);
 }
 
 void ViewerApp::on_actionSave_image_triggered()
@@ -149,8 +149,8 @@ void ViewerApp::on_actionExport_all_3d_files_triggered()
     if(out_directory.isEmpty())
         return;
 
-    const QFileInfoList all_interiors = get_interior_files(dir_name);
-    InteriorExporter().export_all_interiors(all_interiors, QDir(out_directory));
+    const QFileInfoList all_geometry_files = get_geometry_files(dir_name);
+    GeometryExporter().export_all_geometry_files(all_geometry_files, QDir(out_directory));
 }
 
 void ViewerApp::on_actionZoom_In_triggered()

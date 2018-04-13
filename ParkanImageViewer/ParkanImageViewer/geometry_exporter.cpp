@@ -1,4 +1,4 @@
-#include "interior_exporter.h"
+#include "geometry_exporter.h"
 
 #include "io_utils.h"
 #include "texture_exporter.h"
@@ -13,15 +13,15 @@
 #include <fstream>
 
 
-bool InteriorExporter::export_interior(const QString& i_from, const QString& i_to) const
+bool GeometryExporter::export_geometry(const QString& i_from, const QString& i_to) const
 {
-    InteriorExporter::ExportFormat format = auto_detect_format(i_to);
-    return export_interior(i_from, i_to, format);
+    GeometryExporter::ExportFormat format = auto_detect_format(i_to);
+    return export_geometry(i_from, i_to, format);
 }
 
-bool InteriorExporter::export_interior(const QString& i_from,
+bool GeometryExporter::export_geometry(const QString& i_from,
                                        const QString& i_to,
-                                       InteriorExporter::ExportFormat i_format) const
+                                       GeometryExporter::ExportFormat i_format) const
 {
     switch(i_format)
     {
@@ -36,17 +36,18 @@ bool InteriorExporter::export_interior(const QString& i_from,
     }
 }
 
-bool InteriorExporter::export_all_used_textures(const QFileInfoList& i_all_interiors, const QString& i_to) const
+bool GeometryExporter::export_all_used_textures(const QFileInfoList& i_all_geometry_files,
+                                                const QString& i_to) const
 {
-    if(i_all_interiors.empty())
+    if(i_all_geometry_files.empty())
         return false;
 
     std::set<QString> texture_names;
 
-    for(const auto& interior_file : i_all_interiors)
+    for(const auto& geometry_file : i_all_geometry_files)
     {
-        const QString file_path = interior_file.absoluteFilePath();
-        std::cout << "Parsing interior file " << file_path.toStdString() << std::endl;
+        const QString file_path = geometry_file.absoluteFilePath();
+        std::cout << "Parsing geometry file " << file_path.toStdString() << std::endl;
         const auto old_size = texture_names.size();
 
         InteriorFile interior;
@@ -74,25 +75,27 @@ bool InteriorExporter::export_all_used_textures(const QFileInfoList& i_all_inter
     return true;
 }
 
-QFileInfo replace_dir_and_extension(const QFileInfo& i_filepath, const QDir& i_new_dir, const QString& i_new_ext)
+QFileInfo replace_dir_and_extension(const QFileInfo& i_filepath,
+                                    const QDir& i_new_dir, const QString& i_new_ext)
 {
     return QFileInfo(i_new_dir, i_filepath.baseName() + i_new_ext);
 }
 
-bool InteriorExporter::export_all_interiors(const QFileInfoList& i_all_interiors, const QDir& i_out_directory) const
+bool GeometryExporter::export_all_geometry_files(const QFileInfoList& i_all_geometry_files,
+                                                 const QDir& i_out_directory) const
 {
     bool success = true;
-    for(const auto& interior_file : i_all_interiors)
+    for(const auto& geometry_file : i_all_geometry_files)
     {
-        const QFileInfo output_file = replace_dir_and_extension(interior_file, i_out_directory, ".obj");
-        success &= export_interior(interior_file.absoluteFilePath(),
+        const QFileInfo output_file = replace_dir_and_extension(geometry_file, i_out_directory, ".obj");
+        success &= export_geometry(geometry_file.absoluteFilePath(),
                                    output_file.absoluteFilePath(),
                                    ExportFormat::TexturedObj);
     }
     return success;
 }
 
-bool InteriorExporter::import_interior(const QString& i_from, InteriorFile& o_interior) const
+bool GeometryExporter::import_interior(const QString& i_from, InteriorFile& o_interior) const
 {
     if(i_from.isEmpty())
         return false;
@@ -106,7 +109,7 @@ bool InteriorExporter::import_interior(const QString& i_from, InteriorFile& o_in
     return true;
 }
 
-bool InteriorExporter::import_3d_object(const QString& i_from, Object3d& o_object) const
+bool GeometryExporter::import_3d_object(const QString& i_from, Object3d& o_object) const
 {
     if(i_from.isEmpty())
         return false;
@@ -119,7 +122,7 @@ bool InteriorExporter::import_3d_object(const QString& i_from, Object3d& o_objec
     return true;
 }
 
-bool InteriorExporter::export_as_text(const QString& i_from, const QString& i_to) const
+bool GeometryExporter::export_as_text(const QString& i_from, const QString& i_to) const
 {
     std::cout << "Exporting as text to " << i_to.toStdString() << std::endl;
     if(i_to.isEmpty())
@@ -134,7 +137,7 @@ bool InteriorExporter::export_as_text(const QString& i_from, const QString& i_to
     return true;
 }
 
-bool InteriorExporter::export_as_obj(const QString& i_from, const QString& i_to) const
+bool GeometryExporter::export_as_obj(const QString& i_from, const QString& i_to) const
 {
     std::cout << "Exporting as obj to " << i_to.toStdString() << std::endl;
     if(i_to.isEmpty())
@@ -147,7 +150,7 @@ bool InteriorExporter::export_as_obj(const QString& i_from, const QString& i_to)
     return export_as_obj(interior, i_to);
 }
 
-bool InteriorExporter::export_as_obj(const InteriorFile& i_interior, const QString& i_to) const
+bool GeometryExporter::export_as_obj(const InteriorFile& i_interior, const QString& i_to) const
 {
     if(i_to.isEmpty())
         return false;
@@ -179,7 +182,7 @@ bool InteriorExporter::export_as_obj(const InteriorFile& i_interior, const QStri
     return true;
 }
 
-bool InteriorExporter::export_as_textured_obj(const QString& i_from, const QString& i_to) const
+bool GeometryExporter::export_as_textured_obj(const QString& i_from, const QString& i_to) const
 {
     std::cout << "Exporting as textured obj to " << i_to.toStdString() << std::endl;
     if(i_to.isEmpty())
@@ -192,7 +195,7 @@ bool InteriorExporter::export_as_textured_obj(const QString& i_from, const QStri
         if(!import_interior(i_from, interior))
             return false;
 
-        return export_model_as_textured_obj(interior, i_to);
+        return export_geometry_as_textured_obj(interior, i_to);
     }
     if(ext == "3D")
     {
@@ -200,13 +203,13 @@ bool InteriorExporter::export_as_textured_obj(const QString& i_from, const QStri
         if(!import_3d_object(i_from, object))
             return false;
 
-        return export_model_as_textured_obj(object, i_to);
+        return export_geometry_as_textured_obj(object, i_to);
     }
     return false;
 }
 
 template<typename Model>
-bool InteriorExporter::export_model_as_textured_obj(const Model& i_model, const QString& i_to) const
+bool GeometryExporter::export_geometry_as_textured_obj(const Model& i_model, const QString& i_to) const
 {
     if(i_to.isEmpty())
         return false;
@@ -229,17 +232,17 @@ bool InteriorExporter::export_model_as_textured_obj(const Model& i_model, const 
     return true;
 }
 
-InteriorExporter::ExportFormat InteriorExporter::auto_detect_format(const QString& i_file_name) const
+GeometryExporter::ExportFormat GeometryExporter::auto_detect_format(const QString& i_file_name) const
 {
     return QFileInfo(i_file_name).suffix() == "obj" ?
-                InteriorExporter::ExportFormat::TexturedObj :
-                InteriorExporter::ExportFormat::Text;
+                GeometryExporter::ExportFormat::TexturedObj :
+                GeometryExporter::ExportFormat::Text;
 }
 
-QFileInfoList get_interior_files(const QString& i_dir)
+QFileInfoList get_geometry_files(const QString& i_dir)
 {
     return get_files_from_dir_by_mask(i_dir, QStringList() << "*.BIN" << "*.3D");
 }
 
-template bool InteriorExporter::export_model_as_textured_obj(const InteriorFile&, const QString&) const;
-template bool InteriorExporter::export_model_as_textured_obj(const Object3d&, const QString&) const;
+template bool GeometryExporter::export_geometry_as_textured_obj(const InteriorFile&, const QString&) const;
+template bool GeometryExporter::export_geometry_as_textured_obj(const Object3d&, const QString&) const;
