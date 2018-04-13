@@ -45,7 +45,8 @@ SOURCES += main.cpp\
     vector_2d.cpp \
     short_string.cpp \
     string_utils.cpp \
-    exceptions.cpp
+    exceptions.cpp \
+    geometry_3d.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -79,7 +80,8 @@ HEADERS  += viewer_app.h \
     vector_2d.h \
     short_string.h \
     string_utils.h \
-    exceptions.h
+    exceptions.h \
+    geometry_3d.h
 
 
 FORMS    += viewer_app.ui
