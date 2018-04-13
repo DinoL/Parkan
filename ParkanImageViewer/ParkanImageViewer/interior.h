@@ -114,11 +114,11 @@ struct InteriorFile
     DataArray<VertexInfo> vertex_infos;               // size 16
     DataArray<InteriorSignature> signature;           // size 20
 
-    static QString get_textures_palette_name();
+    QString get_textures_palette_name() const;
 
-    static QDir get_textures_folder();
+    QDir get_textures_folder() const;
 
-    static QFileInfo get_texture_fullpath(const QString& i_texture_name);
+    QFileInfo get_texture_fullpath(const QString& i_texture_name) const;
 
     std::set<QString> all_texture_names() const;
 };

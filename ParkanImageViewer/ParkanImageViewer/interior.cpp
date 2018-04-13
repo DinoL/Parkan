@@ -243,19 +243,19 @@ std::ostream& operator<<(std::ostream& s, const InteriorFile& file)
     return s;
 }
 
-QString InteriorFile::get_textures_palette_name()
+QString InteriorFile::get_textures_palette_name() const
 {
     return "PAL.PAL";
 }
 
-QDir InteriorFile::get_textures_folder()
+QDir InteriorFile::get_textures_folder() const
 {
     return QDir(R"(C:\Users\Leonid\Downloads\PARKAN THE IMPERIAL CHRONICLES\TEXTURES.LIB.dir)");
 }
 
-QFileInfo InteriorFile::get_texture_fullpath(const QString& i_texture_name)
+QFileInfo InteriorFile::get_texture_fullpath(const QString& i_texture_name) const
 {
-    return QFileInfo(InteriorFile::get_textures_folder(), i_texture_name);
+    return QFileInfo(get_textures_folder(), i_texture_name);
 }
 
 std::set<QString> InteriorFile::all_texture_names() const
@@ -263,11 +263,11 @@ std::set<QString> InteriorFile::all_texture_names() const
     std::set<QString> texture_names;
     for(const auto& p : vertical_polygons.vec)
     {
-        texture_names.insert(InteriorFile::get_texture_fullpath(p.texture.to_string()).absoluteFilePath());
+        texture_names.insert(get_texture_fullpath(p.texture.to_string()).absoluteFilePath());
     }
     for(const auto& p : horizontal_polygons.vec)
     {
-        texture_names.insert(InteriorFile::get_texture_fullpath(p.texture.to_string()).absoluteFilePath());
+        texture_names.insert(get_texture_fullpath(p.texture.to_string()).absoluteFilePath());
     }
     return texture_names;
 }

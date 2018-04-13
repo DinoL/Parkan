@@ -217,7 +217,7 @@ bool InteriorExporter::export_model_as_textured_obj(const Model& i_model, const 
 
     const auto all_textures = i_model.all_texture_names();
 
-    const Palette palette = Palette::get_palette_by_name(Model::get_textures_palette_name());
+    const Palette palette = Palette::get_palette_by_name(i_model.get_textures_palette_name());
     TextureExporter().export_textures(all_textures, palette, obj_file_dir);
 
     ObjModel model(i_model);
