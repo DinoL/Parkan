@@ -42,7 +42,7 @@
     <addaction name="actionOpen_Image"/>
     <addaction name="actionOpen_animation"/>
     <addaction name="actionSave_image"/>
-    <addaction name="actionOpen_interior"/>
+    <addaction name="actionOpen_3d_geometry"/>
     <addaction name="actionExport_all_interiors"/>
     <addaction name="actionExport_all_used_textures"/>
     <addaction name="separator"/>
@@ -92,9 +92,9 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="actionOpen_interior">
+  <action name="actionOpen_3d_geometry">
    <property name="text">
-    <string>Open interior...</string>
+    <string>Open 3d geometry...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+T</string>
@@ -121,7 +121,7 @@
   </action>
   <action name="actionExport_all_interiors">
    <property name="text">
-    <string>Export all interiors...</string>
+    <string>Export all 3d files...</string>
    </property>
   </action>
   <action name="actionZoom_In">

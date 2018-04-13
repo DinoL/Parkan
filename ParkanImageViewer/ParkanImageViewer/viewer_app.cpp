@@ -94,7 +94,7 @@ void ViewerApp::on_actionOpen_Image_triggered()
         open_image(*m_it);
 }
 
-void ViewerApp::on_actionOpen_interior_triggered()
+void ViewerApp::on_actionOpen_3d_geometry_triggered()
 {
     const QString file_name = QFileDialog::getOpenFileName();
     if (file_name.isEmpty())
@@ -139,7 +139,7 @@ void ViewerApp::on_actionSave_image_triggered()
     m_img->save(out_file_name);
 }
 
-void ViewerApp::on_actionExport_all_interiors_triggered()
+void ViewerApp::on_actionExport_all_3d_files_triggered()
 {
     const QString dir_name = QFileDialog::getExistingDirectory();
     if (dir_name.isEmpty())
