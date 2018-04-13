@@ -1,9 +1,10 @@
 #ifndef INTERIOR_FILE_H
 #define INTERIOR_FILE_H
 
+#include "geometry_3d.h"
 #include "interior.h"
 
-class InteriorFile
+class InteriorFile : public Geometry3d
 {
 public:
     DataArray<Vertex> vertices;                       // size 12
@@ -12,13 +13,11 @@ public:
     DataArray<VertexInfo> vertex_infos;               // size 16
     DataArray<InteriorSignature> signature;           // size 20
 
-    QString get_textures_palette_name() const;
+    virtual QString get_textures_palette_name() const override;
 
-    QDir get_textures_folder() const;
+    virtual QDir get_textures_folder() const override;
 
-    QFileInfo get_texture_fullpath(const QString& i_texture_name) const;
-
-    std::set<QString> all_texture_names() const;
+    virtual  std::set<QString> all_texture_names() const override;
 };
 
 InputBinaryStream& operator>>(InputBinaryStream& s, InteriorFile& file);
