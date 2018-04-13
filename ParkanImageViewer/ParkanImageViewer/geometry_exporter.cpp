@@ -234,7 +234,7 @@ bool GeometryExporter::export_geometry_as_textured_obj(const Model& i_model, con
 
 GeometryExporter::ExportFormat GeometryExporter::auto_detect_format(const QString& i_file_name) const
 {
-    return QFileInfo(i_file_name).suffix() == "obj" ?
+    return QFileInfo(i_file_name).suffix().toUpper() == "OBJ" ?
                 GeometryExporter::ExportFormat::TexturedObj :
                 GeometryExporter::ExportFormat::Text;
 }
