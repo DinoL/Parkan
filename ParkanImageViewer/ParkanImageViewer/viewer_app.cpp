@@ -100,7 +100,9 @@ void ViewerApp::on_actionOpen_interior_triggered()
     if (file_name.isEmpty())
         return;
 
-    const QString out_file_name = QFileDialog::getSaveFileName();
+    const QString out_file_name = QFileDialog::getSaveFileName(this, tr("Save 3d geometry file"),
+                                                               QFileInfo(file_name).baseName(),
+                                                               "*.obj");
     if(out_file_name.isEmpty())
         return;
 
