@@ -1,4 +1,5 @@
 #include "image_data.h"
+#include "exceptions.h"
 
 ImageData::ImageData(const QFileInfo& i_path) :
     m_path(i_path)
@@ -23,7 +24,7 @@ Image ImageData::get_image() const
 {
     if(!is_valid())
     {
-        throw "Cannot create image from data";
+        throw DecodeImageDataException("Cannot create image from data");
     }
 
     QImage image(m_width, m_height, QImage::QImage::Format_Indexed8);

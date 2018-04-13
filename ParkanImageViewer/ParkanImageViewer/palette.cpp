@@ -1,4 +1,5 @@
 #include "palette.h"
+#include "exceptions.h"
 
 #include <QFile>
 #include <QDir>
@@ -10,7 +11,7 @@ Palette::Palette(const QFileInfo& i_path) :
 {
     QFile file(i_path.filePath());
     if(!file.open(QIODevice::ReadOnly))
-        throw "Cannot create palette from file " + i_path.filePath();
+        throw LoadImageDataException("Cannot create palette from file " + i_path.filePath());
 
     const qint64 channels_cnt = 4;
     for (auto& cur_color : m_colors)

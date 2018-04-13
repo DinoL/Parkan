@@ -1,6 +1,7 @@
 #include "ngb_complex_image_data.h"
 #include "image_description_guard.h"
 #include "binary_stream.h"
+#include "exceptions.h"
 
 #include <fstream>
 
@@ -9,7 +10,7 @@ NgbComplexImageData::NgbComplexImageData(const QFileInfo& i_path)
 {
     std::ifstream file(i_path.filePath().toStdString(), std::ios::binary);
     if(file.fail())
-        throw "Cannot open texture file " + i_path.filePath();
+        throw LoadImageDataException("Cannot open texture file " + i_path.filePath());
 
     const std::vector<uchar> signature{0xAB, 0xCD, 0xEF, 0x01};
     if(has_signature(file, signature))

@@ -5,6 +5,7 @@
 #include "texture_factory.h"
 #include "interior_exporter.h"
 #include "files_filter.h"
+#include "exceptions.h"
 
 #include <QDir>
 #include <QFileInfoList>
@@ -186,7 +187,16 @@ void ViewerApp::open_image(const QString& i_path)
     if(!m_crw || i_path.isEmpty())
         return;
 
-    m_img = TextureFactory::build_image(i_path);
+    try
+    {
+        m_img = TextureFactory::build_image(i_path);
+    }
+    catch(const ImageDataException& e)
+    {
+        auto* mb = new QMessageBox(QMessageBox::Warning, "Error", e.what());
+        mb->show();
+    }
+
     if (!m_img)
         return;
 

@@ -1,6 +1,7 @@
 #include "dib_image_data.h"
 #include "binary_stream.h"
 #include "image_description_guard.h"
+#include "exceptions.h"
 
 #include <QFile>
 
@@ -11,7 +12,7 @@ DibImageData::DibImageData(const QFileInfo& i_path)
 {
     std::ifstream file(i_path.filePath().toStdString(), std::ios::binary | std::ios::ate);
     if(file.fail())
-        throw "Cannot open texture file " + i_path.filePath();
+        throw LoadImageDataException("Cannot open texture file " + i_path.filePath());
 
     InputBinaryStream bis(file);
     {
