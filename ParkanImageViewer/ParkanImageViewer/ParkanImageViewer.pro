@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     vertex.cpp \
     face.cpp \
     vector_2d.cpp \
-    short_string.cpp
+    short_string.cpp \
+    string_utils.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -75,7 +76,8 @@ HEADERS  += viewer_app.h \
     vertex.h \
     face.h \
     vector_2d.h \
-    short_string.h
+    short_string.h \
+    string_utils.h
 
 
 FORMS    += viewer_app.ui

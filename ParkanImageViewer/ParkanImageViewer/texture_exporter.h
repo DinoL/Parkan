@@ -3,15 +3,12 @@
 
 #include "palette.h"
 #include "simple_image_data.h"
+#include "string_utils.h"
 
 #include <QFileInfo>
 #include <QString>
 #include <string>
 #include <QDir>
-
-std::string to_std_string(const std::string& i_str);
-std::string to_std_string(const QString& i_str);
-std::string to_std_string(const char* i_str);
 
 class TextureExporter
 {
