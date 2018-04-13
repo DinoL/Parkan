@@ -238,7 +238,7 @@ InteriorExporter::ExportFormat InteriorExporter::auto_detect_format(const QStrin
 
 QFileInfoList get_interior_files(const QString& i_dir)
 {
-    return get_files_from_dir_by_mask(i_dir, "*.BIN");
+    return get_files_from_dir_by_mask(i_dir, QStringList() << "*.BIN" << "*.3D");
 }
 
 template bool InteriorExporter::export_model_as_textured_obj(const InteriorFile&, const QString&) const;
