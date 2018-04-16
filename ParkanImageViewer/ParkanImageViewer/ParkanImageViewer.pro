@@ -24,7 +24,6 @@ SOURCES += main.cpp\
     interior.cpp \
     texture_exporter.cpp \
     obj_model.cpp \
-    data_array.cpp \
     io_utils.cpp \
     image.cpp \
     texture_factory.cpp \
@@ -60,7 +59,6 @@ HEADERS  += viewer_app.h \
     interior.h \
     texture_exporter.h \
     obj_model.h \
-    data_array.h \
     io_utils.h \
     image.h \
     texture_factory.h \

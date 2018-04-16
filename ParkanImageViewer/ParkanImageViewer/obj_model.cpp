@@ -2,12 +2,12 @@
 
 ObjModel::ObjModel(const InteriorFile& i_interior)
 {
-    for(const auto& vx : i_interior.vertices.vec)
+    for(const auto& vx : i_interior.vertices)
     {
         vxs.push_back(Vertex{vx.x, vx.y, vx.z});
     }
 
-    for(const auto& poly : i_interior.vertical_polygons.vec)
+    for(const auto& poly : i_interior.vertical_polygons)
     {
         ObjFace cur_poly;
         cur_poly.texture = poly.texture.to_string();
@@ -25,7 +25,7 @@ ObjModel::ObjModel(const InteriorFile& i_interior)
         }
         fs.push_back(cur_poly);
     }
-    for(const auto& poly : i_interior.horizontal_polygons.vec)
+    for(const auto& poly : i_interior.horizontal_polygons)
     {
         ObjFace cur_poly;
         cur_poly.texture = poly.texture.to_string();

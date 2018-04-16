@@ -4,14 +4,16 @@
 #include "geometry_3d.h"
 #include "interior.h"
 
+#include <vector>
+
 class InteriorFile : public Geometry3d
 {
 public:
-    DataArray<Vertex> vertices;                       // size 12
-    DataArray<VerticalPolygon> vertical_polygons;     // size 114
-    DataArray<HorizontalPolygon> horizontal_polygons; // size 128
-    DataArray<VertexInfo> vertex_infos;               // size 16
-    DataArray<InteriorSignature> signature;           // size 20
+    std::vector<Vertex> vertices;                       // size 12
+    std::vector<VerticalPolygon> vertical_polygons;     // size 114
+    std::vector<HorizontalPolygon> horizontal_polygons; // size 128
+    std::vector<VertexInfo> vertex_infos;               // size 16
+    std::vector<InteriorSignature> signature;           // size 20
 
     virtual QString get_textures_palette_name() const override;
 

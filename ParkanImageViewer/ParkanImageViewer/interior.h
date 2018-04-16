@@ -2,7 +2,6 @@
 #define INTERIOR_H
 
 #include "io_utils.h"
-#include "data_array.h"
 #include "vertex.h"
 #include "short_string.h"
 

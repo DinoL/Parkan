@@ -31,7 +31,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const std::vector<T>& i_ar
     quint16 size = static_cast<quint16>(i_arr.size());
     s << size;
 
-    for(const T& el : i_arr.vec)
+    for(const T& el : i_arr)
     {
         s << el;
     }

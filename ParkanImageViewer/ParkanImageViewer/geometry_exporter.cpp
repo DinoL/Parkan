@@ -156,11 +156,11 @@ bool GeometryExporter::export_as_obj(const InteriorFile& i_interior, const QStri
         return false;
 
     std::ofstream out_file(i_to.toStdString());
-    for(const auto& vx : i_interior.vertices.vec)
+    for(const auto& vx : i_interior.vertices)
     {
         out_file << "v " << vx.x << " " << vx.y << " " << vx.z << std::endl;
     }
-    for(const auto& poly : i_interior.vertical_polygons.vec)
+    for(const auto& poly : i_interior.vertical_polygons)
     {
         out_file << "f ";
         for(int i = 0; i < 4; ++i)
@@ -169,7 +169,7 @@ bool GeometryExporter::export_as_obj(const InteriorFile& i_interior, const QStri
         }
         out_file << std::endl;
     }
-    for(const auto& poly : i_interior.horizontal_polygons.vec)
+    for(const auto& poly : i_interior.horizontal_polygons)
     {
         out_file << "f ";
         for(int i = 0; i < 4; ++i)

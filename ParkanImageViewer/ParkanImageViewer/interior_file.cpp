@@ -1,5 +1,7 @@
 #include "interior_file.h"
 
+#include "io_utils.h"
+
 InputBinaryStream& operator>>(InputBinaryStream& s, InteriorFile& file)
 {
     s >> file.vertices;
@@ -43,11 +45,11 @@ QDir InteriorFile::get_textures_folder() const
 std::set<QString> InteriorFile::all_texture_names() const
 {
     std::set<QString> texture_names;
-    for(const auto& p : vertical_polygons.vec)
+    for(const auto& p : vertical_polygons)
     {
         texture_names.insert(get_texture_fullpath(p.texture.to_string()).absoluteFilePath());
     }
-    for(const auto& p : horizontal_polygons.vec)
+    for(const auto& p : horizontal_polygons)
     {
         texture_names.insert(get_texture_fullpath(p.texture.to_string()).absoluteFilePath());
     }
