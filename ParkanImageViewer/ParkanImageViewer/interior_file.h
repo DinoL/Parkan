@@ -9,11 +9,11 @@
 class InteriorFile : public Geometry3d
 {
 public:
-    std::vector<Vertex> vertices;                       // size 12
-    std::vector<VerticalPolygon> vertical_polygons;     // size 114
-    std::vector<HorizontalPolygon> horizontal_polygons; // size 128
-    std::vector<VertexInfo> vertex_infos;               // size 16
-    std::vector<InteriorSignature> signature;           // size 20
+    std::vector<Vertex> m_vertices;                       // size 12
+    std::vector<VerticalPolygon> m_vertical_polygons;     // size 114
+    std::vector<HorizontalPolygon> m_horizontal_polygons; // size 128
+    std::vector<VertexInfo> m_vertex_infos;               // size 16
+    std::vector<InteriorSignature> m_signature;           // size 20
 
     virtual QString get_textures_palette_name() const override;
 
