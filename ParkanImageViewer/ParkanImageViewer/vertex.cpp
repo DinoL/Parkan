@@ -14,7 +14,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const Vertex& v)
 
 std::ostream& operator<<(std::ostream& s, const Vertex& v)
 {
-    s << "Vertex(" << v.x << ' ' << v.y << ' ' << v.z << ") ";
+    s << v.x << ' ' << v.y << ' ' << v.z;
     return s;
 }
 
