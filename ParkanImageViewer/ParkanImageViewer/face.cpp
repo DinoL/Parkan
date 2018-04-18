@@ -36,12 +36,21 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const Face& f)
 
 std::ostream& operator<<(std::ostream& s, const Face& f)
 {
-    s << "Face(";
+    char sep = ' ';
+    s << f.pts.size() << sep;
     for(const FacePoint& p : f.pts)
     {
-        s << p.id << ' ';
+        s << p.id << sep;
     }
-    s << ") ";
+    for(const FacePoint& p : f.pts)
+    {
+        s << p.uv << sep;
+    }
+    for(const FacePoint& p : f.pts)
+    {
+        s << p.k << sep;
+    }
+    s << f.texture << std::endl;
     return s;
 }
 
