@@ -118,7 +118,7 @@ bool GeometryExporter::import_3d_object(const QString& i_from, Object3d& o_objec
     if(!file.good())
         return false;
 
-    o_object.read(file);
+    file >> o_object;
     return true;
 }
 

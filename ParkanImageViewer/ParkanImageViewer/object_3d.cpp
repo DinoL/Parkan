@@ -1,22 +1,46 @@
 #include "object_3d.h"
 
-void Object3d::read(std::istream& i_s)
+#include <iomanip>
+
+void Object3d::read(std::istream& io_s)
 {
     int vertices_cnt;
-    float scale;
-    i_s >> vertices_cnt >> scale;
+    io_s >> vertices_cnt >> m_scale;
     m_vertices.resize(vertices_cnt);
     for(Vertex& v : m_vertices)
     {
-        i_s >> v;
+        io_s >> v;
     }
     int faces_cnt;
-    i_s >> faces_cnt;
+    io_s >> faces_cnt;
     m_faces.resize(faces_cnt);
     for(Face& f : m_faces)
     {
-        i_s >> f;
+        io_s >> f;
     }
+}
+
+void Object3d::write(std::ostream& io_s) const
+{
+    io_s << m_vertices.size() << ' ' << m_scale << std::endl;
+    io_s << std::fixed << std::setprecision(6);
+    for(const Vertex& v : m_vertices)
+    {
+        io_s << v << std::endl;
+    }
+    io_s << m_faces.size() << std::endl;
+    for(const Face& f : m_faces)
+    {
+        io_s << f;
+    }
+}
+
+Object3d::Object3d()
+{}
+
+Object3d::Object3d(std::istream& io_s)
+{
+    read(io_s);
 }
 
 std::vector<Vertex> Object3d::get_vertices() const
@@ -47,4 +71,16 @@ std::set<QString> Object3d::all_texture_names() const
         texture_names.insert(get_texture_fullpath(QString(f.texture.c_str())).absoluteFilePath());
     }
     return texture_names;
+}
+
+std::ostream& operator<<(std::ostream& io_s, const Object3d& i_obj)
+{
+    i_obj.write(io_s);
+    return io_s;
+}
+
+std::istream& operator>>(std::istream& io_s, Object3d& o_obj)
+{
+    o_obj.read(io_s);
+    return io_s;
 }
