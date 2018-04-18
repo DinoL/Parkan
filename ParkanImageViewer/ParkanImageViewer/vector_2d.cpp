@@ -14,7 +14,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const Vector2d& v)
 
 std::ostream& operator<<(std::ostream& s, const Vector2d& v)
 {
-    s << "Vec(" << v.u << ' ' << v.v << ") ";
+    s << v.u << ' ' << v.v;
     return s;
 }
 
