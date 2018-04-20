@@ -35,14 +35,6 @@ void Object3d::write(std::ostream& io_s) const
     }
 }
 
-Object3d::Object3d()
-{}
-
-Object3d::Object3d(std::istream& io_s)
-{
-    read(io_s);
-}
-
 std::vector<Vertex> Object3d::get_vertices() const
 {
     return m_vertices;
@@ -73,14 +65,3 @@ std::set<QString> Object3d::all_texture_names() const
     return texture_names;
 }
 
-std::ostream& operator<<(std::ostream& io_s, const Object3d& i_obj)
-{
-    i_obj.write(io_s);
-    return io_s;
-}
-
-std::istream& operator>>(std::istream& io_s, Object3d& o_obj)
-{
-    o_obj.read(io_s);
-    return io_s;
-}
