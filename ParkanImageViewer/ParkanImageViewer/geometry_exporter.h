@@ -26,8 +26,6 @@ public:
                          const QString& i_to,
                          ExportFormat i_format) const;
 
-    bool export_all_used_textures(const QFileInfoList& i_all_geometry_files, const QString& i_to) const;
-
     bool export_all_geometry_files(const QFileInfoList& i_all_geometry_files, const QDir& i_out_directory) const;
 
 private:

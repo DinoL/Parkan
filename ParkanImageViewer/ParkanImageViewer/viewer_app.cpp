@@ -110,20 +110,6 @@ void ViewerApp::on_actionOpen_3d_geometry_triggered()
     GeometryExporter().export_geometry(file_name, out_file_name);
 }
 
-void ViewerApp::on_actionExport_all_used_textures_triggered()
-{
-    const QString dir_name = QFileDialog::getExistingDirectory();
-    if (dir_name.isEmpty())
-        return;
-
-    const QString out_file_name = QFileDialog::getSaveFileName();
-    if(out_file_name.isEmpty())
-        return;
-
-    const QFileInfoList all_geometry_files = get_geometry_files(dir_name);
-    GeometryExporter().export_all_used_textures(all_geometry_files, out_file_name);
-}
-
 void ViewerApp::on_actionSave_image_triggered()
 {
     if(!m_img)

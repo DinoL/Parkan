@@ -36,8 +36,6 @@ private slots:
 
     void on_actionOpen_3d_geometry_triggered();
 
-    void on_actionExport_all_used_textures_triggered();
-
     void on_actionSave_image_triggered();
 
     void on_actionExport_all_3d_files_triggered();

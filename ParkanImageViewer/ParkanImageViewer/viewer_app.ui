@@ -44,7 +44,6 @@
     <addaction name="actionSave_image"/>
     <addaction name="actionOpen_3d_geometry"/>
     <addaction name="actionExport_all_interiors"/>
-    <addaction name="actionExport_all_used_textures"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>

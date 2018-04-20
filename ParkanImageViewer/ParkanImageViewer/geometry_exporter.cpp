@@ -36,44 +36,6 @@ bool GeometryExporter::export_geometry(const QString& i_from,
     }
 }
 
-bool GeometryExporter::export_all_used_textures(const QFileInfoList& i_all_geometry_files,
-                                                const QString& i_to) const
-{
-    if(i_all_geometry_files.empty())
-        return false;
-
-    std::set<QString> texture_names;
-
-    for(const auto& geometry_file : i_all_geometry_files)
-    {
-        const QString file_path = geometry_file.absoluteFilePath();
-        std::cout << "Parsing geometry file " << file_path.toStdString() << std::endl;
-        const auto old_size = texture_names.size();
-
-        InteriorFile interior;
-        if(!import_interior(file_path, interior))
-        {
-            std::cout << "Could not load interior" << std::endl;
-            continue;
-        }
-
-        const auto new_names = interior.all_texture_names();
-        texture_names.insert(new_names.begin(), new_names.end());
-
-        const auto new_size = texture_names.size();
-        std::cout << "Found " << new_size - old_size << " new textures" << std::endl;
-    }
-
-    if(texture_names.empty())
-        return false;
-
-    std::ofstream out(i_to.toStdString());
-    for(const auto& name : texture_names)
-    {
-        out << name << std::endl;
-    }
-    return true;
-}
 
 QFileInfo replace_dir_and_extension(const QFileInfo& i_filepath,
                                     const QDir& i_new_dir, const QString& i_new_ext)
