@@ -84,7 +84,6 @@ HEADERS  += viewer_app.h \
     geometry_3d.h \
     interior_file.h \
     geometry_exporter.h \
-    subdir/file.h \
     serializable.h \
     serializable_geometry.h
 
