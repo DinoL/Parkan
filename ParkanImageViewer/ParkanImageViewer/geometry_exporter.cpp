@@ -4,6 +4,8 @@
 #include "texture_exporter.h"
 #include "palette.h"
 #include "obj_model.h"
+#include "interior_file.h"
+#include "object_3d.h"
 
 #include <QFileInfo>
 #include <QDir>
