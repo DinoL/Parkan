@@ -15,8 +15,8 @@
 class Object3d : public SerializableGeometry
 {
 public:
-    std::vector<Vertex> get_vertices() const;
-    std::vector<Face> get_faces() const;
+    virtual std::vector<Vertex> get_vertices() const override;
+    virtual std::vector<Face> get_faces() const override;
 
     virtual QString get_textures_palette_name() const override;
     virtual QDir get_textures_folder() const override;

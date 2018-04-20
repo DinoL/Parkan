@@ -22,6 +22,48 @@ void InteriorFile::write(std::ostream& io_s) const
     bos << m_signature;
 }
 
+std::vector<Vertex> InteriorFile::get_vertices() const
+{
+    return m_vertices;
+}
+
+FacePoint to_face_point(const Point& i_pt)
+{
+    return FacePoint{i_pt.id, Vector2d{i_pt.u, i_pt.v}, 1};
+}
+
+std::vector<Face> InteriorFile::get_faces() const
+{
+    std::vector<Face> faces;
+    for(const auto& poly : m_vertical_polygons)
+    {
+        Face cur_face;
+        cur_face.texture = poly.texture.to_string().toStdString();
+
+        std::vector<FacePoint> points;
+        for(const Point& pt : poly.ps)
+        {
+            points.push_back(to_face_point(pt));
+        }
+        cur_face.pts = points;
+        faces.push_back(cur_face);
+    }
+    for(const auto& poly : m_horizontal_polygons)
+    {
+        Face cur_face;
+        cur_face.texture = poly.texture.to_string().toStdString();
+
+        std::vector<FacePoint> points;
+        for(const Point& pt : poly.ps)
+        {
+            points.push_back(to_face_point(pt));
+        }
+        cur_face.pts = points;
+        faces.push_back(cur_face);
+    }
+    return faces;
+}
+
 QString InteriorFile::get_textures_palette_name() const
 {
     return "PAL.PAL";

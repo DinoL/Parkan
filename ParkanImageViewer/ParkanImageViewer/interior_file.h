@@ -9,11 +9,8 @@
 class InteriorFile : public SerializableGeometry
 {
 public:
-    std::vector<Vertex> m_vertices;                       // size 12
-    std::vector<VerticalPolygon> m_vertical_polygons;     // size 114
-    std::vector<HorizontalPolygon> m_horizontal_polygons; // size 128
-    std::vector<VertexInfo> m_vertex_infos;               // size 16
-    std::vector<InteriorSignature> m_signature;           // size 20
+    virtual std::vector<Vertex> get_vertices() const override;
+    virtual std::vector<Face> get_faces() const override;
 
     virtual QString get_textures_palette_name() const override;
     virtual QDir get_textures_folder() const override;
@@ -22,6 +19,13 @@ public:
 private:
     virtual void read(std::istream& io_s) override;
     virtual void write(std::ostream& io_s) const override;
+
+public:
+    std::vector<Vertex> m_vertices;                       // size 12
+    std::vector<VerticalPolygon> m_vertical_polygons;     // size 114
+    std::vector<HorizontalPolygon> m_horizontal_polygons; // size 128
+    std::vector<VertexInfo> m_vertex_infos;               // size 16
+    std::vector<InteriorSignature> m_signature;           // size 20
 };
 
 #endif // INTERIOR_FILE_H
