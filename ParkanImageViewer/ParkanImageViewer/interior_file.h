@@ -1,12 +1,12 @@
 #ifndef INTERIOR_FILE_H
 #define INTERIOR_FILE_H
 
-#include "geometry_3d.h"
+#include "serializable_geometry.h"
 #include "interior.h"
 
 #include <vector>
 
-class InteriorFile : public Geometry3d
+class InteriorFile : public SerializableGeometry
 {
 public:
     std::vector<Vertex> m_vertices;                       // size 12
@@ -16,14 +16,12 @@ public:
     std::vector<InteriorSignature> m_signature;           // size 20
 
     virtual QString get_textures_palette_name() const override;
-
     virtual QDir get_textures_folder() const override;
-
     virtual  std::set<QString> all_texture_names() const override;
-};
 
-InputBinaryStream& operator>>(InputBinaryStream& s, InteriorFile& file);
-OutputBinaryStream& operator<<(OutputBinaryStream& s, const InteriorFile& file);
-std::ostream& operator<<(std::ostream& s, const InteriorFile& file);
+private:
+    virtual void read(std::istream& io_s) override;
+    virtual void write(std::ostream& io_s) const override;
+};
 
 #endif // INTERIOR_FILE_H

@@ -2,34 +2,24 @@
 
 #include "io_utils.h"
 
-InputBinaryStream& operator>>(InputBinaryStream& s, InteriorFile& file)
+void InteriorFile::read(std::istream& io_s)
 {
-    s >> file.m_vertices;
-    s >> file.m_vertical_polygons;
-    s >> file.m_horizontal_polygons;
-    s >> file.m_vertex_infos;
-    s >> file.m_signature;
-    return s;
+    InputBinaryStream bis(io_s);
+    bis >> m_vertices;
+    bis >> m_vertical_polygons;
+    bis >> m_horizontal_polygons;
+    bis >> m_vertex_infos;
+    bis >> m_signature;
 }
 
-OutputBinaryStream& operator<<(OutputBinaryStream& s, const InteriorFile& file)
+void InteriorFile::write(std::ostream& io_s) const
 {
-    s << file.m_vertices;
-    s << file.m_vertical_polygons;
-    s << file.m_horizontal_polygons;
-    s << file.m_vertex_infos;
-    s << file.m_signature;
-    return s;
-}
-
-std::ostream& operator<<(std::ostream& s, const InteriorFile& file)
-{
-    s << "Vertices:\n"            << file.m_vertices            << std::endl;
-    s << "Vertical polygons:\n"   << file.m_vertical_polygons   << std::endl;
-    s << "Horizontal polygons:\n" << file.m_horizontal_polygons << std::endl;
-    s << "Block 4:\n"             << file.m_vertex_infos        << std::endl;
-    s << "Signature:\n"           << file.m_signature           << std::endl;
-    return s;
+    OutputBinaryStream bos(io_s);
+    bos << m_vertices;
+    bos << m_vertical_polygons;
+    bos << m_horizontal_polygons;
+    bos << m_vertex_infos;
+    bos << m_signature;
 }
 
 QString InteriorFile::get_textures_palette_name() const
@@ -55,3 +45,4 @@ std::set<QString> InteriorFile::all_texture_names() const
     }
     return texture_names;
 }
+
