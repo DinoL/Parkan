@@ -34,6 +34,9 @@ struct ObjFace
 class ObjModel
 {
 public:
+    ObjModel(const SerializableGeometry& i_geometry)
+    {}
+
     ObjModel(const InteriorFile& i_interior);
     ObjModel(const Object3d& i_object);
 
