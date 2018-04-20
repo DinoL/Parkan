@@ -14,8 +14,6 @@ public:
     bool export_all_geometry_files(const QFileInfoList& i_all_geometry_files, const QDir& i_out_directory) const;
 
 private:
-
-    bool import_geometry(const QString& i_from, SerializableGeometry& o_geometry) const;
     bool export_geometry(const SerializableGeometry& i_geometry, const QString& i_to) const;
 };
 

@@ -1,5 +1,6 @@
 #include "geometry_exporter.h"
 
+#include "geometry_importer.h"
 #include "io_utils.h"
 #include "texture_exporter.h"
 #include "palette.h"
@@ -34,19 +35,6 @@ bool GeometryExporter::export_all_geometry_files(const QFileInfoList& i_all_geom
     return success;
 }
 
-bool GeometryExporter::import_geometry(const QString& i_from, SerializableGeometry& o_geometry) const
-{
-    if(i_from.isEmpty())
-        return false;
-
-    std::ifstream file(i_from.toStdString(), std::ios::binary);
-    if(!file.good())
-        return false;
-
-    file >> o_geometry;
-    return true;
-}
-
 std::unique_ptr<SerializableGeometry> get_geometry_by_ext(const QString& i_ext)
 {
     if(i_ext == "BIN")
@@ -71,7 +59,7 @@ bool GeometryExporter::export_geometry(const QString& i_from, const QString& i_t
     if(!geometry)
         return false;
 
-    import_geometry(i_from, *geometry);
+    GeometryImporter().import_geometry(i_from, *geometry);
     return export_geometry(*geometry, i_to);
 }
 
