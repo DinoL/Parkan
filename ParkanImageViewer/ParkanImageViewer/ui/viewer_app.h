@@ -2,9 +2,9 @@
 #define VIEWER_APP_H
 
 #include "color_ramp_widget.h"
-#include "image.h"
-#include "image_iterator.h"
-#include "animated_image.h"
+#include "image/image.h"
+#include "image/image_iterator.h"
+#include "image/animated_image.h"
 
 #include <QMainWindow>
 #include <QLabel>

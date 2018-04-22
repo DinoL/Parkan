@@ -2,7 +2,8 @@
 #define TEXTURE_FACTORY_H
 
 #include "image.h"
-#include "files_filter.h"
+
+#include "utils/files_filter.h"
 
 #include <memory>
 

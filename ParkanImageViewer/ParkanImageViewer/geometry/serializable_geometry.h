@@ -2,7 +2,7 @@
 #define SERIALIZABLE_GEOMETRY_H
 
 #include "geometry_3d.h"
-#include "serializable.h"
+#include "utils/serializable.h"
 
 class SerializableGeometry : public Geometry3d, public ISerializable
 {

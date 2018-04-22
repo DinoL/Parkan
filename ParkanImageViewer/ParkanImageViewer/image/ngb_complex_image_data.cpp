@@ -1,7 +1,8 @@
 #include "ngb_complex_image_data.h"
 #include "image_description_guard.h"
-#include "binary_stream.h"
-#include "exceptions.h"
+
+#include "utils/binary_stream.h"
+#include "utils/exceptions.h"
 
 #include <fstream>
 

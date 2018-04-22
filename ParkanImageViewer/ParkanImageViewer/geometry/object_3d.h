@@ -1,7 +1,7 @@
 #ifndef OBJECT_3D_H
 #define OBJECT_3D_H
 
-#include "vertex.h"
+#include "utils/vertex.h"
 #include "face.h"
 #include "serializable_geometry.h"
 

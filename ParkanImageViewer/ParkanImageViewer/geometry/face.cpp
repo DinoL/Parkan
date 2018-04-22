@@ -1,6 +1,6 @@
 #include "face.h"
 
-#include "short_string.h"
+#include "utils/short_string.h"
 
 InputBinaryStream& operator>>(InputBinaryStream& s, Face& f)
 {

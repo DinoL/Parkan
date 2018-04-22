@@ -3,7 +3,8 @@
 
 #include "palette.h"
 #include "simple_image_data.h"
-#include "string_utils.h"
+
+#include "utils/string_utils.h"
 
 #include <QFileInfo>
 #include <QString>

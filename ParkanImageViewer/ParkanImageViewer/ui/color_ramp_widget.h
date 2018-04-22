@@ -1,9 +1,10 @@
 #ifndef COLORRAMPWIDGET_H
 #define COLORRAMPWIDGET_H
 
+#include "image/palette.h"
+
 #include <QWidget>
 #include <QPainter>
-#include "palette.h"
 
 class ColorRampWidget : public QWidget
 {

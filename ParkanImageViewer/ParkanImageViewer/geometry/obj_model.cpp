@@ -1,6 +1,6 @@
 #include "obj_model.h"
 
-#include "io_utils.h"
+#include "utils/io_utils.h"
 
 ObjModel::ObjModel(const SerializableGeometry& i_geometry)
 {

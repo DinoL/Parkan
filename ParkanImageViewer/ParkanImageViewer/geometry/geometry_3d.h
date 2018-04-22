@@ -1,7 +1,7 @@
 #ifndef GEOMETRY_3D_H
 #define GEOMETRY_3D_H
 
-#include "vertex.h"
+#include "utils/vertex.h"
 #include "face.h"
 
 #include <QString>
