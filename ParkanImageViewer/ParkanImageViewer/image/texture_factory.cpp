@@ -2,7 +2,7 @@
 
 #include "simple_image_data.h"
 #include "dib_image_data.h"
-#include "ngb_image_data.h"
+#include "ngb_simple_image_data.h"
 #include "ngb_complex_image_data.h"
 
 #include "utils/exceptions.h"
@@ -11,7 +11,7 @@ enum ImageType
 {
     Simple = 0,
     DIB = 1,
-    NGB = 2,
+    SimpleNGB = 2,
     ComplexNGB = 3,
     Count = 4
 };
@@ -26,8 +26,8 @@ std::unique_ptr<ImageData> get_image_by_type(const QFileInfo& i_file_info, int i
             return std::make_unique<SimpleImageData>(i_file_info);
         case ImageType::DIB:
             return std::make_unique<DibImageData>(i_file_info);
-        case ImageType::NGB:
-            return std::make_unique<NgbImageData>(i_file_info);
+        case ImageType::SimpleNGB:
+            return std::make_unique<NgbSimpleImageData>(i_file_info);
         case ImageType::ComplexNGB:
             return std::make_unique<NgbComplexImageData>(i_file_info);
         default:

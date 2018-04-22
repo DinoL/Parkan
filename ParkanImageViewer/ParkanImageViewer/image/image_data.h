@@ -12,6 +12,8 @@ class ImageData
 public:
     ImageData(const QFileInfo& i_path);
 
+    virtual ~ImageData();
+
     bool is_valid() const;
 
     qint32 width() const;

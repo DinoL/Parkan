@@ -6,6 +6,9 @@ ImageData::ImageData(const QFileInfo& i_path) :
     m_path(i_path)
 {}
 
+ImageData::~ImageData()
+{}
+
 qint32 ImageData::width() const
 {
     return m_width;
