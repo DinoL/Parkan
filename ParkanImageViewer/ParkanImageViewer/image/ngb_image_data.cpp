@@ -1,6 +1,7 @@
 #include "ngb_image_data.h"
 #include "image_description_guard.h"
-#include "binary_stream.h"
+
+#include "utils/binary_stream.h"
 
 NgbImageData::NgbImageData(const QFileInfo& i_path) :
     ImageData(i_path)

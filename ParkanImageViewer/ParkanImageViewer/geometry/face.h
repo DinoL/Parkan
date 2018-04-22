@@ -1,9 +1,9 @@
 #ifndef FACE_H
 #define FACE_H
 
-#include "binary_stream.h"
-#include "vertex.h"
-#include "vector_2d.h"
+#include "utils/binary_stream.h"
+#include "utils/vertex.h"
+#include "utils/vector_2d.h"
 
 #include <iostream>
 #include <string>

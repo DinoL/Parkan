@@ -1,5 +1,6 @@
 #include "palette.h"
-#include "exceptions.h"
+
+#include "utils/exceptions.h"
 
 #include <QFile>
 #include <QDir>

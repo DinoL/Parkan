@@ -1,6 +1,6 @@
 #include "interior_file.h"
 
-#include "io_utils.h"
+#include "utils/io_utils.h"
 
 void InteriorFile::read(std::istream& io_s)
 {

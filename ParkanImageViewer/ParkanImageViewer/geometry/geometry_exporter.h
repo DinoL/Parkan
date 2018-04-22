@@ -2,7 +2,7 @@
 #define GEOMETRY_EXPORTER_H
 
 #include "serializable_geometry.h"
-#include "files_filter.h"
+#include "utils/files_filter.h"
 
 #include <QString>
 #include <QFileInfoList>

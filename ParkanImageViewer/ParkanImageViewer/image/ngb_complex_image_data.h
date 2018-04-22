@@ -2,7 +2,8 @@
 #define NGB_COMPLEX_IMAGE_DATA_H
 
 #include "ngb_image_data.h"
-#include "binary_stream.h"
+
+#include "utils/binary_stream.h"
 
 class NgbComplexImageData : public NgbImageData
 {

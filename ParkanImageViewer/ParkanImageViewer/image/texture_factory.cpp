@@ -4,7 +4,8 @@
 #include "dib_image_data.h"
 #include "ngb_image_data.h"
 #include "ngb_complex_image_data.h"
-#include "exceptions.h"
+
+#include "utils/exceptions.h"
 
 enum ImageType
 {

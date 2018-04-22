@@ -1,5 +1,6 @@
 #include "image_data.h"
-#include "exceptions.h"
+
+#include "utils/exceptions.h"
 
 ImageData::ImageData(const QFileInfo& i_path) :
     m_path(i_path)

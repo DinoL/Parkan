@@ -1,12 +1,13 @@
 #include "geometry_exporter.h"
 
 #include "geometry_importer.h"
-#include "io_utils.h"
-#include "texture_exporter.h"
-#include "palette.h"
 #include "obj_model.h"
 #include "interior_file.h"
 #include "object_3d.h"
+
+#include "utils/io_utils.h"
+#include "image/texture_exporter.h"
+#include "image/palette.h"
 
 #include <QFileInfo>
 #include <QDir>

@@ -1,9 +1,9 @@
 #ifndef INTERIOR_H
 #define INTERIOR_H
 
-#include "io_utils.h"
-#include "vertex.h"
-#include "short_string.h"
+#include "utils/io_utils.h"
+#include "utils/vertex.h"
+#include "utils/short_string.h"
 
 #include <QString>
 #include <QDir>

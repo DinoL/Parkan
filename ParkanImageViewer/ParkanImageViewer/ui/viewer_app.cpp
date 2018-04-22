@@ -2,10 +2,11 @@
 #include "ui_viewer_app.h"
 
 #include "color_ramp_widget.h"
-#include "texture_factory.h"
-#include "geometry_exporter.h"
-#include "files_filter.h"
-#include "exceptions.h"
+
+#include "image/texture_factory.h"
+#include "geometry/geometry_exporter.h"
+#include "utils/files_filter.h"
+#include "utils/exceptions.h"
 
 #include <QDir>
 #include <QFileInfoList>

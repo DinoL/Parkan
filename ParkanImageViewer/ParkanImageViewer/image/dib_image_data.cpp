@@ -1,7 +1,8 @@
 #include "dib_image_data.h"
-#include "binary_stream.h"
 #include "image_description_guard.h"
-#include "exceptions.h"
+
+#include "utils/binary_stream.h"
+#include "utils/exceptions.h"
 
 #include <QFile>
 
