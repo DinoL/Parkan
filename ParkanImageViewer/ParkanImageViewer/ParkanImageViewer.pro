@@ -46,7 +46,10 @@ SOURCES += main.cpp\
     exceptions.cpp \
     geometry_3d.cpp \
     interior_file.cpp \
-    geometry_exporter.cpp
+    geometry_exporter.cpp \
+    serializable.cpp \
+    serializable_geometry.cpp \
+    geometry_importer.cpp
 
 HEADERS  += viewer_app.h \
     binary_file.h \
@@ -81,7 +84,10 @@ HEADERS  += viewer_app.h \
     exceptions.h \
     geometry_3d.h \
     interior_file.h \
-    geometry_exporter.h
+    geometry_exporter.h \
+    serializable.h \
+    serializable_geometry.h \
+    geometry_importer.h
 
 
 FORMS    += viewer_app.ui

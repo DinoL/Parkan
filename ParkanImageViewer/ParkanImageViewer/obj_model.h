@@ -1,8 +1,7 @@
 #ifndef OBJ_MODEL_H
 #define OBJ_MODEL_H
 
-#include "interior_file.h"
-#include "object_3d.h"
+#include "serializable_geometry.h"
 
 #include <QString>
 #include <QFileInfo>
@@ -34,8 +33,7 @@ struct ObjFace
 class ObjModel
 {
 public:
-    ObjModel(const InteriorFile& i_interior);
-    ObjModel(const Object3d& i_object);
+    ObjModel(const SerializableGeometry& i_geometry);
 
     void save(const std::string& i_to, const std::string& i_mtl_file) const;
 

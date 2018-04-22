@@ -1,59 +1,16 @@
 #include "obj_model.h"
 
-ObjModel::ObjModel(const InteriorFile& i_interior)
+#include "io_utils.h"
+
+ObjModel::ObjModel(const SerializableGeometry& i_geometry)
 {
-    for(const auto& vx : i_interior.m_vertices)
-    {
-        vxs.push_back(Vertex{vx.x, vx.y, vx.z});
-    }
+    vxs = i_geometry.get_vertices();
 
-    for(const auto& poly : i_interior.m_vertical_polygons)
-    {
-        ObjFace cur_poly;
-        cur_poly.texture = poly.texture.to_string();
-        for(int i = 0; i < 4; ++i)
-        {
-            ObjVertex cur_vx;
-
-            const auto& cur = poly.ps[i];
-            cur_vx.vid = cur.id + 1;
-
-            Vector2d cur_uv{cur.u, cur.v};
-            cur_vx.uvid = uvs.add_one(cur_uv) + 1;
-
-            cur_poly.face_vxs.push_back(cur_vx);
-        }
-        fs.push_back(cur_poly);
-    }
-    for(const auto& poly : i_interior.m_horizontal_polygons)
-    {
-        ObjFace cur_poly;
-        cur_poly.texture = poly.texture.to_string();
-        for(int i = 0; i < 4; ++i)
-        {
-            ObjVertex cur_vx;
-
-            const auto& cur = poly.ps[i];
-            cur_vx.vid = cur.id + 1;
-
-            Vector2d cur_uv{cur.u, cur.v};
-            cur_vx.uvid = uvs.add_one(cur_uv) + 1;
-
-            cur_poly.face_vxs.push_back(cur_vx);
-        }
-        fs.push_back(cur_poly);
-    }
-}
-
-ObjModel::ObjModel(const Object3d& i_object)
-{
-    vxs = i_object.get_vertices();
-
-    for(const Face& poly : i_object.get_faces())
+    for(const Face& poly : i_geometry.get_faces())
     {
         ObjFace cur_poly;
         cur_poly.texture = QString(poly.texture.c_str());
-        for(int i = 0; i < 3; ++i)
+        for(int i = 0; i < poly.pts.size(); ++i)
         {
             ObjVertex cur_vx;
 

@@ -3,7 +3,7 @@
 
 #include "vertex.h"
 #include "face.h"
-#include "geometry_3d.h"
+#include "serializable_geometry.h"
 
 #include <QDir>
 #include <QString>
@@ -11,27 +11,20 @@
 
 #include <vector>
 #include <set>
-#include <iostream>
 
-class Object3d : public Geometry3d
+class Object3d : public SerializableGeometry
 {
 public:
-    Object3d();
-    Object3d(std::istream& io_s);
-
-    std::vector<Vertex> get_vertices() const;
-    std::vector<Face> get_faces() const;
+    virtual std::vector<Vertex> get_vertices() const override;
+    virtual std::vector<Face> get_faces() const override;
 
     virtual QString get_textures_palette_name() const override;
     virtual QDir get_textures_folder() const override;
     virtual std::set<QString> all_texture_names() const override;
 
-    friend std::ostream& operator<<(std::ostream& io_s, const Object3d& i_obj);
-    friend std::istream& operator>>(std::istream& io_s, Object3d& o_obj);
-
 private:
-    void read(std::istream& io_s);
-    void write(std::ostream& io_s) const;
+    virtual void read(std::istream& io_s) override;
+    virtual void write(std::ostream& io_s) const override;
 
 private:
     std::vector<Vertex> m_vertices;
