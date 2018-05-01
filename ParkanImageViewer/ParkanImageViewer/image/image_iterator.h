@@ -18,6 +18,8 @@ public:
     QFileInfo* operator->();
     operator bool() const;
 
+    bool is_valid() const;
+
 private:
     ImageIterator& inc();
     ImageIterator& dec();

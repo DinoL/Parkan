@@ -17,15 +17,13 @@ ImageIterator::ImageIterator(const QString& i_path)
     else if(info.isFile())
     {
         init_images(info.absolutePath());
-        int pos = m_images.indexOf(i_path);
-        if(pos >= 0)
-            m_pos = pos;
+        m_pos = m_images.indexOf(i_path);
     }
 }
 
 QFileInfo ImageIterator::operator*() const
 {
-    if(m_images.isEmpty())
+    if(!is_valid())
         return {};
 
     return m_images[m_pos];
@@ -33,15 +31,20 @@ QFileInfo ImageIterator::operator*() const
 
 QFileInfo* ImageIterator::operator->()
 {
-    if(m_images.isEmpty())
+    if(!is_valid())
         return nullptr;
 
     return &m_images[m_pos];
 }
 
+bool ImageIterator::is_valid() const
+{
+    return size() > 0 && m_pos >= 0;
+}
+
 ImageIterator::operator bool() const
 {
-    return size() > 0;
+    return is_valid();
 }
 
 ImageIterator& ImageIterator::inc()
