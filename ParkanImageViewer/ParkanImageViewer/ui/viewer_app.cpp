@@ -312,3 +312,18 @@ void ViewerApp::update_animation()
     update_image();
     update_actions();
 }
+
+void ViewerApp::on_actionShow_Palette_triggered(bool checked)
+{
+    if(!m_crw)
+        return;
+
+    if(checked)
+    {
+        m_crw->show();
+    }
+    else
+    {
+        m_crw->hide();
+    }
+}

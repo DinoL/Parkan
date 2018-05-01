@@ -57,6 +57,8 @@ private slots:
 
     void update_animation();
 
+    void on_actionShow_Palette_triggered(bool checked);
+
 private:
 
     void setup_scroll_area();
