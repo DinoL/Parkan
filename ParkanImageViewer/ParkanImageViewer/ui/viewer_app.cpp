@@ -175,15 +175,15 @@ void ViewerApp::on_actionFit_to_Window_triggered()
     update_actions();
 }
 
-void ViewerApp::open_image(const QFileInfo& i_path)
+bool ViewerApp::open_image(const QFileInfo& i_path)
 {
-    open_image(i_path.absoluteFilePath());
+    return open_image(i_path.absoluteFilePath());
 }
 
-void ViewerApp::open_image(const QString& i_path)
+bool ViewerApp::open_image(const QString& i_path)
 {
     if(!m_crw || i_path.isEmpty())
-        return;
+        return false;
 
     try
     {
@@ -195,7 +195,12 @@ void ViewerApp::open_image(const QString& i_path)
     }
 
     if (!m_img)
-        return;
+    {
+        const QString filename = QFileInfo(i_path).fileName();
+        const QString msg("Could not open image %1");
+        show_warning_message("Loading failed", msg.arg(filename));
+        return false;
+    }
 
     m_img->set_palette(m_crw->m_palette);
 
@@ -208,6 +213,8 @@ void ViewerApp::open_image(const QString& i_path)
 
     update_image();
     update_actions();
+
+    return true;
 }
 
 void ViewerApp::update_image()
