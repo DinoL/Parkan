@@ -93,4 +93,5 @@ HEADERS  += geometry/face.h \
 FORMS    += ui/viewer_app.ui
 
 RESOURCES += \
-    palettes.qrc
+    palettes.qrc \
+    icons.qrc
