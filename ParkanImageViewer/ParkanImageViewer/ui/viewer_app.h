@@ -84,6 +84,8 @@ private:
 
     void adjust_scroll_bar(QScrollBar* i_scroll_bar, float i_factor);
 
+    void show_warning_message(const QString& i_title, const QString& i_message) const;
+
 private:
     Ui::ViewerApp* ui;
     std::unique_ptr<ColorRampWidget> m_crw;

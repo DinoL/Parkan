@@ -89,8 +89,7 @@ void ViewerApp::on_actionOpen_Image_triggered()
 
     if(!m_crw)
     {
-        auto* mb = new QMessageBox(QMessageBox::Warning, "No palette", "Please select palette first");
-        mb->show();
+        show_warning_message("No palette", "Please select palette first");
         return;
     }
 
@@ -119,8 +118,7 @@ void ViewerApp::on_actionSave_image_triggered()
 {
     if(!m_img)
     {
-        auto* mb = new QMessageBox(QMessageBox::Warning, "No image", "Please open image first");
-        mb->show();
+        show_warning_message("No image", "Please open image first");
         return;
     }
     const QString out_file_name = QFileDialog::getSaveFileName();
@@ -130,9 +128,7 @@ void ViewerApp::on_actionSave_image_triggered()
     const bool was_saved = m_img->save(out_file_name);
     if(!was_saved)
     {
-        auto* mb = new QMessageBox(QMessageBox::Warning, "Not saved",
-                                   QString("Failed to save image into %1").arg(out_file_name));
-        mb->show();
+        show_warning_message("Not saved", QString("Failed to save image into %1").arg(out_file_name));
         return;
     }
 }
@@ -195,8 +191,7 @@ void ViewerApp::open_image(const QString& i_path)
     }
     catch(const ImageDataException& e)
     {
-        auto* mb = new QMessageBox(QMessageBox::Warning, "Error", e.what());
-        mb->show();
+        show_warning_message("Error", e.what());
     }
 
     if (!m_img)
@@ -285,6 +280,12 @@ void ViewerApp::adjust_scroll_bar(QScrollBar* i_scroll_bar, float i_factor)
                                + ((i_factor - 1) * i_scroll_bar->pageStep() / 2)));
 }
 
+void ViewerApp::show_warning_message(const QString& i_title, const QString& i_message) const
+{
+    auto* mb = new QMessageBox(QMessageBox::Warning, i_title, i_message);
+    mb->show();
+}
+
 void ViewerApp::on_actionNext_triggered()
 {
     if(m_it)
@@ -305,8 +306,7 @@ void ViewerApp::on_actionOpen_animation_triggered()
 
     if(!m_crw)
     {
-        auto* mb = new QMessageBox(QMessageBox::Warning, "No palette", "Please select palette first");
-        mb->show();
+        show_warning_message("No palette", "Please select palette first");
         return;
     }
 
