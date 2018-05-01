@@ -127,7 +127,14 @@ void ViewerApp::on_actionSave_image_triggered()
     if(out_file_name.isEmpty())
         return;
 
-    m_img->save(out_file_name);
+    const bool was_saved = m_img->save(out_file_name);
+    if(!was_saved)
+    {
+        auto* mb = new QMessageBox(QMessageBox::Warning, "Not saved",
+                                   QString("Failed to save image into %1").arg(out_file_name));
+        mb->show();
+        return;
+    }
 }
 
 void ViewerApp::on_actionExport_all_3d_files_triggered()
