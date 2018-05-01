@@ -8,6 +8,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <QString>
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QFileInfo>
@@ -56,6 +57,8 @@ private slots:
 
     void update_animation();
 
+    void on_actionShow_Palette_triggered(bool checked);
+
 private:
 
     void setup_scroll_area();
@@ -70,6 +73,10 @@ private:
     bool has_image() const;
 
     bool has_palette() const;
+
+    bool show_palette() const;
+
+    void set_palette(const QString& i_palette_name);
 
     bool is_fit_to_window_mode() const;
 

@@ -1,10 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>palettes/B0001.COL</file>
-        <file>palettes/LASTOUTD.COL</file>
-        <file>palettes/LENTIS.COL</file>
-        <file>palettes/P.COL</file>
-        <file>palettes/PAL.PAL</file>
-        <file>palettes/PAL1.PAL</file>
+        <file>palettes/Lentis</file>
+        <file>palettes/Interior</file>
+        <file>palettes/Space</file>
     </qresource>
 </RCC>

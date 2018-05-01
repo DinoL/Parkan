@@ -31,9 +31,14 @@ ViewerApp::ViewerApp(QWidget *parent) :
     QStringList all_palettes = Palette::get_all_palettes();
     ui->select_palette_combo_box->addItems(all_palettes);
 
+    if(!all_palettes.isEmpty())
+        set_palette(all_palettes.front());
+
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update_animation()));
     timer->start(200);
+
+    update_actions();
 }
 
 void ViewerApp::setup_scroll_area()
@@ -60,9 +65,8 @@ ViewerApp::~ViewerApp()
 
 void ViewerApp::on_select_palette_combo_box_activated(const QString& i_palette_name)
 {
-    const Palette palette = Palette::get_palette_by_name(i_palette_name);
-    m_crw.reset(new ColorRampWidget(palette));
-    if (m_img)
+    set_palette(i_palette_name);
+    if (m_img && m_crw)
     {
         m_img->set_palette(m_crw->m_palette);
         m_image_label->setPixmap(QPixmap::fromImage(m_img->image()));
@@ -220,6 +224,17 @@ bool ViewerApp::has_palette() const
     return m_crw != nullptr;
 }
 
+bool ViewerApp::show_palette() const
+{
+    return ui->actionShow_Palette->isChecked();
+}
+
+void ViewerApp::set_palette(const QString& i_palette_name)
+{
+    const Palette palette = Palette::get_palette_by_name(i_palette_name);
+    m_crw.reset(new ColorRampWidget(palette, show_palette()));
+}
+
 bool ViewerApp::is_fit_to_window_mode() const
 {
     return ui->actionFit_to_Window->isChecked();
@@ -303,4 +318,19 @@ void ViewerApp::update_animation()
 
     update_image();
     update_actions();
+}
+
+void ViewerApp::on_actionShow_Palette_triggered(bool checked)
+{
+    if(!m_crw)
+        return;
+
+    if(checked)
+    {
+        m_crw->show();
+    }
+    else
+    {
+        m_crw->hide();
+    }
 }

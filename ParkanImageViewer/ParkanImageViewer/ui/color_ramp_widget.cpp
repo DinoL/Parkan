@@ -1,12 +1,13 @@
 #include "color_ramp_widget.h"
 
-ColorRampWidget::ColorRampWidget(const Palette& i_palette, QWidget* parent)
+ColorRampWidget::ColorRampWidget(const Palette& i_palette, bool i_show, QWidget* parent)
     : QWidget(parent)
     , m_palette(i_palette)
 {
     setGeometry(300, 300, 350, 350);
     setWindowTitle(i_palette.get_name());
-    show();
+    if(i_show)
+        show();
 }
 
 void ColorRampWidget::draw_rectangles(QPainter& qp)

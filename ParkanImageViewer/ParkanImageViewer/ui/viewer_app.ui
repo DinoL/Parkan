@@ -51,6 +51,8 @@
     <property name="title">
      <string>View</string>
     </property>
+    <addaction name="actionShow_Palette"/>
+    <addaction name="separator"/>
     <addaction name="actionZoom_In"/>
     <addaction name="actionZoom_Out"/>
     <addaction name="actionNormal_Size"/>
@@ -70,11 +72,25 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionOpen_Image"/>
+   <addaction name="actionSave_image"/>
+   <addaction name="actionZoom_Out"/>
+   <addaction name="actionZoom_In"/>
+   <addaction name="actionNormal_Size"/>
+   <addaction name="actionFit_to_Window"/>
+   <addaction name="actionPrevious"/>
+   <addaction name="actionNext"/>
+   <addaction name="actionShow_Palette"/>
+   <addaction name="actionExit"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen_Image">
    <property name="enabled">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/open_icon.png</normaloff>:/icons/open_icon.png</iconset>
    </property>
    <property name="text">
     <string>Open image...</string>
@@ -84,6 +100,10 @@
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/exit_icon.png</normaloff>:/icons/exit_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Exit</string>
    </property>
@@ -103,6 +123,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/save_icon.png</normaloff>:/icons/save_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Save image</string>
    </property>
@@ -119,6 +143,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/zoom_in_icon.png</normaloff>:/icons/zoom_in_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Zoom In</string>
    </property>
@@ -130,6 +158,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/zoom_out_icon.png</normaloff>:/icons/zoom_out_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Zoom Out</string>
    </property>
@@ -140,6 +172,10 @@
   <action name="actionNormal_Size">
    <property name="enabled">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/normal_size_icon.png</normaloff>:/icons/normal_size_icon.png</iconset>
    </property>
    <property name="text">
     <string>Normal Size</string>
@@ -155,6 +191,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/fit_to_window_icon.png</normaloff>:/icons/fit_to_window_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Fit to Window</string>
    </property>
@@ -166,6 +206,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/next_icon.png</normaloff>:/icons/next_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Next</string>
    </property>
@@ -176,6 +220,10 @@
   <action name="actionPrevious">
    <property name="enabled">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/previous_icon.png</normaloff>:/icons/previous_icon.png</iconset>
    </property>
    <property name="text">
     <string>Previous</string>
@@ -192,8 +240,22 @@
     <string>Open animation</string>
    </property>
   </action>
+  <action name="actionShow_Palette">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/palette_icon.png</normaloff>:/icons/palette_icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Palette</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
