@@ -9,5 +9,6 @@
         <file>icons/save_icon.png</file>
         <file>icons/zoom_in_icon.png</file>
         <file>icons/zoom_out_icon.png</file>
+        <file>icons/palette_icon.png</file>
     </qresource>
 </RCC>
