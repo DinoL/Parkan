@@ -31,9 +31,14 @@ ViewerApp::ViewerApp(QWidget *parent) :
     QStringList all_palettes = Palette::get_all_palettes();
     ui->select_palette_combo_box->addItems(all_palettes);
 
+    if(!all_palettes.isEmpty())
+        set_palette(all_palettes.front());
+
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update_animation()));
     timer->start(200);
+
+    update_actions();
 }
 
 void ViewerApp::setup_scroll_area()
