@@ -83,8 +83,8 @@ void ViewerApp::on_actionExit_triggered()
 
 void ViewerApp::on_actionOpen_Image_triggered()
 {
-    const QString file_name = QFileDialog::getOpenFileName();
-    if (file_name.isEmpty())
+    const QString file_path = QFileDialog::getOpenFileName();
+    if (file_path.isEmpty())
         return;
 
     if(!m_crw)
@@ -93,9 +93,17 @@ void ViewerApp::on_actionOpen_Image_triggered()
         return;
     }
 
-    m_it = ImageIterator(file_name);
+    m_it = ImageIterator(file_path);
     if(m_it)
+    {
         open_image(*m_it);
+    }
+    else
+    {
+        const QString filename = QFileInfo(file_path).fileName();
+        const QString msg("Could not open image %1");
+        show_warning_message("Loading failed", msg.arg(filename));
+    }
 }
 
 void ViewerApp::on_actionOpen_3d_geometry_triggered()
