@@ -60,9 +60,8 @@ ViewerApp::~ViewerApp()
 
 void ViewerApp::on_select_palette_combo_box_activated(const QString& i_palette_name)
 {
-    const Palette palette = Palette::get_palette_by_name(i_palette_name);
-    m_crw.reset(new ColorRampWidget(palette));
-    if (m_img)
+    set_palette(i_palette_name);
+    if (m_img && m_crw)
     {
         m_img->set_palette(m_crw->m_palette);
         m_image_label->setPixmap(QPixmap::fromImage(m_img->image()));
@@ -216,6 +215,17 @@ bool ViewerApp::has_image() const
 bool ViewerApp::has_palette() const
 {
     return m_crw != nullptr;
+}
+
+bool ViewerApp::show_palette() const
+{
+    return ui->actionShow_Palette->isChecked();
+}
+
+void ViewerApp::set_palette(const QString& i_palette_name)
+{
+    const Palette palette = Palette::get_palette_by_name(i_palette_name);
+    m_crw.reset(new ColorRampWidget(palette, show_palette()));
 }
 
 bool ViewerApp::is_fit_to_window_mode() const
