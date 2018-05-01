@@ -209,6 +209,8 @@ void ViewerApp::open_image(const QString& i_path)
     m_image_label->adjustSize();
     m_image_label->resize(m_scale_factor * pixmap.size());
 
+    ui->image_name->setText(QFileInfo(i_path).fileName());
+
     update_image();
     update_actions();
 }
