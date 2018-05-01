@@ -154,6 +154,8 @@ void ViewerApp::on_actionNormal_Size_triggered()
 {
     m_image_label->adjustSize();
     m_scale_factor = 1.f;
+
+    update_actions();
 }
 
 void ViewerApp::on_actionFit_to_Window_triggered()
