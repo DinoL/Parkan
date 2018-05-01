@@ -28,9 +28,6 @@ public:
     bool save(const QString& i_path) const;
 
 protected:
-    bool prepare_image();
-
-protected:
     QImage m_img;
     QFileInfo m_path;
 };
