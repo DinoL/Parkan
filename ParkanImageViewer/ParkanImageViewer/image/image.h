@@ -25,7 +25,7 @@ public:
 
     void set_palette(const Palette& i_palette);
 
-    void save(const QString& i_path) const;
+    bool save(const QString& i_path) const;
 
 protected:
     bool prepare_image();
