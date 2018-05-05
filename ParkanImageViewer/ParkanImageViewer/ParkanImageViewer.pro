@@ -49,7 +49,8 @@ SOURCES += main.cpp\
     utils/short_string.cpp \
     utils/string_utils.cpp \
     utils/vector_2d.cpp \
-    utils/vertex.cpp
+    utils/vertex.cpp \
+    image/frame_groupper.cpp
 
 HEADERS  += geometry/face.h \
     geometry/geometry_3d.h \
@@ -87,7 +88,8 @@ HEADERS  += geometry/face.h \
     utils/short_string.h \
     utils/string_utils.h \
     utils/vector_2d.h \
-    utils/vertex.h
+    utils/vertex.h \
+    image/frame_groupper.h
 
 
 FORMS    += ui/viewer_app.ui
