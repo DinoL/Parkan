@@ -31,14 +31,35 @@ Image ImageData::get_image() const
         throw DecodeImageDataException("Cannot create image from data");
     }
 
-    QImage image(m_width, m_height, QImage::QImage::Format_Indexed8);
-    for(qint32 y = 0; y < m_height; ++y)
+    QImage image = data_to_image(m_data, {m_width, m_height});
+    return Image(image, m_path);
+}
+
+QImage ImageData::data_to_image(const QByteArray& i_data, QSize i_size)
+{
+    const int width = i_size.width();
+    const int height = i_size.height();
+    if(i_data.size() != width * height)
+    {
+        throw DecodeImageDataException(QString("Cannot create image from data: sizes mismatch"
+                                       "%1 != %2").arg(i_data.size(), width * height));
+    }
+
+    QImage image(width, height, QImage::QImage::Format_Indexed8);
+    for(qint32 y = 0; y < height; ++y)
     {
         auto* row = image.scanLine(y);
-        for(qint32 x = 0; x < m_width; ++x)
+        for(qint32 x = 0; x < width; ++x)
         {
-            row[x] = m_data[x + m_width * y];
+            row[x] = i_data[x + width * y];
         }
     }
-    return Image(image, m_path);
+    return image;
+
+
+}
+
+int ImageData::point_to_index(int x, int y, int width)
+{
+    return x + y * width;
 }

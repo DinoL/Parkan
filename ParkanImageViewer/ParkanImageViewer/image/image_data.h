@@ -22,6 +22,10 @@ public:
     Image get_image() const;
 
 protected:
+    static QImage data_to_image(const QByteArray& i_data, QSize i_size);
+    static int point_to_index(int x, int y, int width);
+
+protected:
     qint32 m_width = 0;
     qint32 m_height = 0;
 
