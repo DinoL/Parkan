@@ -21,7 +21,9 @@ NgbSimpleImageData::NgbSimpleImageData(const QFileInfo& i_path)
 void NgbSimpleImageData::fill_data(std::istream& io_file)
 {
     InputBinaryStream bis(io_file);
-    m_data.resize(m_width * m_height);
 
+    m_data.resize(m_boundary.width() * m_boundary.height());
     bis >> m_data;
+
+    m_data = overlay_with_background();
 }

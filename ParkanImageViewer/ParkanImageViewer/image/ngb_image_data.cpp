@@ -29,8 +29,13 @@ bool NgbImageData::has_signature(std::istream& io_file, const std::vector<uchar>
     if(signature_vec != i_signature)
         return false;
 
-    m_width = words[2] - words[0] + 1;
-    m_height = words[3] - words[1] + 1;
+    m_width = 640;
+    m_height = 480;
+
+    const QPoint top_left(words[0], words[1]);
+    const QPoint bottom_right(words[2], words[3]);
+    m_boundary = QRect(top_left, bottom_right);
+
     m_default_color = default_color;
 
     return true;

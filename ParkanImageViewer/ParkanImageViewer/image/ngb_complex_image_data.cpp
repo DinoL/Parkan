@@ -21,7 +21,7 @@ NgbComplexImageData::NgbComplexImageData(const QFileInfo& i_path)
 void NgbComplexImageData::fill_data(std::istream& io_file)
 {
     InputBinaryStream bis(io_file);
-    std::vector<qint32> row_starts(m_height);
+    std::vector<qint32> row_starts(m_boundary.height());
     for(auto& rs : row_starts)
     {
         bis >> rs;
@@ -29,12 +29,12 @@ void NgbComplexImageData::fill_data(std::istream& io_file)
 
     m_data.clear();
 
-    for(qint32 row = 0; row < m_height; ++row)
+    for(qint32 row = 0; row < m_boundary.height(); ++row)
     {
-        QByteArray cur_row(m_width, m_default_color);
+        QByteArray cur_row(m_boundary.width(), m_default_color);
 
         qint32 cur_x = 0;
-        while(cur_x <= m_width)
+        while(cur_x <= m_boundary.width())
         {
             quint16 shift, cur_width;
             bis >> shift;
@@ -53,4 +53,6 @@ void NgbComplexImageData::fill_data(std::istream& io_file)
 
         m_data.append(cur_row);
     }
+
+    m_data = overlay_with_background();
 }
