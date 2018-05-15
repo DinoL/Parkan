@@ -4,6 +4,8 @@
 #include <QString>
 #include <QFileInfoList>
 
+#include "frame_groupper.h"
+
 class ImageIterator
 {
 public:
@@ -14,8 +16,8 @@ public:
     ImageIterator& operator--(int) { return dec(); }
     ImageIterator& operator--()    { return dec(); }
 
-    QFileInfo operator*() const;
-    QFileInfo* operator->();
+    QFileInfoList operator*() const;
+    QFileInfoList* operator->();
     operator bool() const;
 
     bool is_valid() const;
@@ -24,12 +26,13 @@ private:
     ImageIterator& inc();
     ImageIterator& dec();
 
-    int size() const { return m_images.size(); }
+    int size() const { return static_cast<int>(m_images.size()); }
     void init_images(const QString& i_dir);
 
 private:
     int m_pos = 0;
-    QFileInfoList m_images = {};
+    std::vector<QFileInfoList> m_images = {};
+    int find_index_of(const QFileInfo& i_path) const;
 };
 
 #endif // IMAGE_ITERATOR_H

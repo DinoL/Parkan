@@ -11,7 +11,7 @@
 #include <QString>
 #include <QScrollArea>
 #include <QScrollBar>
-#include <QFileInfo>
+#include <QFileInfoList>
 #include <QTimer>
 
 #include <memory>
@@ -53,9 +53,7 @@ private slots:
 
     void on_actionPrevious_triggered();
 
-    void on_actionOpen_animation_triggered();
-
-    void update_animation();
+    void next_frame();
 
     void on_actionShow_Palette_triggered(bool checked);
 
@@ -63,8 +61,9 @@ private:
 
     void setup_scroll_area();
 
-    bool open_image(const QFileInfo& i_path);
-    bool open_image(const QString& i_path);
+    void try_open_image(const QFileInfoList& i_paths);
+
+    bool open_image(const QFileInfoList& i_paths);
 
     void update_image();
 
@@ -86,12 +85,12 @@ private:
 
     void show_warning_message(const QString& i_title, const QString& i_message) const;
 
+    void clear_image();
+
 private:
     Ui::ViewerApp* ui;
     std::unique_ptr<ColorRampWidget> m_crw;
-    std::unique_ptr<Image> m_img;
-
-    std::unique_ptr<AnimatedImage> m_animation;
+    std::unique_ptr<AnimatedImage> m_img;
 
     ImageIterator m_it;
 

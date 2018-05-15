@@ -35,7 +35,7 @@ ViewerApp::ViewerApp(QWidget *parent) :
         set_palette(all_palettes.front());
 
     QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update_animation()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(next_frame()));
     timer->start(200);
 
     update_actions();
@@ -58,6 +58,20 @@ void ViewerApp::setup_scroll_area()
     ui->verticalLayout->addWidget(m_scroll_area);
 }
 
+void ViewerApp::try_open_image(const QFileInfoList& i_paths)
+{
+    if(i_paths.empty())
+        return;
+
+    if(!open_image(i_paths))
+    {
+        clear_image();
+        const QString filename = i_paths.front().fileName();
+        const QString msg("Could not open image %1");
+        show_warning_message("Loading failed", msg.arg(filename));
+    }
+}
+
 ViewerApp::~ViewerApp()
 {
     delete ui;
@@ -66,12 +80,9 @@ ViewerApp::~ViewerApp()
 void ViewerApp::on_select_palette_combo_box_activated(const QString& i_palette_name)
 {
     set_palette(i_palette_name);
-    if (m_img && m_crw)
+    if (has_image())
     {
         m_img->set_palette(m_crw->m_palette);
-        m_image_label->setPixmap(QPixmap::fromImage(m_img->image()));
-
-        update_image();
     }
     update_actions();
 }
@@ -87,7 +98,7 @@ void ViewerApp::on_actionOpen_Image_triggered()
     if (file_path.isEmpty())
         return;
 
-    if(!m_crw)
+    if(!has_palette())
     {
         show_warning_message("No palette", "Please select palette first");
         return;
@@ -96,13 +107,7 @@ void ViewerApp::on_actionOpen_Image_triggered()
     m_it = ImageIterator(file_path);
     if(m_it)
     {
-        open_image(*m_it);
-    }
-    else
-    {
-        const QString filename = QFileInfo(file_path).fileName();
-        const QString msg("Could not open image %1");
-        show_warning_message("Loading failed", msg.arg(filename));
+        try_open_image(*m_it);
     }
 }
 
@@ -124,7 +129,7 @@ void ViewerApp::on_actionOpen_3d_geometry_triggered()
 
 void ViewerApp::on_actionSave_image_triggered()
 {
-    if(!m_img)
+    if(!has_image())
     {
         show_warning_message("No image", "Please open image first");
         return;
@@ -133,7 +138,7 @@ void ViewerApp::on_actionSave_image_triggered()
     if(out_file_name.isEmpty())
         return;
 
-    const bool was_saved = m_img->save(out_file_name);
+    const bool was_saved = m_img->current_image().save(out_file_name);
     if(!was_saved)
     {
         show_warning_message("Not saved", QString("Failed to save image into %1").arg(out_file_name));
@@ -183,51 +188,19 @@ void ViewerApp::on_actionFit_to_Window_triggered()
     update_actions();
 }
 
-bool ViewerApp::open_image(const QFileInfo& i_path)
+bool ViewerApp::open_image(const QFileInfoList& i_paths)
 {
-    return open_image(i_path.absoluteFilePath());
-}
-
-bool ViewerApp::open_image(const QString& i_path)
-{
-    if(!m_crw || i_path.isEmpty())
+    if(!has_palette())
         return false;
 
-    try
-    {
-        m_img = TextureFactory::build_image(i_path);
-    }
-    catch(const ImageDataException& e)
-    {
-        show_warning_message("Error", e.what());
-    }
-
-    if (!m_img)
-    {
-        const QString filename = QFileInfo(i_path).fileName();
-        const QString msg("Could not open image %1");
-        show_warning_message("Loading failed", msg.arg(filename));
-        return false;
-    }
-
+    m_img.reset(new AnimatedImage(i_paths));
     m_img->set_palette(m_crw->m_palette);
-
-    const QPixmap pixmap = QPixmap::fromImage(m_img->image());
-    m_image_label->setPixmap(pixmap);
-    m_image_label->adjustSize();
-    m_image_label->resize(m_scale_factor * pixmap.size());
-
-    ui->image_name->setText(QFileInfo(i_path).fileName());
-
-    update_image();
-    update_actions();
-
-    return true;
+    return has_image();
 }
 
 void ViewerApp::update_image()
 {
-    if(!m_img)
+    if(!has_image())
         return;
 
     ui->actionFit_to_Window->setEnabled(true);
@@ -235,7 +208,7 @@ void ViewerApp::update_image()
 
 bool ViewerApp::has_image() const
 {
-    return m_img != nullptr;
+    return m_img && m_img->is_valid() && has_palette();
 }
 
 bool ViewerApp::has_palette() const
@@ -301,44 +274,40 @@ void ViewerApp::show_warning_message(const QString& i_title, const QString& i_me
     mb->show();
 }
 
+void ViewerApp::clear_image()
+{
+    if(!ui || !m_image_label)
+        return;
+
+    m_image_label->clear();
+    ui->image_name->setText("");
+}
+
 void ViewerApp::on_actionNext_triggered()
 {
     if(m_it)
-        open_image(*(++m_it));
+        try_open_image(*(++m_it));
 }
 
 void ViewerApp::on_actionPrevious_triggered()
 {
     if(m_it)
-        open_image(*(--m_it));
+        try_open_image(*(--m_it));
 }
 
-void ViewerApp::on_actionOpen_animation_triggered()
+void ViewerApp::next_frame()
 {
-    const QString file_name = QFileDialog::getOpenFileName();
-    if (file_name.isEmpty())
+    if(!has_image())
         return;
 
-    if(!m_crw)
-    {
-        show_warning_message("No palette", "Please select palette first");
-        return;
-    }
+    Image img = m_img->next_image();
+    img.set_palette(m_crw->m_palette);
+    const QPixmap pixmap = QPixmap::fromImage(img.image());
+    m_image_label->setPixmap(pixmap);
+    m_image_label->adjustSize();
+    m_image_label->resize(m_scale_factor * pixmap.size());
 
-    m_animation.reset(new AnimatedImage{QFileInfo(file_name)});
-}
-
-void ViewerApp::update_animation()
-{
-    if(!m_animation || !m_animation->is_valid())
-        return;
-
-    m_img.reset(new Image(m_animation->next_image()));
-    if (!m_img)
-        return;
-
-    m_img->set_palette(m_crw->m_palette);
-    m_image_label->setPixmap(QPixmap::fromImage(m_img->image()));
+    ui->image_name->setText(img.path().fileName());
 
     update_image();
     update_actions();
@@ -346,7 +315,7 @@ void ViewerApp::update_animation()
 
 void ViewerApp::on_actionShow_Palette_triggered(bool checked)
 {
-    if(!m_crw)
+    if(!has_palette())
         return;
 
     if(checked)

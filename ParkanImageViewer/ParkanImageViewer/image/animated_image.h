@@ -9,13 +9,19 @@ class AnimatedImage
 {
 public:
     AnimatedImage(const QFileInfo& i_path);
+    AnimatedImage(const QFileInfoList& i_frame_paths);
 
-    Image next_image();
+    const Image& next_image();
+    const Image& current_image() const;
+
+    void set_palette(const Palette& i_palette);
 
     bool is_valid() const;
 
 private:
-    Image get_image(int i_frame) const;
+    void init(const QFileInfoList& i_frame_paths);
+
+    const Image& get_image(int i_frame) const;
 
 private:
     std::vector<Image> m_frames;
