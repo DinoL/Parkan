@@ -51,10 +51,15 @@ std::unique_ptr<Image> TextureFactory::build_image(const QFileInfo& i_file_info)
     return nullptr;
 }
 
+QStringList get_animated_image_extensions()
+{
+    return QStringList{"*.A", "*.V"};
+}
+
 QStringList get_image_extensions()
 {
     QStringList all_exts{"*.DIB", "*.NGB", "*.F", "*.W"};
-    for(QString ext : {"*.A", "*.V"})
+    for(QString ext : get_animated_image_extensions())
     {
         for(int i = 0; i < 10; ++i)
         {
