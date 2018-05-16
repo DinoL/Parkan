@@ -194,8 +194,30 @@ bool ViewerApp::open_image(const QFileInfoList& i_paths)
         return false;
 
     m_img.reset(new AnimatedImage(i_paths));
+
+    if(!has_image())
+        return false;
+
     m_img->set_palette(m_crw->m_palette);
-    return has_image();
+    show_image(m_img->current_image());
+    update_image();
+
+    return true;
+}
+
+bool ViewerApp::show_image(const Image& i_image)
+{
+    if(!ui || !m_image_label)
+        return false;
+
+    const QPixmap pixmap = QPixmap::fromImage(i_image.image());
+    m_image_label->setPixmap(pixmap);
+    m_image_label->adjustSize();
+    m_image_label->resize(m_scale_factor * pixmap.size());
+
+    ui->image_name->setText(i_image.path().fileName());
+
+    return true;
 }
 
 void ViewerApp::update_image()
@@ -302,12 +324,8 @@ void ViewerApp::next_frame()
 
     Image img = m_img->next_image();
     img.set_palette(m_crw->m_palette);
-    const QPixmap pixmap = QPixmap::fromImage(img.image());
-    m_image_label->setPixmap(pixmap);
-    m_image_label->adjustSize();
-    m_image_label->resize(m_scale_factor * pixmap.size());
 
-    ui->image_name->setText(img.path().fileName());
+    show_image(img);
 
     update_image();
     update_actions();

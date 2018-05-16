@@ -65,6 +65,8 @@ private:
 
     bool open_image(const QFileInfoList& i_paths);
 
+    bool show_image(const Image& i_image);
+
     void update_image();
 
     void update_actions();
