@@ -239,8 +239,8 @@ void ViewerApp::update_actions()
 
     const bool can_zoom = has_image() && !is_fit_to_window_mode();
 
-    ui->actionZoom_In->setEnabled(can_zoom);
-    ui->actionZoom_Out->setEnabled(can_zoom);
+    ui->actionZoom_In->setEnabled(can_zoom && m_scale_factor < m_max_zoom);
+    ui->actionZoom_Out->setEnabled(can_zoom && m_scale_factor > m_min_zoom);
     ui->actionNormal_Size->setEnabled(can_zoom);
     ui->actionSave_image->setEnabled(has_image());
     ui->actionNext->setEnabled(has_image());
