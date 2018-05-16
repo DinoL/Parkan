@@ -51,7 +51,8 @@ SOURCES += main.cpp\
     utils/vector_2d.cpp \
     utils/vertex.cpp \
     image/frame_groupper.cpp \
-    image/image_frame.cpp
+    image/image_frame.cpp \
+    image/image_extensions.cpp
 
 HEADERS  += geometry/face.h \
     geometry/geometry_3d.h \
@@ -91,7 +92,8 @@ HEADERS  += geometry/face.h \
     utils/vector_2d.h \
     utils/vertex.h \
     image/frame_groupper.h \
-    image/image_frame.h
+    image/image_frame.h \
+    image/image_extensions.h
 
 
 FORMS    += ui/viewer_app.ui

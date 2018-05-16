@@ -5,6 +5,9 @@
 
 #include "utils/files_filter.h"
 
+#include <QStringList>
+#include <QFileInfoList>
+
 #include <memory>
 
 class TextureFactory

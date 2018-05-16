@@ -4,6 +4,7 @@
 #include "dib_image_data.h"
 #include "ngb_simple_image_data.h"
 #include "ngb_complex_image_data.h"
+#include "image_extensions.h"
 
 #include "utils/exceptions.h"
 
@@ -49,24 +50,6 @@ std::unique_ptr<Image> TextureFactory::build_image(const QFileInfo& i_file_info)
             return std::make_unique<Image>(image_data->get_image());
     }
     return nullptr;
-}
-
-QStringList get_animated_image_extensions()
-{
-    return QStringList{"*.A", "*.V"};
-}
-
-QStringList get_image_extensions()
-{
-    QStringList all_exts{"*.DIB", "*.NGB", "*.F", "*.W"};
-    for(QString ext : get_animated_image_extensions())
-    {
-        for(int i = 0; i < 10; ++i)
-        {
-            all_exts << (i == 0 ? ext : ext + QString::number(i));
-        }
-    }
-    return all_exts;
 }
 
 QFileInfoList get_images(const QString& i_dir, bool i_recursive)
