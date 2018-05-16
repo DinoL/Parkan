@@ -200,7 +200,8 @@ bool ViewerApp::open_image(const QFileInfoList& i_paths)
 
     m_img->set_palette(m_crw->m_palette);
     show_image(m_img->current_image());
-    update_image();
+
+    update_actions();
 
     return true;
 }
@@ -218,14 +219,6 @@ bool ViewerApp::show_image(const Image& i_image)
     ui->image_name->setText(i_image.path().fileName());
 
     return true;
-}
-
-void ViewerApp::update_image()
-{
-    if(!has_image())
-        return;
-
-    ui->actionFit_to_Window->setEnabled(true);
 }
 
 bool ViewerApp::has_image() const
@@ -267,6 +260,7 @@ void ViewerApp::update_actions()
     ui->actionSave_image->setEnabled(has_image());
     ui->actionNext->setEnabled(has_image());
     ui->actionPrevious->setEnabled(has_image());
+    ui->actionFit_to_Window->setEnabled(has_image());
 }
 
 void ViewerApp::scale_image(float i_factor)
@@ -327,7 +321,6 @@ void ViewerApp::next_frame()
 
     show_image(img);
 
-    update_image();
     update_actions();
 }
 
