@@ -319,7 +319,7 @@ void ViewerApp::on_actionPrevious_triggered()
 
 void ViewerApp::next_frame()
 {
-    if(!has_image())
+    if(!has_image() || m_img->is_single_frame())
         return;
 
     Image img = m_img->next_image();

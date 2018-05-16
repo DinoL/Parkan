@@ -64,6 +64,11 @@ bool AnimatedImage::is_valid() const
     return !m_frames.empty();
 }
 
+bool AnimatedImage::is_single_frame() const
+{
+    return m_frames.size() == 1;
+}
+
 void AnimatedImage::init(const QFileInfoList& i_frame_paths)
 {
     for(const auto file : i_frame_paths)

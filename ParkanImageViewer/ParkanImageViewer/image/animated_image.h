@@ -17,6 +17,7 @@ public:
     void set_palette(const Palette& i_palette);
 
     bool is_valid() const;
+    bool is_single_frame() const;
 
 private:
     void init(const QFileInfoList& i_frame_paths);
