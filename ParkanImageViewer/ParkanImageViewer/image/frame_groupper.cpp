@@ -17,6 +17,8 @@ std::vector<ImageFrame> FrameGroupper::convert_to_frames(const QFileInfoList& i_
     std::vector<ImageFrame> result;
     std::transform(i_paths.begin(), i_paths.end(), std::back_inserter(result),
                    [](const QFileInfo& i_path){ return ImageFrame(i_path); });
+
+    std::sort(result.begin(), result.end());
     return result;
 }
 
@@ -53,31 +55,20 @@ bool FrameGroupper::add_group(std::vector<FrameGroupper::FrameGroup>& io_all_gro
     if(io_group.empty())
         return false;
 
-    if(io_group.size() > 1)
-    {
-        auto by_number = [](const ImageFrame& i_lhs, const ImageFrame& i_rhs)
-        {
-            return i_lhs.number() < i_rhs.number();
-        };
-
-        // sort group by frame number
-        std::sort(io_group.begin(), io_group.end(), by_number);
-    }
-
     io_all_groups.push_back(io_group);
     return true;
 }
 
 bool FrameGroupper::merge(FrameGroupper::FrameGroup& io_group, const ImageFrame& i_frame) const
 {
-    if(io_group.empty() || !frames_are_in_one_group(io_group.back(), i_frame))
+    if(io_group.empty() || !frames_are_sequential(io_group.back(), i_frame))
         return false;
 
     io_group.push_back(i_frame);
     return true;
 }
 
-bool FrameGroupper::frames_are_in_one_group(const ImageFrame& i_first, const ImageFrame& i_second) const
+bool FrameGroupper::frames_are_sequential(const ImageFrame& i_first, const ImageFrame& i_second) const
 {
-    return i_first.name() == i_second.name();
+    return i_first.name() == i_second.name() && i_second.number() == i_first.number() + 1 ;
 }

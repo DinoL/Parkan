@@ -24,7 +24,7 @@ private:
 
     bool merge(FrameGroup& io_group, const ImageFrame& i_frame) const;
 
-    bool frames_are_in_one_group(const ImageFrame& i_first, const ImageFrame& i_second) const;
+    bool frames_are_sequential(const ImageFrame& i_first, const ImageFrame& i_second) const;
 
 };
 
