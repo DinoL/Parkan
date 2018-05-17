@@ -1,31 +1,60 @@
 #include "image_frame.h"
 
+#include "image_extensions.h"
+
 #include <QRegularExpression>
+
+struct NameNumberSplitter
+{
+    NameNumberSplitter(const QString& i_str)
+    {
+        if(i_str.isEmpty())
+            return;
+
+        const int first_digit = i_str.lastIndexOf(QRegularExpression("\\D")) + 1;
+        if(first_digit >= i_str.size())
+        {
+            name = i_str;
+            return;
+        }
+
+        const QString numeric_part = i_str.right(i_str.size() - first_digit);
+        bool has_number = false;
+        int temp = numeric_part.toInt(&has_number, 10);
+        if(has_number)
+        {
+            name = i_str.left(first_digit);
+            number = temp;
+        }
+        else
+        {
+            name = i_str;
+        }
+    }
+
+    QString name = "";
+    int number = 0;
+};
 
 ImageFrame::ImageFrame(const QFileInfo& i_path) :
     m_path(i_path)
 {
     const QString ext = i_path.suffix();
-    int number;
-    if(extract_number(ext, number))
-    {
-        m_number = number;
-        const int first_digit = ext.lastIndexOf(QRegularExpression("\\D")) + 1;
-        m_name = i_path.baseName() + '.' + ext.left(first_digit);
-        return;
-    }
 
-    const QString filename = i_path.baseName();
-    if(extract_number(filename, number))
+    if(get_animated_image_extensions().contains(ext))
     {
-        m_number = number;
-        const int first_digit = filename.lastIndexOf(QRegularExpression("\\D")) + 1;
-        m_name = filename.left(first_digit) + '.' + ext;
-        return;
+        // this image can be animated only by extension, numbers in filename denote different images
+        const NameNumberSplitter split(ext);
+        m_number = split.number;
+        m_name = i_path.baseName() + '.' + split.name;
     }
-
-    m_number = 0;
-    m_name = i_path.fileName();
+    else
+    {
+        // extension does not contain number, so try filename
+        const NameNumberSplitter split(i_path.baseName());
+        m_number = split.number;
+        m_name = split.name + '.' + ext;
+    }
 }
 
 QFileInfo ImageFrame::path() const
@@ -41,19 +70,4 @@ QString ImageFrame::name() const
 int ImageFrame::number() const
 {
     return m_number;
-}
-
-bool ImageFrame::extract_number(const QString& i_str, int& o_number) const
-{
-    if(i_str.isEmpty())
-        return false;
-
-    const int first_digit = i_str.lastIndexOf(QRegularExpression("\\D")) + 1;
-    if(first_digit >= i_str.size())
-        return false;
-
-    const QString numeric_part = i_str.right(i_str.size() - first_digit);
-    bool has_number = false;
-    o_number = numeric_part.toInt(&has_number, 10);
-    return has_number;
 }

@@ -16,9 +16,6 @@ public:
     int number() const;
 
 private:
-    bool extract_number(const QString& i_str, int& o_number) const;
-
-private:
     QFileInfo m_path;
     QString m_name;
     int m_number;
