@@ -71,3 +71,11 @@ int ImageFrame::number() const
 {
     return m_number;
 }
+
+bool ImageFrame::operator<(const ImageFrame& i_other) const
+{
+    if(m_name != i_other.m_name)
+        return m_name < i_other.m_name;
+
+    return m_number < i_other.m_number;
+}

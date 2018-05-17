@@ -15,6 +15,8 @@ public:
 
     int number() const;
 
+    bool operator<(const ImageFrame& i_other) const;
+
 private:
     QFileInfo m_path;
     QString m_name;
