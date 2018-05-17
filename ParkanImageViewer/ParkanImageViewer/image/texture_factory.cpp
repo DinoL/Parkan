@@ -55,7 +55,8 @@ std::unique_ptr<Image> TextureFactory::build_image(const QFileInfo& i_file_info)
 QFileInfoList get_images(const QString& i_dir, bool i_recursive)
 {
     const QStringList extensions = get_image_extensions();
-    QFileInfoList all_images = get_files_from_dir_by_mask(i_dir, extensions);
+    const QStringList file_masks = convert_to_file_masks(extensions);
+    QFileInfoList all_images = get_files_from_dir_by_mask(i_dir, file_masks);
 
     if(i_recursive)
     {

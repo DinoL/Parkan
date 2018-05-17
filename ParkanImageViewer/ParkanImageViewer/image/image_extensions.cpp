@@ -2,7 +2,7 @@
 
 QStringList get_image_extensions()
 {
-    QStringList extensions{"*.DIB", "*.NGB", "*.F", "*.W"};
+    QStringList extensions{"DIB", "NGB", "F", "W"};
     extensions << get_animated_image_extensions();
     return extensions;
 }
@@ -10,7 +10,7 @@ QStringList get_image_extensions()
 QStringList get_animated_image_extensions()
 {
     QStringList extensions;
-    for(QString ext : {"*.A", "*.V"})
+    for(QString ext : {"A", "V"})
     {
         for(int i = 0; i < 10; ++i)
         {
