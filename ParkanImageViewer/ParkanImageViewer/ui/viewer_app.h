@@ -57,6 +57,14 @@ private slots:
 
     void on_actionShow_Palette_triggered(bool checked);
 
+    void on_frames_per_second_control_valueChanged(int i_frames_per_second);
+
+    void on_next_frame_button_clicked();
+
+    void on_previous_frame_button_clicked();
+
+    void on_play_pause_button_toggled(bool i_set_on_pause);
+
 private:
 
     void setup_scroll_area();

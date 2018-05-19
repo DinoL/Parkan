@@ -52,6 +52,104 @@
       </property>
      </widget>
     </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="previous_frame_button">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../icons.qrc">
+          <normaloff>:/icons/previous_frame_icon.png</normaloff>:/icons/previous_frame_icon.png</iconset>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="play_pause_button">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../icons.qrc">
+          <normaloff>:/icons/pause_icon.png</normaloff>
+          <normalon>:/icons/play_icon.png</normalon>:/icons/pause_icon.png</iconset>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="next_frame_button">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../icons.qrc">
+          <normaloff>:/icons/next_frame_icon.png</normaloff>:/icons/next_frame_icon.png</iconset>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="frames_per_second_control">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>20</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="frames_per_second_label">
+        <property name="minimumSize">
+         <size>
+          <width>95</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>frames per second</string>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -139,6 +237,10 @@
    </property>
   </action>
   <action name="actionOpen_3d_geometry">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/model_3d_icon.png</normaloff>:/icons/model_3d_icon.png</iconset>
+   </property>
    <property name="text">
     <string>Open 3d geometry...</string>
    </property>

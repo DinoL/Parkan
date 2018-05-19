@@ -55,7 +55,7 @@ void ViewerApp::setup_scroll_area()
 
     m_scroll_area->setWidget(m_image_label);
 
-    ui->verticalLayout->addWidget(m_scroll_area);
+    ui->verticalLayout->insertWidget(2, m_scroll_area, 1);
 }
 
 void ViewerApp::try_open_image(const QFileInfoList& i_paths)
@@ -339,12 +339,27 @@ void ViewerApp::on_actionShow_Palette_triggered(bool checked)
     if(!has_palette())
         return;
 
-    if(checked)
-    {
-        m_crw->show();
-    }
-    else
-    {
-        m_crw->hide();
-    }
+    m_crw->setVisible(checked);
+}
+
+void ViewerApp::on_frames_per_second_control_valueChanged(int i_frames_per_second)
+{
+    m_timer->setInterval(1000.f/i_frames_per_second);
+}
+
+void ViewerApp::on_next_frame_button_clicked()
+{
+    if(has_image())
+        show_image(m_img->next_image());
+}
+
+void ViewerApp::on_previous_frame_button_clicked()
+{
+    if(has_image())
+        show_image(m_img->previous_image());
+}
+
+void ViewerApp::on_play_pause_button_toggled(bool i_set_on_pause)
+{
+    i_set_on_pause ? m_timer->stop() : m_timer->start();
 }
