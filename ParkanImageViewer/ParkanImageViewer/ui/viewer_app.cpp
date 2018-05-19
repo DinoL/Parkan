@@ -221,6 +221,14 @@ bool ViewerApp::show_image(const Image& i_image)
     return true;
 }
 
+void ViewerApp::update_image()
+{
+    if(!has_image())
+        return;
+
+    show_image(m_img->current_image());
+}
+
 bool ViewerApp::has_image() const
 {
     return m_img && m_img->is_valid() && has_palette();

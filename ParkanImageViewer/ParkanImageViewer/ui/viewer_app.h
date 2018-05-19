@@ -67,6 +67,8 @@ private:
 
     bool show_image(const Image& i_image);
 
+    void update_image();
+
     void update_actions();
 
     bool has_image() const;
