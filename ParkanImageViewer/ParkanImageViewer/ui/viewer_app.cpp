@@ -84,6 +84,7 @@ void ViewerApp::on_select_palette_combo_box_activated(const QString& i_palette_n
     {
         m_img->set_palette(m_crw->m_palette);
     }
+    update_image();
     update_actions();
 }
 
@@ -199,8 +200,8 @@ bool ViewerApp::open_image(const QFileInfoList& i_paths)
         return false;
 
     m_img->set_palette(m_crw->m_palette);
-    show_image(m_img->current_image());
 
+    update_image();
     update_actions();
 
     return true;
