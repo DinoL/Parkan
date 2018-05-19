@@ -10,5 +10,10 @@
         <file>icons/zoom_in_icon.png</file>
         <file>icons/zoom_out_icon.png</file>
         <file>icons/palette_icon.png</file>
+        <file>icons/pause_icon.png</file>
+        <file>icons/play_icon.png</file>
+        <file>icons/next_frame_icon.png</file>
+        <file>icons/previous_frame_icon.png</file>
+        <file>icons/model_3d_icon.png</file>
     </qresource>
 </RCC>
