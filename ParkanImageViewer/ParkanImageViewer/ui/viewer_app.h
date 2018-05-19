@@ -97,6 +97,8 @@ private:
 
     void clear_image();
 
+    void set_animation_speed(int i_frames_per_second);
+
 private:
     Ui::ViewerApp* ui;
     std::unique_ptr<ColorRampWidget> m_crw;

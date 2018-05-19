@@ -36,7 +36,8 @@ ViewerApp::ViewerApp(QWidget *parent) :
 
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(next_frame()));
-    m_timer->start(200);
+    set_animation_speed(ui->frames_per_second_control->value());
+    m_timer->start();
 
     update_actions();
 }
@@ -309,6 +310,11 @@ void ViewerApp::clear_image()
     ui->image_name->setText("");
 }
 
+void ViewerApp::set_animation_speed(int i_frames_per_second)
+{
+    m_timer->setInterval(1000.f / i_frames_per_second);
+}
+
 void ViewerApp::on_actionNext_triggered()
 {
     if(m_it)
@@ -344,7 +350,7 @@ void ViewerApp::on_actionShow_Palette_triggered(bool checked)
 
 void ViewerApp::on_frames_per_second_control_valueChanged(int i_frames_per_second)
 {
-    m_timer->setInterval(1000.f/i_frames_per_second);
+    set_animation_speed(i_frames_per_second);
 }
 
 void ViewerApp::on_next_frame_button_clicked()
