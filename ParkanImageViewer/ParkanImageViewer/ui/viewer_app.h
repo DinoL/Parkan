@@ -98,6 +98,7 @@ private:
 
     QLabel* m_image_label;
     QScrollArea* m_scroll_area;
+    QTimer* m_timer;
 
     float m_scale_factor = 1.f;
     float m_scale_step = 0.25f;

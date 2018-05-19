@@ -34,9 +34,9 @@ ViewerApp::ViewerApp(QWidget *parent) :
     if(!all_palettes.isEmpty())
         set_palette(all_palettes.front());
 
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(next_frame()));
-    timer->start(200);
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(next_frame()));
+    m_timer->start(200);
 
     update_actions();
 }
@@ -75,6 +75,7 @@ void ViewerApp::try_open_image(const QFileInfoList& i_paths)
 ViewerApp::~ViewerApp()
 {
     delete ui;
+    delete m_timer;
 }
 
 void ViewerApp::on_select_palette_combo_box_activated(const QString& i_palette_name)
