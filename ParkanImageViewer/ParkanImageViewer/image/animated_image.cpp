@@ -34,6 +34,14 @@ AnimatedImage::AnimatedImage(const QFileInfoList& i_frame_paths)
     init(i_frame_paths);
 }
 
+const Image&AnimatedImage::previous_image()
+{
+    --m_frame;
+    m_frame += m_frames.size();
+    m_frame %= m_frames.size();
+    return get_image(m_frame);
+}
+
 const Image& AnimatedImage::get_image(int i_frame) const
 {
     return m_frames[i_frame % m_frames.size()];

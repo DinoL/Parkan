@@ -11,6 +11,7 @@ public:
     AnimatedImage(const QFileInfo& i_path);
     AnimatedImage(const QFileInfoList& i_frame_paths);
 
+    const Image& previous_image();
     const Image& next_image();
     const Image& current_image() const;
 
