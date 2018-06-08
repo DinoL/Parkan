@@ -198,6 +198,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionOpen_Image"/>
+   <addaction name="actionOpen_3d_geometry"/>
    <addaction name="actionSave_image"/>
    <addaction name="actionZoom_Out"/>
    <addaction name="actionZoom_In"/>

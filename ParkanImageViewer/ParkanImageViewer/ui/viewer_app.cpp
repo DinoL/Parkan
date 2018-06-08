@@ -126,7 +126,6 @@ void ViewerApp::on_actionOpen_3d_geometry_triggered()
     if(out_file_name.isEmpty())
         return;
 
-    std::cout << "Exporting from " << file_name.toStdString() << " to " << out_file_name.toStdString() << std::endl;
     GeometryExporter().export_geometry(file_name, out_file_name);
 }
 
