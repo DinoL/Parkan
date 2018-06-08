@@ -4,7 +4,7 @@
 #include "geometry_3d.h"
 #include "utils/serializable.h"
 
-class SerializableGeometry : public Geometry3d, public ISerializable
+class SerializableGeometry : public IGeometry3d, public ISerializable
 {
 };
 

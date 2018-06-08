@@ -17,15 +17,9 @@ public:
     virtual std::vector<Face> get_faces() const = 0;
 
     virtual QString get_textures_palette_name() const = 0;
-    virtual QDir get_textures_folder() const = 0;
-    virtual QFileInfo get_texture_fullpath(const QString&) const = 0;
     virtual std::set<QString> all_texture_names() const = 0;
-};
 
-class Geometry3d : public IGeometry3d
-{
-public:
-    virtual QFileInfo get_texture_fullpath(const QString& i_texture_name) const final;
+    virtual bool is_empty() const = 0;
 };
 
 #endif // GEOMETRY_3D_H

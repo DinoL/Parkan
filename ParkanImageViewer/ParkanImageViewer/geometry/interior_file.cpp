@@ -66,12 +66,7 @@ std::vector<Face> InteriorFile::get_faces() const
 
 QString InteriorFile::get_textures_palette_name() const
 {
-    return "PAL.PAL";
-}
-
-QDir InteriorFile::get_textures_folder() const
-{
-    return QDir(R"(C:\Users\Leonid\Downloads\PARKAN THE IMPERIAL CHRONICLES\TEXTURES.LIB.dir)");
+    return "Interior";
 }
 
 std::set<QString> InteriorFile::all_texture_names() const
@@ -79,12 +74,17 @@ std::set<QString> InteriorFile::all_texture_names() const
     std::set<QString> texture_names;
     for(const auto& p : m_vertical_polygons)
     {
-        texture_names.insert(get_texture_fullpath(p.texture.to_string()).absoluteFilePath());
+        texture_names.insert(p.texture.to_string());
     }
     for(const auto& p : m_horizontal_polygons)
     {
-        texture_names.insert(get_texture_fullpath(p.texture.to_string()).absoluteFilePath());
+        texture_names.insert(p.texture.to_string());
     }
     return texture_names;
+}
+
+bool InteriorFile::is_empty() const
+{
+    return m_vertices.empty() || (m_horizontal_polygons.empty() && m_vertical_polygons.empty());
 }
 

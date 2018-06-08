@@ -16,7 +16,6 @@ SOURCES += main.cpp\
     geometry/face.cpp \
     geometry/geometry_3d.cpp \
     geometry/geometry_exporter.cpp \
-    geometry/geometry_importer.cpp \
     geometry/interior.cpp \
     geometry/interior_file.cpp \
     geometry/obj_model.cpp \
@@ -52,12 +51,13 @@ SOURCES += main.cpp\
     utils/vertex.cpp \
     image/frame_groupper.cpp \
     image/image_frame.cpp \
-    image/image_extensions.cpp
+    image/image_extensions.cpp \
+    geometry/geometry_file.cpp \
+    geometry/geometry_type.cpp
 
 HEADERS  += geometry/face.h \
     geometry/geometry_3d.h \
     geometry/geometry_exporter.h \
-    geometry/geometry_importer.h \
     geometry/interior.h \
     geometry/interior_file.h \
     geometry/obj_model.h \
@@ -93,7 +93,9 @@ HEADERS  += geometry/face.h \
     utils/vertex.h \
     image/frame_groupper.h \
     image/image_frame.h \
-    image/image_extensions.h
+    image/image_extensions.h \
+    geometry/geometry_file.h \
+    geometry/geometry_type.h
 
 
 FORMS    += ui/viewer_app.ui

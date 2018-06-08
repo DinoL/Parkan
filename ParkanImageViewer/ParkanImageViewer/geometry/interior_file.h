@@ -13,8 +13,9 @@ public:
     virtual std::vector<Face> get_faces() const override;
 
     virtual QString get_textures_palette_name() const override;
-    virtual QDir get_textures_folder() const override;
-    virtual  std::set<QString> all_texture_names() const override;
+    virtual std::set<QString> all_texture_names() const override;
+
+    virtual bool is_empty() const override;
 
 private:
     virtual void read(std::istream& io_s) override;

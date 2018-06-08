@@ -47,12 +47,7 @@ std::vector<Face> Object3d::get_faces() const
 
 QString Object3d::get_textures_palette_name() const
 {
-    return "PAL.PAL";
-}
-
-QDir Object3d::get_textures_folder() const
-{
-    return QDir(R"(C:\Users\Leonid\Downloads\PARKAN THE IMPERIAL CHRONICLES\TEXTUR3D.LIB.dir)");
+    return "Space";
 }
 
 std::set<QString> Object3d::all_texture_names() const
@@ -60,8 +55,13 @@ std::set<QString> Object3d::all_texture_names() const
     std::set<QString> texture_names;
     for(const Face& f : get_faces())
     {
-        texture_names.insert(get_texture_fullpath(QString(f.texture.c_str())).absoluteFilePath());
+        texture_names.insert(QString(f.texture.c_str()));
     }
     return texture_names;
+}
+
+bool Object3d::is_empty() const
+{
+    return m_vertices.empty() || m_faces.empty();
 }
 

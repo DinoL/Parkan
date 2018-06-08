@@ -35,15 +35,15 @@ class ObjModel
 public:
     ObjModel(const SerializableGeometry& i_geometry);
 
-    void save(const std::string& i_to, const std::string& i_mtl_file) const;
+    void save(const QFileInfo& i_to) const;
 
 private:
-    void save_material_file(const std::string& to) const;
+    void save_material_file(const QFileInfo& i_to) const;
 
 private:
-    std::vector<Vertex> vxs;
-    AllUVs uvs;
-    std::vector<ObjFace> fs;
+    std::vector<Vertex> m_vertices;
+    AllUVs m_uvs;
+    std::vector<ObjFace> m_faces;
 };
 
 #endif // OBJ_MODEL_H

@@ -1,11 +1,8 @@
 #include "geometry_exporter.h"
-
-#include "geometry_importer.h"
-#include "obj_model.h"
-#include "interior_file.h"
-#include "object_3d.h"
+#include "geometry_file.h"
 
 #include "utils/io_utils.h"
+#include "utils/files_filter.h"
 #include "image/texture_exporter.h"
 #include "image/palette.h"
 
@@ -36,55 +33,17 @@ bool GeometryExporter::export_all_geometry_files(const QFileInfoList& i_all_geom
     return success;
 }
 
-std::unique_ptr<SerializableGeometry> get_geometry_by_ext(const QString& i_ext)
-{
-    if(i_ext == "BIN")
-    {
-        return std::make_unique<InteriorFile>();
-    }
-    if(i_ext == "3D")
-    {
-        return std::make_unique<Object3d>();
-    }
-    return nullptr;
-}
-
 bool GeometryExporter::export_geometry(const QString& i_from, const QString& i_to) const
 {
     std::cout << "Exporting as textured obj to " << i_to.toStdString() << std::endl;
     if(i_to.isEmpty())
         return false;
 
-    QString ext = QFileInfo(i_from).suffix().toUpper();
-    std::unique_ptr<SerializableGeometry> geometry = get_geometry_by_ext(ext);
-    if(!geometry)
+    const GeometryFile geometry{QFileInfo(i_from)};
+    if(!geometry.is_valid())
         return false;
 
-    GeometryImporter().import_geometry(i_from, *geometry);
-    return export_geometry(*geometry, i_to);
-}
-
-bool GeometryExporter::export_geometry(const SerializableGeometry& i_geometry, const QString& i_to) const
-{
-    if(i_to.isEmpty())
-        return false;
-
-    QFileInfo file_info(i_to);
-    QString obj_file_name = file_info.baseName();
-    QDir obj_file_dir = file_info.dir();
-
-    const auto all_textures = i_geometry.all_texture_names();
-
-    const Palette palette = Palette::get_palette_by_name(i_geometry.get_textures_palette_name());
-    TextureExporter().export_textures(all_textures, palette, obj_file_dir);
-
-    ObjModel model(i_geometry);
-    const auto mtl_file = obj_file_dir.absoluteFilePath(obj_file_name + ".mtl").toStdString();
-
-    model.save(i_to.toStdString(), mtl_file);
-
-    std::cout << "Successfully exported to " << i_to.toStdString() << " MTL " << mtl_file << std::endl;
-    return true;
+    return geometry.export_to(QFileInfo(i_to));
 }
 
 QFileInfoList get_geometry_files(const QString& i_dir)
