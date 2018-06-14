@@ -35,10 +35,10 @@ class ObjModel
 public:
     ObjModel(const SerializableGeometry& i_geometry);
 
-    void save(const QFileInfo& i_to) const;
+    bool save(const QFileInfo& i_to) const;
 
 private:
-    void save_material_file(const QFileInfo& i_to) const;
+    bool save_material_file(const QFileInfo& i_to) const;
 
 private:
     std::vector<Vertex> m_vertices;

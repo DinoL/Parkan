@@ -24,7 +24,7 @@ ObjModel::ObjModel(const SerializableGeometry& i_geometry)
     }
 }
 
-void ObjModel::save_material_file(const QFileInfo& i_to) const
+bool ObjModel::save_material_file(const QFileInfo& i_to) const
 {
     std::set<QString> textures;
     for(const auto& face : m_faces)
@@ -34,23 +34,24 @@ void ObjModel::save_material_file(const QFileInfo& i_to) const
 
     std::ofstream out(i_to.absoluteFilePath().toStdString());
     if(!out.good())
-        return;
+        return false;
 
     for(const auto& texture : textures)
     {
         out << "newmtl " << texture << std::endl;
         out << "map_Kd " << texture << ".png" << std::endl;
     }
+    return true;
 }
 
-void ObjModel::save(const QFileInfo& i_to) const
+bool ObjModel::save(const QFileInfo& i_to) const
 {
     const QFileInfo mtl_file(i_to.absoluteDir().absoluteFilePath(i_to.baseName() + ".mtl"));
     save_material_file(mtl_file);
 
     std::ofstream out(i_to.absoluteFilePath().toStdString());
     if(!out.good())
-        return;
+        return false;
 
     out << "mtllib " << mtl_file.fileName().toStdString() << std::endl;
     for(const Vertex& vertex : m_vertices)
@@ -75,6 +76,8 @@ void ObjModel::save(const QFileInfo& i_to) const
     }
     std::cout << "Successfully exported to " << i_to.absoluteFilePath().toStdString() << std::endl;
     std::cout << "Material file: " << mtl_file.absoluteFilePath().toStdString() << std::endl;
+
+    return true;
 }
 
 size_t AllUVs::add_one(const Vector2d& uv)
