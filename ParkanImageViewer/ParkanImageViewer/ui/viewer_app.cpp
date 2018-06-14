@@ -67,9 +67,7 @@ void ViewerApp::try_open_image(const QFileInfoList& i_paths)
     if(!open_image(i_paths))
     {
         clear_image();
-        const QString filename = i_paths.front().fileName();
-        const QString msg("Could not open image %1");
-        show_warning_message("Loading failed", msg.arg(filename));
+        show_file_loading_error_message(i_paths.front());
     }
 }
 
@@ -97,8 +95,8 @@ void ViewerApp::on_actionExit_triggered()
 
 void ViewerApp::on_actionOpen_Image_triggered()
 {
-    const QString file_path = QFileDialog::getOpenFileName();
-    if (file_path.isEmpty())
+    const QString input_file_path = QFileDialog::getOpenFileName();
+    if (input_file_path.isEmpty())
         return;
 
     if(!has_palette())
@@ -107,26 +105,33 @@ void ViewerApp::on_actionOpen_Image_triggered()
         return;
     }
 
-    m_it = ImageIterator(file_path);
-    if(m_it)
+    m_it = ImageIterator(input_file_path);
+    if(!m_it)
     {
-        try_open_image(*m_it);
+        clear_image();
+        show_file_loading_error_message(input_file_path);
     }
+
+    try_open_image(*m_it);
 }
 
 void ViewerApp::on_actionOpen_3d_geometry_triggered()
 {
-    const QString file_name = QFileDialog::getOpenFileName();
-    if (file_name.isEmpty())
+    const QString input_file_path = QFileDialog::getOpenFileName();
+    if (input_file_path.isEmpty())
         return;
 
-    const QString out_file_name = QFileDialog::getSaveFileName(this, tr("Save 3d geometry file"),
-                                                               QFileInfo(file_name).baseName(),
+    const QString output_file_path = QFileDialog::getSaveFileName(this, tr("Save 3d geometry file"),
+                                                               QFileInfo(input_file_path).baseName(),
                                                                "*.obj");
-    if(out_file_name.isEmpty())
+    if(output_file_path.isEmpty())
         return;
 
-    GeometryExporter().export_geometry(file_name, out_file_name);
+    const bool success = GeometryExporter().export_geometry(input_file_path, output_file_path);
+    if(!success)
+    {
+        show_file_loading_error_message(input_file_path);
+    }
 }
 
 void ViewerApp::on_actionSave_image_triggered()
@@ -136,30 +141,30 @@ void ViewerApp::on_actionSave_image_triggered()
         show_warning_message("No image", "Please open image first");
         return;
     }
-    const QString out_file_name = QFileDialog::getSaveFileName();
-    if(out_file_name.isEmpty())
+    const QString output_file_path = QFileDialog::getSaveFileName();
+    if(output_file_path.isEmpty())
         return;
 
-    const bool was_saved = m_img->current_image().save(out_file_name);
+    const bool was_saved = m_img->current_image().save(output_file_path);
     if(!was_saved)
     {
-        show_warning_message("Not saved", QString("Failed to save image into %1").arg(out_file_name));
+        show_file_saving_error_message(output_file_path);
         return;
     }
 }
 
 void ViewerApp::on_actionExport_all_3d_files_triggered()
 {
-    const QString dir_name = QFileDialog::getExistingDirectory();
-    if (dir_name.isEmpty())
+    const QString input_directory = QFileDialog::getExistingDirectory();
+    if (input_directory.isEmpty())
         return;
 
-    const QString out_directory = QFileDialog::getExistingDirectory();
-    if(out_directory.isEmpty())
+    const QString output_directory = QFileDialog::getExistingDirectory();
+    if(output_directory.isEmpty())
         return;
 
-    const QFileInfoList all_geometry_files = get_geometry_files(dir_name);
-    GeometryExporter().export_all_geometry_files(all_geometry_files, QDir(out_directory));
+    const QFileInfoList all_geometry_files = get_geometry_files(input_directory);
+    GeometryExporter().export_all_geometry_files(all_geometry_files, QDir(output_directory));
 }
 
 void ViewerApp::on_actionZoom_In_triggered()
@@ -195,7 +200,14 @@ bool ViewerApp::open_image(const QFileInfoList& i_paths)
     if(!has_palette())
         return false;
 
-    m_img.reset(new AnimatedImage(i_paths));
+    try
+    {
+        m_img.reset(new AnimatedImage(i_paths));
+    }
+    catch(const ImageDataException& e)
+    {
+        show_warning_message("Exception caught", e.what());
+    }
 
     if(!has_image())
         return false;
