@@ -287,6 +287,12 @@ void ViewerApp::update_actions()
     ui->actionNext->setEnabled(has_image());
     ui->actionPrevious->setEnabled(has_image());
     ui->actionFit_to_Window->setEnabled(has_image());
+
+    const bool has_animation = has_image() && !m_img->is_single_frame();
+
+    ui->previous_frame_button->setEnabled(has_animation);
+    ui->next_frame_button->setEnabled(has_animation);
+    ui->play_pause_button->setEnabled(has_animation);
 }
 
 void ViewerApp::scale_image(float i_factor)
