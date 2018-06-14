@@ -31,7 +31,7 @@ Image ImageData::get_image() const
         throw DecodeImageDataException("Cannot create image from data");
     }
 
-    QImage image = data_to_image(m_data, {m_width, m_height});
+    const QImage image = data_to_image(m_data, {m_width, m_height});
     return Image(image, m_path);
 }
 
