@@ -141,7 +141,11 @@ void ViewerApp::on_actionSave_image_triggered()
         show_warning_message("No image", "Please open image first");
         return;
     }
-    const QString output_file_path = QFileDialog::getSaveFileName();
+
+    const QString current_file_name = QFileInfo(m_img->current_image().path()).baseName();
+    const QString output_file_path = QFileDialog::getSaveFileName(this, tr("Save image file"),
+                                                               current_file_name,
+                                                               "*.png");
     if(output_file_path.isEmpty())
         return;
 
