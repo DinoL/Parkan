@@ -95,6 +95,9 @@ private:
 
     void show_warning_message(const QString& i_title, const QString& i_message) const;
 
+    void show_file_loading_error_message(const QFileInfo& i_path) const;
+    void show_file_saving_error_message(const QFileInfo& i_path) const;
+
     void clear_image();
 
     void set_animation_speed(int i_frames_per_second);

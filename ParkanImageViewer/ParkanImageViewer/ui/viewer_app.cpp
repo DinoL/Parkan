@@ -300,6 +300,20 @@ void ViewerApp::show_warning_message(const QString& i_title, const QString& i_me
     mb->show();
 }
 
+void ViewerApp::show_file_loading_error_message(const QFileInfo& i_path) const
+{
+    const QString file_name = i_path.fileName();
+    const QString msg("Could not open file %1");
+    show_warning_message("Loading failed", msg.arg(file_name));
+}
+
+void ViewerApp::show_file_saving_error_message(const QFileInfo& i_path) const
+{
+    const QString file_name = i_path.fileName();
+    const QString msg("Could not save file %1");
+    show_warning_message("Saving failed", msg.arg(file_name));
+}
+
 void ViewerApp::clear_image()
 {
     if(!ui || !m_image_label)
