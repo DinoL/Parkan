@@ -1,8 +1,9 @@
 #ifndef PALETTE_H
 #define PALETTE_H
 
-#include <QColor>
+#include <QRgb>
 #include <QString>
+#include <QColor>
 #include <QStringList>
 #include <QFileInfo>
 #include <QVector>
