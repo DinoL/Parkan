@@ -9,7 +9,7 @@ ObjModel::ObjModel(const SerializableGeometry& i_geometry)
     for(const Face& poly : i_geometry.get_faces())
     {
         ObjFace cur_poly;
-        cur_poly.texture = QString(poly.texture.c_str());
+        cur_poly.texture = QString::fromWCharArray(poly.texture.c_str());
         for(int i = 0; i < poly.pts.size(); ++i)
         {
             ObjVertex cur_vx;
@@ -32,7 +32,7 @@ bool ObjModel::save_material_file(const QFileInfo& i_to) const
         textures.insert(face.texture);
     }
 
-    std::ofstream out(i_to.absoluteFilePath().toStdString());
+    std::wofstream out(i_to.absoluteFilePath().toStdWString());
     if(!out.good())
         return false;
 
@@ -49,11 +49,11 @@ bool ObjModel::save(const QFileInfo& i_to) const
     const QFileInfo mtl_file(i_to.absoluteDir().absoluteFilePath(i_to.baseName() + ".mtl"));
     save_material_file(mtl_file);
 
-    std::ofstream out(i_to.absoluteFilePath().toStdString());
+    std::wofstream out(i_to.absoluteFilePath().toStdWString());
     if(!out.good())
         return false;
 
-    out << "mtllib " << mtl_file.fileName().toStdString() << std::endl;
+    out << "mtllib " << mtl_file.fileName().toStdWString() << std::endl;
     for(const Vertex& vertex : m_vertices)
     {
         out << "v " << vertex << std::endl;
@@ -74,8 +74,8 @@ bool ObjModel::save(const QFileInfo& i_to) const
         }
         out << std::endl;
     }
-    std::cout << "Successfully exported to " << i_to.absoluteFilePath().toStdString() << std::endl;
-    std::cout << "Material file: " << mtl_file.absoluteFilePath().toStdString() << std::endl;
+    std::wcout << "Successfully exported to " << i_to.absoluteFilePath().toStdWString() << std::endl;
+    std::wcout << "Material file: " << mtl_file.absoluteFilePath().toStdWString() << std::endl;
 
     return true;
 }

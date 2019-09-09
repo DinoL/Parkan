@@ -1,16 +1,16 @@
 #include "string_utils.h"
 
-std::string to_std_string(const std::string& i_str)
+std::wstring to_std_string(const std::wstring& i_str)
 {
     return i_str;
 }
 
-std::string to_std_string(const QString& i_str)
+std::wstring to_std_string(const QString& i_str)
 {
-    return i_str.toStdString();
+    return i_str.toStdWString();
 }
 
-std::string to_std_string(const char *i_str)
+std::wstring to_std_string(const wchar_t *i_str)
 {
-    return std::string(i_str);
+    return std::wstring(i_str);
 }

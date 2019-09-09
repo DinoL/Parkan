@@ -7,10 +7,10 @@ NgbImageData::NgbImageData(const QFileInfo& i_path) :
     ImageData(i_path)
 {}
 
-void NgbImageData::fill_data(std::istream&)
+void NgbImageData::fill_data(std::wistream&)
 {}
 
-bool NgbImageData::has_signature(std::istream& io_file, const std::vector<uchar>& i_signature)
+bool NgbImageData::has_signature(std::wistream& io_file, const std::vector<uchar>& i_signature)
 {
     InputBinaryStream bis(io_file);
     HeaderGuard guard(16, io_file);

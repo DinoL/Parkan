@@ -1,14 +1,14 @@
 #include "io_utils.h"
 
-std::ostream&operator<<(std::ostream& s, const QString& i_str)
+std::wostream&operator<<(std::wostream& s, const QString& i_str)
 {
-    return s << i_str.toStdString();
+    return s << i_str.toStdWString();
 }
 
-std::istream&operator>>(std::istream& s, QString& o_str)
+std::wistream&operator>>(std::wistream& s, QString& o_str)
 {
-    std::string temp;
+    std::wstring temp;
     s >> temp;
-    o_str = QString(temp.c_str());
+    o_str = QString::fromWCharArray(temp.c_str());
     return s;
 }

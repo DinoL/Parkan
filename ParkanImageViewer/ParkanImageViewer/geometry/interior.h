@@ -23,7 +23,7 @@ struct CoordinatesShort
 
 InputBinaryStream& operator>>(InputBinaryStream& s, CoordinatesShort& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const CoordinatesShort& v);
-std::ostream& operator<<(std::ostream& s, const CoordinatesShort& v);
+std::wostream& operator<<(std::wostream& s, const CoordinatesShort& v);
 
 struct Point
 {
@@ -34,7 +34,7 @@ struct Point
 
 InputBinaryStream& operator>>(InputBinaryStream& s, Point& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const Point& v);
-std::ostream& operator<<(std::ostream& s, const Point& v);
+std::wostream& operator<<(std::wostream& s, const Point& v);
 
 struct ShortPair
 {
@@ -44,7 +44,7 @@ struct ShortPair
 
 InputBinaryStream& operator>>(InputBinaryStream& s, ShortPair& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const ShortPair& v);
-std::ostream& operator<<(std::ostream& s, const ShortPair& v);
+std::wostream& operator<<(std::wostream& s, const ShortPair& v);
 
 struct SmallIndices
 {
@@ -55,7 +55,7 @@ struct SmallIndices
 
 InputBinaryStream& operator>>(InputBinaryStream& s, SmallIndices& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const SmallIndices& v);
-std::ostream& operator<<(std::ostream& s, const SmallIndices& v);
+std::wostream& operator<<(std::wostream& s, const SmallIndices& v);
 
 struct VerticalPolygon
 {
@@ -68,7 +68,7 @@ struct VerticalPolygon
 
 InputBinaryStream& operator>>(InputBinaryStream& s, VerticalPolygon& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const VerticalPolygon& v);
-std::ostream& operator<<(std::ostream& s, const VerticalPolygon& v);
+std::wostream& operator<<(std::wostream& s, const VerticalPolygon& v);
 
 struct HorizontalPolygon
 {
@@ -82,7 +82,7 @@ struct HorizontalPolygon
 
 InputBinaryStream& operator>>(InputBinaryStream& s, HorizontalPolygon& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const HorizontalPolygon& v);
-std::ostream& operator<<(std::ostream& s, const HorizontalPolygon& v);
+std::wostream& operator<<(std::wostream& s, const HorizontalPolygon& v);
 
 struct VertexInfo
 {
@@ -92,7 +92,7 @@ struct VertexInfo
 
 InputBinaryStream& operator>>(InputBinaryStream& s, VertexInfo& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const VertexInfo& v);
-std::ostream& operator<<(std::ostream& s, const VertexInfo& v);
+std::wostream& operator<<(std::wostream& s, const VertexInfo& v);
 
 struct InteriorSignature
 {
@@ -102,6 +102,6 @@ struct InteriorSignature
 
 InputBinaryStream& operator>>(InputBinaryStream& s, InteriorSignature& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const InteriorSignature& v);
-std::ostream& operator<<(std::ostream& s, const InteriorSignature& v);
+std::wostream& operator<<(std::wostream& s, const InteriorSignature& v);
 
 #endif // INTERIOR_H

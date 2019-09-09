@@ -13,7 +13,7 @@ struct Vector2d
 
 InputBinaryStream& operator>>(InputBinaryStream& s, Vector2d& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const Vector2d& v);
-std::ostream& operator<<(std::ostream& s, const Vector2d& v);
-std::istream& operator>>(std::istream& s, Vector2d& v);
+std::wostream& operator<<(std::wostream& s, const Vector2d& v);
+std::wistream& operator>>(std::wistream& s, Vector2d& v);
 
 #endif // VECTOR_2D_H

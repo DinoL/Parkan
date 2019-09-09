@@ -2,7 +2,7 @@
 
 #include "utils/io_utils.h"
 
-void InteriorFile::read(std::istream& io_s)
+void InteriorFile::read(std::wistream& io_s)
 {
     InputBinaryStream bis(io_s);
     bis >> m_vertices;
@@ -12,7 +12,7 @@ void InteriorFile::read(std::istream& io_s)
     bis >> m_signature;
 }
 
-void InteriorFile::write(std::ostream& io_s) const
+void InteriorFile::write(std::wostream& io_s) const
 {
     OutputBinaryStream bos(io_s);
     bos << m_vertices;
@@ -38,7 +38,7 @@ std::vector<Face> InteriorFile::get_faces() const
     for(const auto& poly : m_vertical_polygons)
     {
         Face cur_face;
-        cur_face.texture = poly.texture.to_string().toStdString();
+        cur_face.texture = poly.texture.to_string().toStdWString();
 
         std::vector<FacePoint> points;
         for(const Point& pt : poly.ps)
@@ -51,7 +51,7 @@ std::vector<Face> InteriorFile::get_faces() const
     for(const auto& poly : m_horizontal_polygons)
     {
         Face cur_face;
-        cur_face.texture = poly.texture.to_string().toStdString();
+        cur_face.texture = poly.texture.to_string().toStdWString();
 
         std::vector<FacePoint> points;
         for(const Point& pt : poly.ps)

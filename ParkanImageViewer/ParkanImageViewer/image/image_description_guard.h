@@ -6,7 +6,7 @@
 class ImageDescriptionGuard
 {
 public:
-    ImageDescriptionGuard(int i_size, std::istream& io_stream);
+    ImageDescriptionGuard(int i_size, std::wistream& io_stream);
 
 protected:
     int size() const;
@@ -14,13 +14,13 @@ protected:
 
 private:
     int m_size;
-    std::istream& m_stream;
+    std::wistream& m_stream;
 };
 
 class HeaderGuard : public ImageDescriptionGuard
 {
 public:
-    HeaderGuard(int i_size, std::istream& io_stream);
+    HeaderGuard(int i_size, std::wistream& io_stream);
 
     ~HeaderGuard();
 };
@@ -28,7 +28,7 @@ public:
 class FooterGuard : public ImageDescriptionGuard
 {
 public:
-    FooterGuard(int i_size, std::istream& io_stream);
+    FooterGuard(int i_size, std::wistream& io_stream);
 
     ~FooterGuard();
 };

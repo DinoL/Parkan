@@ -2,7 +2,7 @@
 
 #include <iomanip>
 
-void Object3d::read(std::istream& io_s)
+void Object3d::read(std::wistream& io_s)
 {
     int vertices_cnt;
     io_s >> vertices_cnt >> m_scale;
@@ -20,7 +20,7 @@ void Object3d::read(std::istream& io_s)
     }
 }
 
-void Object3d::write(std::ostream& io_s) const
+void Object3d::write(std::wostream& io_s) const
 {
     io_s << m_vertices.size() << ' ' << m_scale << std::endl;
     io_s << std::fixed << std::setprecision(6);
@@ -55,7 +55,7 @@ std::set<QString> Object3d::all_texture_names() const
     std::set<QString> texture_names;
     for(const Face& f : get_faces())
     {
-        texture_names.insert(QString(f.texture.c_str()));
+        texture_names.insert(QString::fromWCharArray(f.texture.c_str()));
     }
     return texture_names;
 }

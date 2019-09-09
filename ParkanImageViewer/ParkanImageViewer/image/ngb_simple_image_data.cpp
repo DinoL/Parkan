@@ -9,7 +9,7 @@
 NgbSimpleImageData::NgbSimpleImageData(const QFileInfo& i_path)
     : NgbImageData(i_path)
 {
-    std::ifstream file(i_path.filePath().toStdString(), std::ios::binary);
+    std::wifstream file(i_path.filePath().toStdWString(), std::ios::binary);
     if(file.fail())
         throw LoadImageDataException("Cannot open texture file " + i_path.filePath());
 
@@ -18,7 +18,7 @@ NgbSimpleImageData::NgbSimpleImageData(const QFileInfo& i_path)
         fill_data(file);
 }
 
-void NgbSimpleImageData::fill_data(std::istream& io_file)
+void NgbSimpleImageData::fill_data(std::wistream& io_file)
 {
     InputBinaryStream bis(io_file);
 

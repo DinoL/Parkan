@@ -9,7 +9,7 @@ public:
     NgbSimpleImageData(const QFileInfo& i_path);
 
 protected:
-    void fill_data(std::istream& io_file) override;
+    void fill_data(std::wistream& io_file) override;
 };
 
 #endif // NGB_SIMPLE_IMAGE_DATA_H

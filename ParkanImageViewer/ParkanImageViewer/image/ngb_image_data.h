@@ -14,8 +14,8 @@ public:
     NgbImageData(const QFileInfo& i_path);
 
 protected:
-    virtual void fill_data(std::istream&);
-    bool has_signature(std::istream& io_file, const std::vector<uchar>& i_signature);
+    virtual void fill_data(std::wistream&);
+    bool has_signature(std::wistream& io_file, const std::vector<uchar>& i_signature);
 
     QByteArray overlay_with_background() const;
 

@@ -9,7 +9,7 @@
 SimpleImageData::SimpleImageData(const QFileInfo& i_path)
     : ImageData(i_path)
 {
-    std::ifstream file(i_path.filePath().toStdString(), std::ios::binary);
+    std::wifstream file(i_path.filePath().toStdWString(), std::ios::binary);
     if(file.fail())
         throw LoadImageDataException("Cannot open texture file " + i_path.filePath());
 

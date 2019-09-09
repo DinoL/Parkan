@@ -36,7 +36,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const ShortString& v)
     return s;
 }
 
-std::ostream& operator<<(std::ostream& s, const ShortString& v)
+std::wostream& operator<<(std::wostream& s, const ShortString& v)
 {
     s << "\"";
     s << v.to_string();

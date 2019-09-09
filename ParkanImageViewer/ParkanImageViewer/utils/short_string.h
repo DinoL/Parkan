@@ -16,6 +16,6 @@ struct ShortString
 
 InputBinaryStream& operator>>(InputBinaryStream& s, ShortString& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const ShortString& v);
-std::ostream& operator<<(std::ostream& s, const ShortString& v);
+std::wostream& operator<<(std::wostream& s, const ShortString& v);
 
 #endif // SHORT_STRING_H

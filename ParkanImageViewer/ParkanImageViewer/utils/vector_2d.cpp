@@ -12,13 +12,13 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const Vector2d& v)
     return s;
 }
 
-std::ostream& operator<<(std::ostream& s, const Vector2d& v)
+std::wostream& operator<<(std::wostream& s, const Vector2d& v)
 {
     s << v.u << ' ' << v.v;
     return s;
 }
 
-std::istream& operator>>(std::istream& s, Vector2d& v)
+std::wistream& operator>>(std::wistream& s, Vector2d& v)
 {
     s >> v.u >> v.v;
     return s;

@@ -40,7 +40,9 @@ GeometryFile::GeometryFile(const QFileInfo& i_path)
     m_geometry = get_geometry_by_ext(ext);
     if(m_geometry)
     {
-        std::ifstream file(i_path.absoluteFilePath().toStdString(), std::ios::binary);
+        const std::wstring p = i_path.absoluteFilePath().toStdWString();
+        const std::wstring absolute_path(p.begin(), p.end());
+        std::wifstream file(absolute_path, std::ios::binary);
         if(!file.good())
             return;
 
@@ -63,7 +65,7 @@ bool GeometryFile::export_to(const QFileInfo& i_path) const
 
     const auto all_textures = m_geometry->all_texture_names();
 
-    std::cout << "Found " << all_textures.size() << " textures" << std::endl;
+    std::wcout << "Found " << all_textures.size() << " textures" << std::endl;
 
     TextureExporter textures_exporter;
     textures_exporter.set_textures_dir(get_textures_folder());
