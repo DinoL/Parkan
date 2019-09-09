@@ -12,13 +12,13 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const Vertex& v)
     return s;
 }
 
-std::wostream& operator<<(std::wostream& s, const Vertex& v)
+std::ostream& operator<<(std::ostream& s, const Vertex& v)
 {
     s << v.x << ' ' << v.y << ' ' << v.z;
     return s;
 }
 
-std::wistream& operator>>(std::wistream& s, Vertex& v)
+std::istream& operator>>(std::istream& s, Vertex& v)
 {
     s >> v.x >> v.y >> v.z;
     return s;

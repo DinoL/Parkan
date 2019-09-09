@@ -8,7 +8,7 @@
 class InputBinaryStream
 {
 public:
-    InputBinaryStream(std::wistream& i_s);
+    InputBinaryStream(std::istream& i_s);
 
     template<typename T>
     friend InputBinaryStream& read_raw_bytes(InputBinaryStream& s, T& v,
@@ -18,7 +18,7 @@ public:
                                              >::type* = nullptr);
 
 private:
-    std::wistream& m_s;
+    std::istream& m_s;
 
 };
 
@@ -29,7 +29,7 @@ InputBinaryStream& read_raw_bytes(InputBinaryStream& s, T& v,
                                   std::is_floating_point<T>::value
                                   >::type*)
 {
-    s.m_s.read((wchar_t*)&v, sizeof(v));
+    s.m_s.read((char*)&v, sizeof(v));
     return s;
 }
 

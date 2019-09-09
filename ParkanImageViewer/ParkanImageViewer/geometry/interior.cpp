@@ -14,7 +14,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const CoordinatesShort& v)
     return s;
 }
 
-std::wostream& operator<<(std::wostream& s, const CoordinatesShort& v)
+std::ostream& operator<<(std::ostream& s, const CoordinatesShort& v)
 {
     s << "Indices(" << v.i << ' ' << v.j << ' ' << v.k << ") ";
     return s;
@@ -32,7 +32,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const Point& v)
     return s;
 }
 
-std::wostream& operator<<(std::wostream& s, const Point& v)
+std::ostream& operator<<(std::ostream& s, const Point& v)
 {
     s << "Point(" << v.id << ' ' << v.u << ' ' << v.v << ") ";
     return s;
@@ -50,7 +50,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const ShortPair& v)
     return s;
 }
 
-std::wostream& operator<<(std::wostream& s, const ShortPair& v)
+std::ostream& operator<<(std::ostream& s, const ShortPair& v)
 {
     s << "IndicesPair(" << v.x << ' ' << v.y << ") ";
     return s;
@@ -68,7 +68,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const SmallIndices& v)
     return s;
 }
 
-std::wostream& operator<<(std::wostream& s, const SmallIndices& v)
+std::ostream& operator<<(std::ostream& s, const SmallIndices& v)
 {
     s << "SmallIndices(" << v.m << ' ' << int(v.c) << ' ' << int(v.d) << ") ";
     return s;
@@ -102,7 +102,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const VerticalPolygon& v)
     return s;
 }
 
-std::wostream& operator<<(std::wostream& s, const VerticalPolygon& v)
+std::ostream& operator<<(std::ostream& s, const VerticalPolygon& v)
 {
     for(const auto& el : v.ps)
     {
@@ -154,7 +154,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const HorizontalPolygon& v
     return s;
 }
 
-std::wostream& operator<<(std::wostream& s, const HorizontalPolygon& v)
+std::ostream& operator<<(std::ostream& s, const HorizontalPolygon& v)
 {
     for(const auto& el : v.ps)
     {
@@ -189,7 +189,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const VertexInfo& v)
     return s;
 }
 
-std::wostream& operator<<(std::wostream& s, const VertexInfo& v)
+std::ostream& operator<<(std::ostream& s, const VertexInfo& v)
 {
     s << v.v << v.sp;
     return s;
@@ -207,7 +207,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const InteriorSignature& v
     return s;
 }
 
-std::wostream& operator<<(std::wostream& s, const InteriorSignature& v)
+std::ostream& operator<<(std::ostream& s, const InteriorSignature& v)
 {
     s << v.sp << v.signature;
     return s;

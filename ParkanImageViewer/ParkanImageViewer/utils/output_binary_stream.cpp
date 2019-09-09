@@ -1,7 +1,7 @@
 #include "output_binary_stream.h"
 
 
-OutputBinaryStream::OutputBinaryStream(std::wostream& i_s) : m_s(i_s)
+OutputBinaryStream::OutputBinaryStream(std::ostream& i_s) : m_s(i_s)
 {}
 
 template<>

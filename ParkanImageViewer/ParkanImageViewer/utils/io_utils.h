@@ -9,8 +9,8 @@
 #include <string>
 #include <vector>
 
-std::wostream& operator<<(std::wostream& s, const QString& i_str);
-std::wistream& operator>>(std::wistream& s, QString& o_str);
+std::ostream& operator<<(std::ostream& s, const QString& i_str);
+std::istream& operator>>(std::istream& s, QString& o_str);
 
 template<typename T>
 InputBinaryStream& operator>>(InputBinaryStream& s, std::vector<T>& o_arr)
@@ -39,7 +39,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const std::vector<T>& i_ar
 }
 
 template<typename T>
-std::wostream& operator<<(std::wostream& s, const std::vector<T>& o_arr)
+std::ostream& operator<<(std::ostream& s, const std::vector<T>& o_arr)
 {
     size_t size = o_arr.size();
     s << "Size: " << size << std::endl;

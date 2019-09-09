@@ -35,7 +35,7 @@ bool GeometryExporter::export_all_geometry_files(const QFileInfoList& i_all_geom
 
 bool GeometryExporter::export_geometry(const QString& i_from, const QString& i_to) const
 {
-    std::wcout << "Exporting as textured obj to " << i_to.toStdWString() << std::endl;
+    std::cout << "Exporting as textured obj to " << i_to.toStdString() << std::endl;
     if(i_to.isEmpty())
         return false;
 

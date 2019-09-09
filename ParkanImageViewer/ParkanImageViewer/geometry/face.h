@@ -19,13 +19,13 @@ struct FacePoint
 struct Face
 {
     std::vector<FacePoint> pts;
-    std::wstring texture;
+    std::string texture;
 
 };
 
 InputBinaryStream& operator>>(InputBinaryStream& s, Face& v);
 OutputBinaryStream& operator<<(OutputBinaryStream& s, const Face& v);
-std::wostream& operator<<(std::wostream& s, const Face& v);
-std::wistream& operator>>(std::wistream& s, Face& v);
+std::ostream& operator<<(std::ostream& s, const Face& v);
+std::istream& operator>>(std::istream& s, Face& v);
 
 #endif // FACE_H

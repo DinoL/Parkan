@@ -12,12 +12,8 @@ class ImageDataException : public std::runtime_error
 {
 public:
     template<typename T>
-    ImageDataException(const T& i_msg) :
-        std::runtime_error("image data exception"),
-        m_msg(to_std_string(i_msg).c_str())
+    ImageDataException(const T& i_msg) : std::runtime_error(to_std_string(i_msg).c_str())
     {}
-protected:
-    std::wstring m_msg;
 };
 
 class LoadImageDataException : public ImageDataException

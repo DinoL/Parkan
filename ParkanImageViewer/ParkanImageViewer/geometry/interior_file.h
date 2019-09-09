@@ -18,8 +18,8 @@ public:
     virtual bool is_empty() const override;
 
 private:
-    virtual void read(std::wistream& io_s) override;
-    virtual void write(std::wostream& io_s) const override;
+    virtual void read(std::istream& io_s) override;
+    virtual void write(std::ostream& io_s) const override;
 
 public:
     std::vector<Vertex> m_vertices;                       // size 12

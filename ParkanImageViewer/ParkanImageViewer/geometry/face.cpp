@@ -21,7 +21,7 @@ InputBinaryStream& operator>>(InputBinaryStream& s, Face& f)
     }
     ShortString str;
     s >> str;
-    f.texture = str.to_string().toStdWString();
+    f.texture = str.to_string().toStdString();
     return s;
 }
 
@@ -34,7 +34,7 @@ OutputBinaryStream& operator<<(OutputBinaryStream& s, const Face& f)
     return s;
 }
 
-std::wostream& operator<<(std::wostream& s, const Face& f)
+std::ostream& operator<<(std::ostream& s, const Face& f)
 {
     char sep = ' ';
     s << f.pts.size() << sep;
@@ -54,7 +54,7 @@ std::wostream& operator<<(std::wostream& s, const Face& f)
     return s;
 }
 
-std::wistream& operator>>(std::wistream& s, Face& f)
+std::istream& operator>>(std::istream& s, Face& f)
 {
     int cnt;
     s >> cnt;

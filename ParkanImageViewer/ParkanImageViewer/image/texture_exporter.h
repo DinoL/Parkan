@@ -25,13 +25,13 @@ public:
         if(!m_textures_dir.isReadable())
             return;
 
-        std::wcout << "Exporting textures to " << i_out_dir.path().toStdWString() << std::endl;
+        std::cout << "Exporting textures to " << i_out_dir.path().toStdString() << std::endl;
         for(const auto& name : i_textures)
         {
-            const QString texture_name = QString::fromWCharArray(to_std_string(name).c_str());
+            const QString texture_name(to_std_string(name).c_str());
             const QFileInfo info(m_textures_dir, texture_name);
 
-            std::wcout << "Exporting texture " << name << " (" << info.absoluteFilePath() << ")" << std::endl;
+            std::cout << "Exporting texture " << name << " (" << info.absoluteFilePath() << ")" << std::endl;
 
             const SimpleImageData raw_data(info);
             Image texture(raw_data.get_image());

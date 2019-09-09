@@ -5,8 +5,8 @@
 
 #include <string>
 
-std::wstring to_std_string(const std::wstring& i_str);
-std::wstring to_std_string(const QString& i_str);
-std::wstring to_std_string(const wchar_t* i_str);
+std::string to_std_string(const std::string& i_str);
+std::string to_std_string(const QString& i_str);
+std::string to_std_string(const char* i_str);
 
 #endif // STRING_UTILS_H

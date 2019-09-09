@@ -8,7 +8,7 @@
 class OutputBinaryStream
 {
 public:
-    OutputBinaryStream(std::wostream& i_s);
+    OutputBinaryStream(std::ostream& i_s);
 
     template<typename T>
     friend OutputBinaryStream& write_raw_bytes(OutputBinaryStream& s, const T& v,
@@ -17,7 +17,7 @@ public:
                                                std::is_floating_point<T>::value
                                                >::type* = nullptr);
 private:
-    std::wostream& m_s;
+    std::ostream& m_s;
 };
 
 template<typename T>
@@ -27,7 +27,7 @@ OutputBinaryStream& write_raw_bytes(OutputBinaryStream& s, const T& v,
                                     std::is_floating_point<T>::value
                                     >::type*)
 {
-    s.m_s.write((wchar_t*)&v, sizeof(v));
+    s.m_s.write((char*)&v, sizeof(v));
     return s;
 }
 
