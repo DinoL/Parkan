@@ -25,7 +25,7 @@ public:
         if(!m_textures_dir.isReadable())
             return;
 
-        std::cout << "Exporting textures to " << i_out_dir.path().toStdString() << std::endl;
+        std::wcout << "Exporting textures to " << i_out_dir.path().toStdWString() << std::endl;
         for(const auto& name : i_textures)
         {
             const QString texture_name(to_std_string(name).c_str());

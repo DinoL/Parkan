@@ -9,7 +9,7 @@
 NgbComplexImageData::NgbComplexImageData(const QFileInfo& i_path)
     : NgbImageData(i_path)
 {
-    std::ifstream file(i_path.filePath().toStdString(), std::ios::binary);
+    std::ifstream file(i_path.filePath().toStdWString(), std::ios::binary);
     if(file.fail())
         throw LoadImageDataException("Cannot open texture file " + i_path.filePath());
 

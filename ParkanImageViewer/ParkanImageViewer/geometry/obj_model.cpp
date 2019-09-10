@@ -32,7 +32,7 @@ bool ObjModel::save_material_file(const QFileInfo& i_to) const
         textures.insert(face.texture);
     }
 
-    std::ofstream out(i_to.absoluteFilePath().toStdString());
+    std::ofstream out(i_to.absoluteFilePath().toStdWString());
     if(!out.good())
         return false;
 
@@ -49,7 +49,7 @@ bool ObjModel::save(const QFileInfo& i_to) const
     const QFileInfo mtl_file(i_to.absoluteDir().absoluteFilePath(i_to.baseName() + ".mtl"));
     save_material_file(mtl_file);
 
-    std::ofstream out(i_to.absoluteFilePath().toStdString());
+    std::ofstream out(i_to.absoluteFilePath().toStdWString());
     if(!out.good())
         return false;
 
@@ -74,8 +74,8 @@ bool ObjModel::save(const QFileInfo& i_to) const
         }
         out << std::endl;
     }
-    std::cout << "Successfully exported to " << i_to.absoluteFilePath().toStdString() << std::endl;
-    std::cout << "Material file: " << mtl_file.absoluteFilePath().toStdString() << std::endl;
+    std::wcout << "Successfully exported to " << i_to.absoluteFilePath().toStdWString() << std::endl;
+    std::wcout << "Material file: " << mtl_file.absoluteFilePath().toStdWString() << std::endl;
 
     return true;
 }

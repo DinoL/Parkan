@@ -40,7 +40,7 @@ GeometryFile::GeometryFile(const QFileInfo& i_path)
     m_geometry = get_geometry_by_ext(ext);
     if(m_geometry)
     {
-        std::ifstream file(i_path.absoluteFilePath().toStdString(), std::ios::binary);
+        std::ifstream file(i_path.absoluteFilePath().toStdWString(), std::ios::binary);
         if(!file.good())
             return;
 
